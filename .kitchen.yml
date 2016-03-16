@@ -1,87 +1,74 @@
 ---
 driver:
   name: vagrant
-  vagrantfiles:
-    - 'vagrantfiles/cachier.rb'
-  box_check_update: false
-  network:
-    - ['private_network', {type: 'dhcp', nictype: 'virtio'}]
   customize:
-    memory: 1024
-    cpus: 2
+    memory: 5000
     ioapic: 'on'
-    natdnshostresolver1: 'on'
-    natdnsproxy1: 'on'
-    nictype1: 'virtio'
-    nictype2: 'virtio'
-verifier:
-  root_path: '/tmp/vagrant-cache/busser'
+    natdnshostresolver1: "on"
+    natdnsproxy1: "on"
+    nictype1: "virtio"
+
+  network:
+  #- ["forwarded_port", {guest: 8080, host: 9991}]
+
 provisioner:
-  name: 'chef_solo'
-  require_chef_omnibus: <%= ENV.fetch('CHEF_VERSION', '11.16.4').inspect %>
-  chef_omnibus_install_options: '-d /tmp/vagrant-cache/omnibus'
-  solo_rb:
-    file_cache_path: '/tmp/vagrant-cache/chef'
-  attributes:
-    java:
-      jdk_version: 7
-    kafka:
-      version: <%= ENV.fetch('KAFKA_VERSION', '0.8.1.1').inspect %>
-      scala_version: <%= ENV.fetch('SCALA_VERSION', '2.10').inspect %>
-      checksum: <%= ENV.fetch('KAFKA_CHECKSUM', '').inspect %>
-      md5_checksum: <%= ENV.fetch('KAFKA_MD5', '').inspect %>
-      ulimit_file: 128000
-      broker:
-        broker_id: 1
-        controlled_shutdown_enable: <%= ENV.fetch('KAFKA_CTRL_SHUTDOWN', false) %>
-        log_dirs: ['/mnt/kafka-logs-1', '/mnt/kafka-logs-2']
-        zookeeper_connect: ['localhost:2181']
-      log4j:
-        appenders:
-          zookeeperAppender:
-            type: 'org.apache.log4j.FileAppender'
-            file: '/var/log/kafka/zookeeper.log'
-            layout:
-              type: 'org.apache.log4j.PatternLayout'
-              conversion_pattern: '[%d] %p %m (%c)%n'
-        loggers:
-          org.apache.zookeeper:
-            level: 'INFO'
-            appender: 'zookeeperAppender'
-            additivity: false
+  name: chef_solo
+  require_chef_omnibus: 12.4.3
+
+
 platforms:
-  - name: centos-6.5
-  - name: centos-7.0
-  - name: debian-7.4
-    run_list:
-      - recipe[apt]
   - name: ubuntu-14.04
+#  - name: centos-7.0
+
+suites: 
+  - name: default
     run_list:
-      - recipe[apt]
-  - name: fedora-20
-suites:
-  - name: init-style-upstart
-    run_list:
-      - recipe[java]
-      - recipe[kafka]
-    includes:
-      - ubuntu-14.04
+      - recipe[kagent::install]
+      - recipe[kzookeeper::install]
+      - recipe[kkafka::install]
+#      - recipe[apache_hadoop::install]
+      - recipe[kzookeeper::default]
+      - recipe[kkafka::default]
+#      - recipe[apache_hadoop::nn]
+#      - recipe[apache_hadoop::dn]
+#      - recipe[apache_hadoop::rm]
+#      - recipe[apache_hadoop::nm]
+#      - recipe[apache_hadoop::jhs]
+#      - recipe[kkafka::monitor]
     attributes:
-      kafka:
-        init_style: 'upstart'
-  - name: init-style-sysv
-    run_list:
-      - recipe[java]
-      - recipe[kafka]
-    excludes:
-      - centos-7.0
-  - name: init-style-systemd
-    run_list:
-      - recipe[java]
-      - recipe[kafka]
-    includes:
-      - fedora-20
-      - centos-7.0
-    attributes:
-      kafka:
-        init_style: 'systemd'
+         kzookeeper:
+            default:
+                private_ips: ["10.0.2.15"]
+            private_ips: ["10.0.2.15"]
+         kagent:
+            private_ips: ["10.0.2.15"]
+         private_ips: ["10.0.2.15"]
+         public_ips: ["10.0.2.15"]
+         vagrant: "enabled"
+         kkafka:
+            ulimit_file: 128000
+            broker:
+              log_dirs: ['/mnt/kafka-logs-1', '/mnt/kafka-logs-2']
+              zookeeper_connect: ['localhost:2181']
+              zookeeper_connection_timeout_ms: 15_000
+            default:
+                private_ips: ["10.0.2.15"]
+         apache_hadoop:
+            version: 2.7.1
+            group: hadoop
+            hdfs:
+               user: hdfs
+            yarn:
+               user: yarn
+            nn:
+               private_ips: ["10.0.2.15"]
+            dn:
+               private_ips: ["10.0.2.15"]
+            rm:
+               private_ips: ["10.0.2.15"]
+               public_ips: ["10.0.2.15"]
+            nm:
+               private_ips: ["10.0.2.15"]
+            jhs:
+               private_ips: ["10.0.2.15"]
+

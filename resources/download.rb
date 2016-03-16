@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: kafka
+# Cookbook Name:: kkafka
 # Resource:: download
 #
 

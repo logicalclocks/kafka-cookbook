@@ -1,19 +1,28 @@
-# encoding: utf-8
+name             "kkafka"
+maintainer       "kafka"
+maintainer_email "jdowling@kth.se"
+license          "Apache v2.0"
+description      'Installs/Configures/Runs kkafka'
+version          "0.1.0"
 
-name             'kafka'
-maintainer       'Mathias Söderberg'
-maintainer_email 'mths@sdrbrg.se'
-license          'Apache 2.0'
-description      'Installs and configures a Kafka broker'
-long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '0.9.0'
+recipe            "kkafka::install", "Experiment setup for kkafka"
+recipe            "kkafka::default", "configFile=; Run experiment for Kafka"
+recipe            "kkafka::monitor", "Helper webapp to monitor performance of kafka"
+recipe            "kkafka::client", "Kafka client installation"
 
-recipe 'kafka::default', 'Downloads and installs Kafka from binary releases'
+depends "kagent"
+#depends "kafka"
+depends "kzookeeper"
+depends "java"
 
-suggests 'java', '~> 1.22'
+%w{ ubuntu debian rhel centos }.each do |os|
+  supports os
+end
 
-supports 'centos'
-supports 'fedora'
-supports 'amazon'
-supports 'debian'
-supports 'ubuntu'
+attribute "kafka/ulimit",
+:description => "ULimit for the max number of open files allowed",
+:type => 'string'
+
+attribute "kkafka/offset_monitor/port",
+:description => "Port for Kafka monitor service",
+:type => 'string'

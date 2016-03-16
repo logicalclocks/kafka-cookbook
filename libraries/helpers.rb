@@ -4,7 +4,7 @@
 #
 
 def kafka_base
-  %(kafka_#{node.kafka.scala_version}-#{node.kafka.version})
+  %(kafka_#{node.kkafka.scala_version}-#{node.kkafka.version})
 end
 
 def kafka_tar_gz
@@ -16,23 +16,23 @@ def kafka_local_download_path
 end
 
 def kafka_target_path
-  ::File.join(node.kafka.build_dir, kafka_base)
+  ::File.join(node.kkafka.build_dir, kafka_base)
 end
 
 def kafka_jar_path
   if kafka_v0_8_0?
-    ::File.join(node.kafka.install_dir, %(#{kafka_base}.jar))
+    ::File.join(node.kkafka.install_dir, %(#{kafka_base}.jar))
   else
-    ::File.join(node.kafka.install_dir, 'libs', %(#{kafka_base}.jar))
+    ::File.join(node.kkafka.install_dir, 'libs', %(#{kafka_base}.jar))
   end
 end
 
 def kafka_installed?
-  ::File.exists?(node.kafka.install_dir) && ::File.exists?(kafka_jar_path)
+  ::File.exists?(node.kkafka.install_dir) && ::File.exists?(kafka_jar_path)
 end
 
 def kafka_download_uri(filename)
-  [node.kafka.base_url, node.kafka.version, filename].join('/')
+  [node.kkafka.base_url, node.kkafka.version, filename].join('/')
 end
 
 def kafka_archive_ext
@@ -44,11 +44,11 @@ def kafka_archive_ext
 end
 
 def kafka_v0_8_0?
-  node.kafka.version == '0.8.0'
+  node.kkafka.version == '0.8.0'
 end
 
 def kafka_init_style
-  node.kafka.init_style.to_sym
+  node.kkafka.init_style.to_sym
 end
 
 def kafka_init_opts
@@ -90,11 +90,11 @@ def kafka_init_opts
 end
 
 def start_automatically?
-  !!node.kafka.automatic_start || restart_on_configuration_change?
+  !!node.kkafka.automatic_start || restart_on_configuration_change?
 end
 
 def restart_on_configuration_change?
-  !!node.kafka.automatic_restart
+  !!node.kkafka.automatic_restart
 end
 
 def kafka_service_actions
@@ -105,16 +105,16 @@ end
 
 def kafka_log_dirs
   dirs = []
-  dirs += Array(node.kafka.broker['log.dirs'])
-  dirs += Array(node.kafka.broker.fetch(:log_dirs, []))
-  dirs += Array(node.kafka.broker.fetch(:log, {}).fetch(:dirs, []))
+  dirs += Array(node.kkafka.broker['log.dirs'])
+  dirs += Array(node.kkafka.broker.fetch(:log_dirs, []))
+  dirs += Array(node.kkafka.broker.fetch(:log, {}).fetch(:dirs, []))
   dirs.uniq!
   dirs
 end
 
 def broker_attribute?(*parts)
   parts = parts.map(&:to_s)
-  broker = node.kafka.broker
+  broker = node.kkafka.broker
   if broker.attribute?(parts.join('.'))
     return true
   end
@@ -128,7 +128,7 @@ end
 
 def fetch_broker_attribute(*parts)
   parts = parts.map(&:to_s)
-  broker = node.kafka.broker
+  broker = node.kkafka.broker
   if broker.attribute?(parts.join('.'))
     return broker[parts.join('.')]
   end

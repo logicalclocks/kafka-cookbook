@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: kafka
+# Cookbook Name:: kkafka
 # Provider:: download
 #
 
@@ -14,10 +14,10 @@ action :create do
     source   new_resource.source
     mode     new_resource.mode
     checksum sha256 if sha256 && !sha256.empty?
-    notifies :create, 'ruby_block[kafka-validate-download]', :immediately
+    notifies :create, 'ruby_block[kkafka-validate-download]', :immediately
   end
 
-  ruby_block 'kafka-validate-download' do
+  ruby_block 'kkafka-validate-download' do
     block do
       if known_md5 && !known_md5.empty?
         unless (checksum = Digest::MD5.file(local_file_path).hexdigest) == known_md5.downcase

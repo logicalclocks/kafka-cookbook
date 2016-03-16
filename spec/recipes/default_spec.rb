@@ -2,24 +2,24 @@
 
 require 'spec_helper'
 
-describe 'kafka::default' do
+describe 'kkafka::default' do
   let :chef_run do
     ChefSpec::Runner.new.converge(described_recipe)
   end
 
-  it 'includes kafka::_defaults' do
-    expect(chef_run).to include_recipe('kafka::_defaults')
+  it 'includes kkafka::_defaults' do
+    expect(chef_run).to include_recipe('kkafka::_defaults')
   end
 
-  it 'includes kafka::_setup' do
-    expect(chef_run).to include_recipe('kafka::_setup')
+  it 'includes kkafka::_setup' do
+    expect(chef_run).to include_recipe('kkafka::_setup')
   end
 
-  it 'includes kafka::_install recipe' do
-    expect(chef_run).to include_recipe('kafka::_install')
+  it 'includes kkafka::_install recipe' do
+    expect(chef_run).to include_recipe('kkafka::_install')
   end
 
-  it 'includes kafka::_configure' do
-    expect(chef_run).to include_recipe('kafka::_configure')
+  it 'includes kkafka::_configure' do
+    expect(chef_run).to include_recipe('kkafka::_configure')
   end
 end

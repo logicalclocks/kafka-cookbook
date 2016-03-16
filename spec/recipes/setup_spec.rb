@@ -2,14 +2,14 @@
 
 require 'spec_helper'
 
-describe 'kafka::_setup' do
+describe 'kkafka::_setup' do
   let :chef_run do
     ChefSpec::Runner.new do |node|
-      node.set[:kafka] = kafka_attrs
-    end.converge('kafka::_defaults', described_recipe)
+      node.set[:kkafka] = kkafka_attrs
+    end.converge('kkafka::_defaults', described_recipe)
   end
 
-  let :kafka_attrs do
+  let :kkafka_attrs do
     {}
   end
 
@@ -28,7 +28,7 @@ describe 'kafka::_setup' do
     end
 
     context 'when disabled' do
-      let :kafka_attrs do
+      let :kkafka_attrs do
         {manage_user: false}
       end
 
@@ -45,7 +45,7 @@ describe 'kafka::_setup' do
     end
 
     context 'when overridden' do
-      let :kafka_attrs do
+      let :kkafka_attrs do
         {user: 'spec', group: 'spec'}
       end
 
@@ -71,7 +71,7 @@ describe 'kafka::_setup' do
   end
 
   it 'creates build directory' do
-    expect(chef_run).to create_directory(%(#{Dir.tmpdir}/kafka-build)).with({
+    expect(chef_run).to create_directory(%(#{Dir.tmpdir}/kkafka-build)).with({
       owner: 'kafka',
       group: 'kafka',
       mode: '755'
@@ -104,7 +104,7 @@ describe 'kafka::_setup' do
       let :kafka_attrs do
         {
           broker: {
-            log_dirs: %w[/mnt/kafka-1 /mnt/kafka-2]
+            log_dirs: %w[/mnt/kkafka-1 /mnt/kafka-2]
           }
         }
       end
@@ -113,11 +113,11 @@ describe 'kafka::_setup' do
     end
 
     context 'when using `nested hash` notation' do
-      let :kafka_attrs do
+      let :kkafka_attrs do
         {
           broker: {
             log: {
-              dirs: %w[/mnt/kafka-1 /mnt/kafka-2]
+              dirs: %w[/mnt/kkafka-1 /mnt/kafka-2]
             }
           }
         }
@@ -127,7 +127,7 @@ describe 'kafka::_setup' do
     end
 
     context 'when using String keys' do
-      let :kafka_attrs do
+      let :kkafka_attrs do
         {
           broker: {
             'log.dirs' => %w[/mnt/kafka-1 /mnt/kafka-2]

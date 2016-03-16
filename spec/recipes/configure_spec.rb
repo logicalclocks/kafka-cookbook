@@ -2,16 +2,16 @@
 
 require 'spec_helper'
 
-describe 'kafka::_configure' do
+describe 'kkafka::_configure' do
   let :chef_run do
     ChefSpec::Runner.new do |node|
-      node.set[:kafka] = kafka_attributes
-      node.set[:kafka][:broker] = broker_attributes
+      node.set[:kkafka] = kkafka_attributes
+      node.set[:kkafka][:broker] = broker_attributes
     end.converge(*described_recipes)
   end
 
   let :described_recipes do
-    ['kafka::_defaults', described_recipe]
+    ['kkafka::_defaults', described_recipe]
   end
 
   let :node do
@@ -178,8 +178,8 @@ describe 'kafka::_configure' do
     end
 
     it 'configures sane date patterns for appenders' do
-      expect(node.kafka.log4j.appenders).to_not be_empty
-      node.kafka.log4j.appenders.each do |_, opts|
+      expect(node.kkafka.log4j.appenders).to_not be_empty
+      node.kkafka.log4j.appenders.each do |_, opts|
         expect(opts.date_pattern).to eq('.yyyy-MM-dd')
       end
     end
@@ -188,9 +188,9 @@ describe 'kafka::_configure' do
   shared_examples_for 'an init style' do
     let :chef_run do
       ChefSpec::Runner.new(platform_and_version) do |node|
-        node.set[:kafka][:scala_version] = '2.8.0'
-        node.set[:kafka][:init_style] = init_style
-        node.set[:kafka][:broker] = broker_attributes
+        node.set[:kkafka][:scala_version] = '2.8.0'
+        node.set[:kkafka][:init_style] = init_style
+        node.set[:kkafka][:broker] = broker_attributes
       end.converge(*described_recipes)
     end
 
@@ -509,19 +509,19 @@ describe 'kafka::_configure' do
       context 'by default' do
         it 'does not restart kafka on configuration changes' do
           config_templates.each do |template|
-            expect(template).not_to notify('ruby_block[coordinate-kafka-start]').to(:create)
+            expect(template).not_to notify('ruby_block[coordinate-kkafka-start]').to(:create)
           end
         end
       end
 
       context 'when set to true' do
-        let :kafka_attributes do
+        let :kkafka_attributes do
           {automatic_restart: true}
         end
 
         it 'restarts kafka when configuration is changed' do
           config_templates.each do |template|
-            expect(template).to notify('ruby_block[coordinate-kafka-start]').to(:create)
+            expect(template).to notify('ruby_block[coordinate-kkafka-start]').to(:create)
           end
         end
 
@@ -539,7 +539,7 @@ describe 'kafka::_configure' do
       end
 
       context 'when set to true' do
-        let :kafka_attributes do
+        let :kkafka_attributes do
           {automatic_start: true}
         end
 
@@ -551,11 +551,11 @@ describe 'kafka::_configure' do
 
     context 'coordination recipe' do
       it 'includes a recipe for coordinating starts / restarts' do
-        expect(chef_run).to include_recipe('kafka::_coordinate')
+        expect(chef_run).to include_recipe('kkafka::_coordinate')
       end
 
       it 'creates a ruby_block that does nothing' do
-        expect(chef_run.ruby_block('coordinate-kafka-start')).to do_nothing
+        expect(chef_run.ruby_block('coordinate-kkafka-start')).to do_nothing
       end
     end
   end
