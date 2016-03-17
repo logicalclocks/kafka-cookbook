@@ -16,5 +16,17 @@ node.default.kkafka.broker[:log_dirs] = %w[/tmp/kafka-logs]
 include_recipe 'kkafka::_defaults'
 include_recipe 'kkafka::_setup'
 include_recipe 'kkafka::_install'
+
+
+#zk_ips = node.kzookeeper.default[:private_ips].join(:":2181/kafka,") 
+#zk_ips = "#{zk_ips}:2181/kafka"
+#node.override.kkafka.broker.zookeeper.connect = ["#{zk_ips}"]
+zk_ip = private_recipe_ip('kzookeeper', 'default')
+node.override.kkafka.broker.zookeeper.connect = ["#{zk_ip}:2181/kafka"]
+my_ip = my_private_ip()
+node.override.kkafka.broker.host.name = my_ip
+#node.override.kkafka.broker.advertised.host.name = my_ip
+node.override.kkafka.broker.listeners = "PLAINTEXT://#{my_ip}:9092,2,TRACE://#{my_ip}:9091"
+
 include_recipe 'kkafka::_configure'
 

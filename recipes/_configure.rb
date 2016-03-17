@@ -24,8 +24,6 @@ template ::File.join(node.kkafka.config_dir, 'log4j.properties') do
   end
 end
 
-zk_ip = private_recipe_ip('kzookeeper', 'default')
-
 template ::File.join(node.kkafka.config_dir, 'server.properties') do
   source 'server.properties.erb'
   owner node.kkafka.user

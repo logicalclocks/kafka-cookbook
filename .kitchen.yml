@@ -18,7 +18,8 @@ provisioner:
 
 platforms:
   - name: ubuntu-14.04
-#  - name: centos-7.0
+  - name: ubuntu-15.04
+  - name: centos-7.0
 
 suites: 
   - name: default
@@ -38,10 +39,7 @@ suites:
     attributes:
          kzookeeper:
             default:
-                private_ips: ["10.0.2.15"]
-            private_ips: ["10.0.2.15"]
-         kagent:
-            private_ips: ["10.0.2.15"]
+               private_ips: ["10.0.2.15"]
          private_ips: ["10.0.2.15"]
          public_ips: ["10.0.2.15"]
          vagrant: "enabled"
@@ -49,7 +47,7 @@ suites:
             ulimit_file: 128000
             broker:
               log_dirs: ['/mnt/kafka-logs-1', '/mnt/kafka-logs-2']
-              zookeeper_connect: ['localhost:2181']
+#              zookeeper_connect: ['10.0.2.15:2181']
               zookeeper_connection_timeout_ms: 15_000
             default:
                 private_ips: ["10.0.2.15"]

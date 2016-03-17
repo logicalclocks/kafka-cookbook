@@ -213,3 +213,68 @@ default.kkafka.log4j.loggers = {
     additivity: false,
   },
 }
+
+default.kkafka.broker.port                                       = 9092
+
+default.kkafka.broker[:log][:retention][:hours]                        = 240
+default.kkafka.broker[:log][:retention][:size]                         = "-1"
+default.kkafka.broker[:num][:network][:threads]                        = 3
+default.kkafka.broker[:num][:io][:threads]                             = 8
+default.kkafka.broker[:num][:recovery][:threads][:per][:data][:dir]          = 1
+default.kkafka.broker[:num][:replica][:fetchers]                       = 1
+default.kkafka.broker[:queued][:max][:requests]                        = 500
+default.kkafka.broker[:socket][:send][:buffer][:bytes]                   = 100 * 1024
+default.kkafka.broker[:socket][:receive][:buffer][:bytes]                = 100 * 1024
+default.kkafka.broker[:socket][:request][:max][:bytes]                   = 100 * 100 * 1024
+default.kkafka.broker[:num][:partitions]                             = 1
+default.kkafka.broker[:log][:segment][:bytes]                          = 1024 * 1024 * 1024
+default.kkafka.broker[:log][:roll][:hours]                             = 24 * 7
+default.kkafka.broker[:log][:retention][:hours]                        = 24 * 7
+default.kkafka.broker[:log][:retention][:bytes]                        = "-1"
+default.kkafka.broker[:log][:retention][:check][:interval][:ms]            = 300000
+default.kkafka.broker[:log][:index][:size][:max][:bytes]                   = "10000000"
+default.kkafka.broker[:log][:index][:interval][:bytes]                   = "4096"
+default.kkafka.broker[:log][:flush][:interval][:messages]                = "9223372036854775807"
+default.kkafka.broker[:log][:flush][:scheduler][:interval][:ms]            = 3000
+default.kkafka.broker[:log][:flush][:interval][:ms]                      = 3000
+default.kkafka.broker[:leader][:imbalance][:check][:interval][:seconds]    = 300
+default.kkafka.broker[:leader][:imbalance][:per][:broker][:percentage]     = 10
+default.kkafka.broker[:log][:dir]                                    = "/tmp/kafka-logs"
+default.kkafka.broker[:log][:flush][:offset][:checkpoint][:interval][:ms]    = 60000
+default.kkafka.broker[:queued][:max][:requests]                        = 500
+default.kkafka.broker[:quota][:consumer][:default]                     = 9223372036854775807
+default.kkafka.broker[:quota][:producer][:default]                     = 9223372036854775807
+default.kkafka.broker[:replica][:fetch][:max][:bytes]                    = 1048576
+default.kkafka.broker[:replica][:fetch][:min][:bytes]                    = 1
+default.kkafka.broker[:replica][:fetch][:wait][:max][:ms]                  = 500
+default.kkafka.broker[:replica][:high][:watermark][:checkpoint][:interval][:ms]    = 5000
+default.kkafka.broker[:replica][:lag][:time][:max][:ms]                    = 10000
+default.kkafka.broker[:replica][:socket][:receive][:buffer][:bytes]        = 65536
+default.kkafka.broker[:replica][:socket][:timeout][:ms]                  = 30000
+default.kkafka.broker[:request][:timeout][:ms]                         = 30000
+default.kkafka.broker[:message][:max][:bytes]                          = "1000012"
+default.kkafka.broker[:default][:replication][:factor]                 = 1
+default.kkafka.broker[:log][:cleaner][:enable]                         = "true"
+default.kkafka.broker[:log][:cleaner][:io][:buffer][:load][:factor]          = "0.9"
+# values are: PLAINTEXT, SSL, SASL_PLAINTEXT, SASL_SSL
+default.kkafka.broker[:security][:inter][:broker][:protocol]             = "PLAINTEXT"
+# required, requested, none
+default.kkafka.broker[:ssl][:client][:auth]                            = "requested"
+default.kkafka.broker[:ssl][:key][:password]                           = "null"
+default.kkafka.broker[:ssl][:keystore][:location]                      = ""
+default.kkafka.broker[:ssl][:keystore][:password]                      = ""
+default.kkafka.broker[:ssl][:truststore][:location]                    = ""
+default.kkafka.broker[:ssl][:truststore][:password]                    = ""
+
+# TODO - HopsWorks implementations needed
+default.kkafka.broker[:authorizer][:class][:name]                      = ""
+default.kkafka.broker[:ssl][:endpoint][:identification][:algorithm]      = ""
+default.kkafka.broker[:principal][:builder][:class]                    = "org.apache.kafka.common.security.auth.DefaultPrincipalBuilder"
+
+default.kkafka.broker[:zookeeper][:synctime][:ms]                      = 6000
+default.kkafka.broker[:zookeeper][:connectiontimeout][:ms]             = 6000
+default.kkafka.broker[:zookeeper][:sessiontimeout][:ms]                = 6000
+default.kkafka.broker[:zookeeper][:synctime][:ms]                      = 2000
+default.kkafka.broker[:zookeeper][:session][:timeout][:ms]               = 6000
+default.kkafka.broker[:zookeeper][:set][:acl]                          = "false"
+
