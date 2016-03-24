@@ -47,8 +47,6 @@ suites:
             ulimit_file: 128000
             broker:
               log_dirs: ['/mnt/kafka-logs-1', '/mnt/kafka-logs-2']
-#              zookeeper_connect: ['10.0.2.15:2181']
-              zookeeper_connection_timeout_ms: 15_000
             default:
                 private_ips: ["10.0.2.15"]
          apache_hadoop:
