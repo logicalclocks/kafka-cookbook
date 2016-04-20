@@ -267,9 +267,9 @@ default.kkafka.broker[:ssl][:truststore][:location]                    = ""
 default.kkafka.broker[:ssl][:truststore][:password]                    = ""
 
 # TODO - HopsWorks implementations needed
-default.kkafka.broker[:authorizer][:class][:name]                      = ""
+default.kkafka.broker[:authorizer][:class][:name]                      = "io.hops.kafka.HopsAclAuthorizer"
 default.kkafka.broker[:ssl][:endpoint][:identification][:algorithm]      = ""
-default.kkafka.broker[:principal][:builder][:class]                    = "org.apache.kafka.common.security.auth.DefaultPrincipalBuilder"
+default.kkafka.broker[:principal][:builder][:class]                    = "io.hops.kafka.HopsPrincipalBuilder"
 
 default.kkafka.broker[:zookeeper][:synctime][:ms]                      = 6000
 default.kkafka.broker[:zookeeper][:connectiontimeout][:ms]             = 6000
