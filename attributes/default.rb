@@ -255,20 +255,20 @@ default.kkafka.broker[:request][:timeout][:ms]                         = 30000
 default.kkafka.broker[:message][:max][:bytes]                          = "1000012"
 default.kkafka.broker[:default][:replication][:factor]                 = 1
 default.kkafka.broker[:log][:cleaner][:enable]                         = "true"
-default.kkafka.broker[:log][:cleaner][:io][:buffer][:load][:factor]          = "0.9"
+default.kkafka.broker[:log][:cleaner][:io][:buffer][:load][:factor]    = "0.9"
 # values are: PLAINTEXT, SSL, SASL_PLAINTEXT, SASL_SSL
-default.kkafka.broker[:security][:inter][:broker][:protocol]             = "PLAINTEXT"
+default.kkafka.broker[:security][:inter][:broker][:protocol]           = "PLAINTEXT"
 # required, requested, none
 default.kkafka.broker[:ssl][:client][:auth]                            = "requested"
-default.kkafka.broker[:ssl][:key][:password]                           = "null"
-default.kkafka.broker[:ssl][:keystore][:location]                      = ""
-default.kkafka.broker[:ssl][:keystore][:password]                      = ""
-default.kkafka.broker[:ssl][:truststore][:location]                    = ""
-default.kkafka.broker[:ssl][:truststore][:password]                    = ""
+default.kkafka.broker[:ssl][:keystore][:location]                      = "/tmp/tempstores/keystore.jks"
+default.kkafka.broker[:ssl][:keystore][:password]                      = "#{node.hopsworks.admin.password}"
+default.kkafka.broker[:ssl][:truststore][:location]                    = "/tmp/tempstores/truststore.jks"
+default.kkafka.broker[:ssl][:truststore][:password]                    = "#{node.hopsworks.admin.password}"
 
 # TODO - HopsWorks implementations needed
 default.kkafka.broker[:authorizer][:class][:name]                      = "io.hops.kafka.HopsAclAuthorizer"
-default.kkafka.broker[:ssl][:endpoint][:identification][:algorithm]      = ""
+default.kkafka.broker[:authorizer][:download_url]                      = ""
+default.kkafka.broker[:ssl][:endpoint][:identification][:algorithm]    = ""
 default.kkafka.broker[:principal][:builder][:class]                    = "io.hops.kafka.HopsPrincipalBuilder"
 
 default.kkafka.broker[:zookeeper][:synctime][:ms]                      = 6000
@@ -277,4 +277,5 @@ default.kkafka.broker[:zookeeper][:sessiontimeout][:ms]                = 6000
 default.kkafka.broker[:zookeeper][:synctime][:ms]                      = 2000
 default.kkafka.broker[:zookeeper][:session][:timeout][:ms]               = 6000
 default.kkafka.broker[:zookeeper][:set][:acl]                          = "false"
+
 
