@@ -261,9 +261,11 @@ default.kkafka.broker[:security][:inter][:broker][:protocol]           = "PLAINT
 # required, requested, none
 default.kkafka.broker[:ssl][:client][:auth]                            = "requested"
 default.kkafka.broker[:ssl][:keystore][:location]                      = "/tmp/tempstores/keystore.jks"
-default.kkafka.broker[:ssl][:keystore][:password]                      = "#{node.hopsworks.admin.password}"
+default.kkafka.broker[:ssl][:keystore][:password]                      = "adminpw"
+#= "#{node.hopsworks.admin.password}"
 default.kkafka.broker[:ssl][:truststore][:location]                    = "/tmp/tempstores/truststore.jks"
-default.kkafka.broker[:ssl][:truststore][:password]                    = "#{node.hopsworks.admin.password}"
+default.kkafka.broker[:ssl][:truststore][:password]                    = "adminpw"
+  # "#{node.hopsworks.admin.password}"
 
 # TODO - HopsWorks implementations needed
 default.kkafka.broker[:authorizer][:class][:name]                      = "io.hops.kafka.HopsAclAuthorizer"
