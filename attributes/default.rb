@@ -276,7 +276,7 @@ default.kkafka.broker[:authorizer][:class][:name]                      = "io.hop
 default.kkafka.broker[:authorizer][:download_url]                      = ""
 default.kkafka.broker[:ssl][:endpoint][:identification][:algorithm]    = ""
 default.kkafka.broker[:principal][:builder][:class]                    = "io.hops.kafka.HopsPrincipalBuilder"
-default.kkafka.broker[:allow][:everyone][:if][:no][:acl][:is][:found]  = "false"
+default.kkafka.broker[:allow][:everyone][:if][:no][:acl][:found]  = "false"
 
 default.kkafka.broker[:zookeeper][:synctime][:ms]                      = 6000
 default.kkafka.broker[:zookeeper][:connectiontimeout][:ms]             = 6000
