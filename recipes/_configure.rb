@@ -78,7 +78,7 @@ end
 include_recipe node.kkafka.start_coordination.recipe
 
 
-remote_file "#{node.kkafka.install_dir}/lib/KafkaAclAuthorizer-1.0.jar" do
+remote_file "#{node.kkafka.install_dir}/libs/KafkaAclAuthorizer-1.0.jar" do
   user 'root'
   group 'root'
   source "http://snurran.sics.se/hops/KafkaAclAuthorizer-1.0.jar"
