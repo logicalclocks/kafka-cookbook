@@ -264,10 +264,10 @@ default.kkafka.broker[:log][:cleaner][:io][:buffer][:load][:factor]    = "0.9"
 default.kkafka.broker[:security][:inter][:broker][:protocol]           = "PLAINTEXT"
 # required, requested, none
 default.kkafka.broker[:ssl][:client][:auth]                            = "requested"
-default.kkafka.broker[:ssl][:keystore][:location]                      = "/tmp/tempstores/keystore.jks"
+default.kkafka.broker[:ssl][:keystore][:location]                      = "#{node.kagent.base_dir}/keystores/keystore.jks"
 default.kkafka.broker[:ssl][:keystore][:password]                      = "adminpw"
 #= "#{node.hopsworks.admin.password}"
-default.kkafka.broker[:ssl][:truststore][:location]                    = "/tmp/tempstores/truststore.jks"
+default.kkafka.broker[:ssl][:truststore][:location]                    = "#{node.kagent.base_dir}/keystores/truststore.jks"
 default.kkafka.broker[:ssl][:truststore][:password]                    = "adminpw"
   # "#{node.hopsworks.admin.password}"
 
