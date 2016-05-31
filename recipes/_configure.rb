@@ -76,3 +76,14 @@ template kafka_init_opts[:script_path] do
 end
 
 include_recipe node.kkafka.start_coordination.recipe
+
+
+remote_file "#{node.kkafka.install_dir}/lib/KafkaAclAuthorizer-1.0.jar" do
+  user 'root'
+  group 'root'
+  source "http://snurran.sics.se/hops/KafkaAclAuthorizer-1.0.jar"
+  mode 0755
+  action :create_if_missing
+end
+
+
