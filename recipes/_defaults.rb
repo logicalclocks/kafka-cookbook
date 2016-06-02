@@ -33,7 +33,7 @@ end
 
 unless broker_attribute?(:database, :url)
   mysql_host = private_recipe_ip("ndb","mysqld")
-  node.default.kkafka.database.url = "#{mysql_host}:#{node.ndb.mysql.port}/hopsworks"
+  node.default.kkafka.database.url = "#{mysql_host}:#{node.ndb.mysql_port}/hopsworks"
 end
 unless broker_attribute?(:database, :username)
   node.default.kkafka.database.username = node.mysql.user
