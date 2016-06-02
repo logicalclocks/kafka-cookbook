@@ -1,3 +1,5 @@
+include_attribute "ndb"
+
 #
 # Cookbook Name:: kkafka
 # Attributes:: default

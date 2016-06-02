@@ -12,6 +12,7 @@ recipe            "kkafka::client", "Kafka client installation"
 
 depends "kagent"
 depends "kzookeeper"
+depends "ndb"
 depends "java"
 
 %w{ ubuntu debian rhel centos }.each do |os|

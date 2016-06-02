@@ -26,3 +26,18 @@ end
 unless node.kkafka.version_install_dir
   node.default.kkafka.version_install_dir = %(#{node.kkafka.install_dir}-#{node.kkafka.version})
 end
+
+unless broker_attribute?(:database, :type)
+  node.default.kkafka.database.type = "mysql"
+end
+
+unless broker_attribute?(:database, :url)
+  mysql_host = private_recipe_ip("ndb","mysqld")
+  node.default.kkafka.database.url = "#{mysql_host}:#{node.ndb.mysql.port}/hopsworks"
+end
+unless broker_attribute?(:database, :username)
+  node.default.kkafka.database.username = node.mysql.user
+end
+unless broker_attribute?(:database, :password)
+  node.default.kkafka.database.password = node.mysql.password
+end
