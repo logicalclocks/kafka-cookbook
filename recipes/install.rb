@@ -22,7 +22,7 @@ include_recipe 'kkafka::_install'
 #zk_ips = "#{zk_ips}:2181/kafka"
 #node.override.kkafka.broker.zookeeper.connect = ["#{zk_ips}"]
 zk_ip = private_recipe_ip('kzookeeper', 'default')
-node.override.kkafka.broker.zookeeper.connect = ["#{zk_ip}:2181/kafka"]
+node.override.kkafka.broker.zookeeper.connect = ["#{zk_ip}:2181"]
 my_ip = my_private_ip()
 node.override.kkafka.broker.host.name = my_ip
 #node.override.kkafka.broker.advertised.host.name = my_ip
