@@ -75,8 +75,6 @@ template kafka_init_opts[:script_path] do
   end
 end
 
-include_recipe node.kkafka.start_coordination.recipe
-
 
 remote_file "#{node.kkafka.install_dir}/libs/KafkaAclAuthorizer-1.0.jar" do
   user 'root'
@@ -87,3 +85,4 @@ remote_file "#{node.kkafka.install_dir}/libs/KafkaAclAuthorizer-1.0.jar" do
 end
 
 
+include_recipe node.kkafka.start_coordination.recipe
