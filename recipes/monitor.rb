@@ -2,7 +2,7 @@
 monitordir = "/srv/kafka-monitor"
 directory monitordir do
   owner node[:kzookeeper][:user]
-  group node[:kafka][:group]
+  group node[:kkafka][:group]
   mode "0774"
   recursive true
   action :create
@@ -16,7 +16,7 @@ dest="#{monitordir}/#{base_filename}"
 remote_file dest do
   source url
   owner node[:kzookeeper][:user]
-  group node[:kafka][:group]
+  group node[:kkafka][:group]
   mode "0775"
   action :create_if_missing
 end

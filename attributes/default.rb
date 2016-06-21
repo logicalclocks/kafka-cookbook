@@ -289,4 +289,8 @@ default.kkafka.broker[:zookeeper][:session][:timeout][:ms]               = 6000
 default.kkafka.broker[:zookeeper][:set][:acl]                          = "false"
 
 
-node.default.java.jdk_version                                         = 7
+node.default.java.jdk_version                                          = 7
+
+default[:kkafka][:offset_monitor][:version]                            = "0.2.1"
+default[:kkafka][:offset_monitor][:url]                                = "http://snurran.sics.se/hops/KafkaOffsetMonitor-assembly-" + node[:kkafka][:offset_monitor][:version] + ".jar"
+default[:kkafka][:offset_monitor][:port]                               = "11111"
