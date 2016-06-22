@@ -19,6 +19,10 @@ depends "java"
   supports os
 end
 
+attribute "java/jdk_version",
+:display_name =>  "Jdk version",
+:type => 'string'
+
 attribute "kafka/ulimit",
 :description => "ULimit for the max number of open files allowed",
 :type => 'string'
