@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 case node.platform
 when "ubuntu"
@@ -39,3 +40,4 @@ if node.kagent.enabled == "true"
     pid_file ""
   end
 end
+
