@@ -1,7 +1,10 @@
 dependencies:
   - recipe: kkafka::install
+    local:
+      - kagent::install
     global:
       - kzookeeper::install
+      - kagent::install
   - recipe: kkafka::default
     global:
       - kzookeeper::default
