@@ -29,3 +29,5 @@ node.override.kkafka.broker.host.name = my_ip
 node.override.kkafka.broker.listeners = "PLAINTEXT://#{my_ip}:9092,SSL://#{my_ip}:9091"
 
 include_recipe 'kkafka::_configure'
+
+include_recipe 'kkafka::_start'
