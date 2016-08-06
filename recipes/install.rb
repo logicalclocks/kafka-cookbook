@@ -29,13 +29,14 @@ node.override.kkafka.broker.listeners = "PLAINTEXT://#{my_ip}:9092,SSL://#{my_ip
 
 include_recipe 'kkafka::_configure'
 
+
 if node.kagent.enabled == "true"
   kagent_config "kafka" do
     service "kafka-#{my_ip}"
     start_script ""
     stop_script ""
-    log_file ""
-    pid_file ""
+    log_file "/var/logs/kafka/kafka.log"
+    pid_file "/var/run/kafka.pid"
   end
 end
 
