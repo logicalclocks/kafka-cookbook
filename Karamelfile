@@ -8,5 +8,4 @@ dependencies:
   - recipe: kkafka::default
     global:
       - kzookeeper::default
-      - kagent::default
 
