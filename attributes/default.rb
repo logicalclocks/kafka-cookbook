@@ -283,7 +283,7 @@ default.kkafka.broker[:allow][:everyone][:if][:no][:acl][:found]       = "false"
 default.kkafka.broker[:delete][:topic][:enable]                        = "true"
 
 default.kkafka.broker[:zookeeper][:synctime][:ms]                      = 6000
-default.kkafka.broker[:zookeeper][:connectiontimeout][:ms]             = 6000
+default.kkafka.broker[:zookeeper][:connectiontimeout][:ms]             = 60000
 default.kkafka.broker[:zookeeper][:sessiontimeout][:ms]                = 6000
 default.kkafka.broker[:zookeeper][:synctime][:ms]                      = 2000
 default.kkafka.broker[:zookeeper][:session][:timeout][:ms]             = 6000
