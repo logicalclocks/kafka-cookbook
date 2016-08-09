@@ -18,6 +18,13 @@ include_recipe 'kkafka::_setup'
 include_recipe 'kkafka::_install'
 
 
+group node.kagent.group do
+  action :modify
+  members ["#{node.kkafka.user}"]
+  append true
+end
+
+
 #zk_ips = node.kzookeeper.default[:private_ips].join(:":2181/kafka,") 
 #zk_ips = "#{zk_ips}:2181/kafka"
 #node.override.kkafka.broker.zookeeper.connect = ["#{zk_ips}"]
