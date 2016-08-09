@@ -18,7 +18,7 @@ include_recipe 'kkafka::_setup'
 include_recipe 'kkafka::_install'
 
 
-group node.kagent.group do
+group node.kagent.certs_group do
   action :modify
   members ["#{node.kkafka.user}"]
   append true
