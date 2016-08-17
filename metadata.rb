@@ -10,6 +10,7 @@ recipe            "kkafka::default", "configFile=; Run experiment for Kafka"
 #link:<a target='_blank' href='http://%host%:11111/'>Launch the WebUI for Kafka Monitor</a>
 recipe            "kkafka::monitor", "Helper webapp to monitor performance of kafka"
 recipe            "kkafka::client", "Kafka client installation"
+recipe            "kkafka::purge", "Removes and deletes Kafka"
 
 depends "kagent"
 depends "kzookeeper"
