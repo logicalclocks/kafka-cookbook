@@ -22,251 +22,255 @@ depends "java"
 end
 
 attribute "java/jdk_version",
-:display_name =>  "Jdk version",
-:type => 'string'
+          :description =>  "Jdk version",
+          :type => 'string'
+
+attribute "java/install_flavor",
+          :description =>  "Oracle (default) or openjdk",
+          :type => 'string'
 
 attribute "kafka/ulimit",
-:description => "ULimit for the max number of open files allowed",
-:type => 'string'
+          :description => "ULimit for the max number of open files allowed",
+          :type => 'string'
 
 attribute "kkafka/offset_monitor/port",
-:description => "Port for Kafka monitor service",
-:type => 'string'
+          :description => "Port for Kafka monitor service",
+          :type => 'string'
 
 attribute "kkafka/memory_mb",
-:description => "Kafka server memory in mbs",
-:type => 'string'
+          :description => "Kafka server memory in mbs",
+          :type => 'string'
 
 attribute "kkafka/broker/zookeeper_connection_timeout_ms",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/log/retention/hours",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/log/retention/size",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/message/max/bytes",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/num/network/threads",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/num/io/threads",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/num/recovery/threads/per/data/dir",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/num/replica/fetchers",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/queued/max/requests",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/socket/send/buffer/bytes",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/brattribute oker/socket/receive/buffer/bytes",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/sockeattribute t/request/max/bytes",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/num/partitionsattribute ",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/log/segment/bytesattribute ",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/log/roll/hoursattribute ",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/log/retention/hoursattribute ",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/log/retention/bytesattribute ",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/log/retention/check/interval/attribute ms",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/log/index/size/max/bytesattribute ",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/log/index/interval/bytesattribute ",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/log/flush/interval/messagesattribute ",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/log/flush/scheduler/interval/msattribute ",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/log/flush/interval/msattribute ",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/leader/imbalance/check/intervalattribute /seconds",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/leader/imbalance/per/broker/percentageattribute ",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/log/dir",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/log/flush/offset/checkpoint/interval/ms",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/port",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/queued/max/requests",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/quota/consumer/default",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/quota/producer/default",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/replica/fetch/max/bytes",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/replica/fetch/min/bytes",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/replica/fetch/wait/max/ms",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/replica/high/watermark/checkpoint/interval/ms",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/replica/lag/time/max/ms",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/replica/socket/receive/buffer/bytes",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/replica/socket/timeout/ms",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/request/timeout/ms",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/zookeeper/session/timeout/ms",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/zookeeper/set/acl",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/replication/factor",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/log/cleaner/enable",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/log/cleaner/io/buffer/load/factor",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/security/inter/broker/protocol",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/ssl/client/auth",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/ssl/key/password",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/ssl/keystore/location",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/ssl/keystore/password",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/ssl/truststore/location",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/ssl/truststore/password",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/authorizer/class/name",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/ssl/endpoint/identification/algorithm",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/principal/builder/class",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/zookeeper/synctime/ms",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/zookeeper/connectiontimeout/ms",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/zookeeper/sessiontimeout/ms",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 attribute "kkafka/broker/zookeeper/synctime/ms",
-:description => "",
-:type => 'string'
+          :description => "",
+          :type => 'string'
 
 
