@@ -41,8 +41,5 @@ include_recipe 'kkafka::_start'
 
 kagent_config "kafka" do
  service "kafka"
- start_script ""
- stop_script ""
  log_file "/var/logs/kafka/kafka.log"
- pid_file "/var/run/kafka.pid"
 end
