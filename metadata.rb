@@ -1,12 +1,12 @@
 name             "kkafka"
-maintainer       "kafka"
+maintainer       "Jim Dowling"
 maintainer_email "jdowling@kth.se"
 license          "Apache v2.0"
 description      'Installs/Configures/Runs kkafka. Karamelized version of https://github.com/mthssdrbrg/kafka-cookbook'
-version          "0.1.0"
+version          "0.2.1"
 
-recipe            "kkafka::install", "Experiment setup for kkafka"
-recipe            "kkafka::default", "configFile=; Run experiment for Kafka"
+recipe            "kkafka::install", "Installs kafka binaries"
+recipe            "kkafka::default", "Configures Kafka"
 #link:<a target='_blank' href='http://%host%:11111/'>Launch the WebUI for Kafka Monitor</a>
 recipe            "kkafka::monitor", "Helper webapp to monitor performance of kafka"
 recipe            "kkafka::client", "Kafka client installation"
