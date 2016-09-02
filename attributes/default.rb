@@ -34,7 +34,9 @@ default.kkafka.scala_version = '2.10'
 
 #
 # Directory where to install Kafka.
-default.kkafka.install_dir = '/opt/kafka'
+default.kkafka.dir         = '/opt'
+
+default.kkafka.install_dir = "#{node.kkafka.dir}/kafka"
 
 #
 # Directory where to install *this* version of Kafka.

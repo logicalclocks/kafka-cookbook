@@ -29,6 +29,10 @@ attribute "java/install_flavor",
           :description =>  "Oracle (default) or openjdk",
           :type => 'string'
 
+attribute "kkafka/dir",
+          :description => "Base directory to install kafka (default: /opt)",
+          :type => 'string'
+
 attribute "kafka/ulimit",
           :description => "ULimit for the max number of open files allowed",
           :type => 'string'
