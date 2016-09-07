@@ -8,7 +8,7 @@ include_attribute "ndb"
 #
 # Version of Kafka to install.
 #default.kkafka.version = '0.9.0.1'
-default.kkafka.version = '0.10.0.0'
+default.kkafka.version = '0.10.0.1'
 
 #
 # Base URL for Kafka releases. The recipes will a download URL using the
