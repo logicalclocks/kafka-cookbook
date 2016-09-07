@@ -21,7 +21,9 @@ default.kkafka.base_url = 'https://archive.apache.org/dist/kafka'
 #default.kkafka.checksum = '7f3900586c5e78d4f5f6cbf52b7cd6c02c18816ce3128c323fd53858abcf0fa1'
 
 # 0.10.0.0
-default.kkafka.checksum = '4a9b1949d7b5dbe18efe1486d706f45dfaf0decd88075bb7dd04c8294100e95f'
+#default.kkafka.checksum = '4a9b1949d7b5dbe18efe1486d706f45dfaf0decd88075bb7dd04c8294100e95f'
+# 0.10.0.1
+default.kkafka.checksum = 'ab682dac5ec3ee5374c44182602eae88a44d84b2c56fe82ace5aafb330cf0462'
 
 #
 # MD5 checksum of the archive to download, which will be used to validate that
