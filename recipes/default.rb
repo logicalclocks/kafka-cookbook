@@ -7,15 +7,6 @@ when "ubuntu"
 end
 
 
-# directory "#{node.kkafka.install_dir}" do
-#   owner node.kkafka.user
-#   group node.kkafka.group
-#   mode "755"
-#   action :create
-#   recursive true
-# end
-
-
 include_recipe 'kkafka::_id'
 
 include_recipe "java"
