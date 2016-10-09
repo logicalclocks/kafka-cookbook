@@ -32,7 +32,7 @@ default.kkafka.md5_checksum = ''
 
 #
 # Scala version of Kafka.
-default.kkafka.scala_version = '2.11'
+default.kkafka.scala_version = '2.10'
 
 #
 # Directory where to install Kafka.
