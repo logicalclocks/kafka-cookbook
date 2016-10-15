@@ -23,7 +23,7 @@ default.kkafka.base_url = 'https://archive.apache.org/dist/kafka'
 # 0.10.0.0
 #default.kkafka.checksum = '4a9b1949d7b5dbe18efe1486d706f45dfaf0decd88075bb7dd04c8294100e95f'
 # 0.10.0.1
-default.kkafka.checksum = 'ab682dac5ec3ee5374c44182602eae88a44d84b2c56fe82ace5aafb330cf0462'
+default.kkafka.checksum = '2d73625aeddd827c9e92eefb3c727a78455725fbca4361c221eaa05ae1fab02d'
 
 #
 # MD5 checksum of the archive to download, which will be used to validate that
@@ -32,7 +32,7 @@ default.kkafka.md5_checksum = ''
 
 #
 # Scala version of Kafka.
-default.kkafka.scala_version = '2.10'
+default.kkafka.scala_version = '2.11'
 
 #
 # Directory where to install Kafka.
