@@ -277,4 +277,6 @@ attribute "kkafka/broker/zookeeper/synctime/ms",
           :description => "",
           :type => 'string'
 
-
+attribute "kkafka/default/private_ips",
+          :description => "Set ip addresses",
+          :type => "array"
