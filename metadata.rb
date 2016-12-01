@@ -225,6 +225,14 @@ attribute "kkafka/broker/security/inter/broker/protocol",
           :description => "",
           :type => 'string'
 
+attribute "kkafka/inter/broker/protocol/version",
+          :description => "",
+          :type => 'string'
+
+attribute "kkafka/broker/rack",
+          :description => "",
+          :type => 'string'
+
 attribute "kkafka/broker/ssl/client/auth",
           :description => "",
           :type => 'string'

@@ -269,6 +269,8 @@ default.kkafka.broker[:log][:cleaner][:enable]                         = "true"
 default.kkafka.broker[:log][:cleaner][:io][:buffer][:load][:factor]    = "0.9"
 # values are: PLAINTEXT, SSL, SASL_PLAINTEXT, SASL_SSL
 default.kkafka.broker[:security][:inter][:broker][:protocol]           = "PLAINTEXT"
+default.kkafka.broker[:inter][:broker][:protocol][:version]            = "#{node.kkafka.version}"
+default.kkafka.broker[:broker][:rack]                                  = "hdp1"
 # required, requested, none
 default.kkafka.broker[:ssl][:client][:auth]                            = "requested"
 default.kkafka.broker[:ssl][:keystore][:location]                      = "#{node.kagent.certs_dir}/keystores/node_server_keystore.jks"
