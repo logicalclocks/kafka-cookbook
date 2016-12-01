@@ -153,6 +153,10 @@ attribute "kkafka/broker/log/flush/offset/checkpoint/interval/ms",
           :description => "",
           :type => 'string'
 
+attribute "kkafka/broker/log/message/format/version",
+          :description => "",
+          :type => 'string'
+
 attribute "kkafka/broker/port",
           :description => "",
           :type => 'string'
