@@ -275,13 +275,14 @@ default.kkafka.broker[:default][:replication][:factor]                 = 1
 default.kkafka.broker[:log][:cleaner][:enable]                         = "true"
 default.kkafka.broker[:log][:cleaner][:io][:buffer][:load][:factor]    = "0.9"
 # values are: PLAINTEXT, SSL, SASL_PLAINTEXT, SASL_SSL
-default.kkafka.broker[:security][:inter][:broker][:protocol]           = "PLAINTEXT"
+default.kkafka.broker[:security][:inter][:broker][:protocol]           = "SSL"
 default.kkafka.broker[:inter][:broker][:protocol][:version]            = "#{node.kkafka.version}"
 default.kkafka.broker[:broker][:rack]                                  = "#{node.kkafka.broker.rack.id}"
 # required, requested, none
-default.kkafka.broker[:ssl][:client][:auth]                            = "requested"
+default.kkafka.broker[:ssl][:client][:auth]                            = "required"
 default.kkafka.broker[:ssl][:keystore][:location]                      = "#{node.kagent.certs_dir}/keystores/node_server_keystore.jks"
 default.kkafka.broker[:ssl][:keystore][:password]                      = "adminpw"
+default.kkafka.broker[:ssl][:key][:password]			       = "adminpw"
 #= "#{node.hopsworks.admin.password}"
 default.kkafka.broker[:ssl][:truststore][:location]                    = "#{node.kagent.certs_dir}/keystores/node_server_truststore.jks"
 default.kkafka.broker[:ssl][:truststore][:password]                    = "adminpw"
