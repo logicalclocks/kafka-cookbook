@@ -9,7 +9,6 @@ include_attribute "ndb"
 # Version of Kafka to install.
 #default.kkafka.version = '0.9.0.1'
 default.kkafka.version = '0.10.1.0'
-default.kkafka.super.users = <%= node['host'] %>
 #
 # Base URL for Kafka releases. The recipes will a download URL using the
 # `base_url`, `version` and `scala_version` attributes.
@@ -231,7 +230,6 @@ default.kkafka.log4j.loggers = {
 }
 
 default.kkafka.broker.port                                             = 9092
-default.kkafka.super.users                                             =User:"#{node.kkafka.supers.users}"
 
 default.kkafka.broker[:log][:retention][:hours]                        = 240
 default.kkafka.broker[:log][:retention][:size]                         = "-1"
