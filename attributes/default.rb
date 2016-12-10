@@ -8,8 +8,7 @@ include_attribute "ndb"
 #
 # Version of Kafka to install.
 #default.kkafka.version = '0.9.0.1'
-default.kkafka.version = '0.10.0.1'
-
+default.kkafka.version = '0.10.1.0'
 #
 # Base URL for Kafka releases. The recipes will a download URL using the
 # `base_url`, `version` and `scala_version` attributes.
@@ -23,7 +22,10 @@ default.kkafka.base_url = 'https://archive.apache.org/dist/kafka'
 # 0.10.0.0
 #default.kkafka.checksum = '4a9b1949d7b5dbe18efe1486d706f45dfaf0decd88075bb7dd04c8294100e95f'
 # 0.10.0.1
-default.kkafka.checksum = '2d73625aeddd827c9e92eefb3c727a78455725fbca4361c221eaa05ae1fab02d'
+#default.kkafka.checksum = '2d73625aeddd827c9e92eefb3c727a78455725fbca4361c221eaa05ae1fab02d'
+# 0.10.1.0
+default.kkafka.checksum = '6d9532ae65c9c8126241e7b928b118aaa3a694dab08069471f0e61f4f0329390'
+
 
 #
 # MD5 checksum of the archive to download, which will be used to validate that
@@ -151,6 +153,9 @@ default.kkafka.kill_timeout = 10
 # statements in helper methods and the alike.
 default.kkafka.broker = {}
 
+#Kafka rack id
+default.kkafka.broker.rack.id = 'hdp1'
+
 #
 # Root logger level and appender.
 default.kkafka.log4j.root_logger = 'INFO, kafkaAppender'
@@ -226,7 +231,6 @@ default.kkafka.log4j.loggers = {
 
 default.kkafka.broker.port                                             = 9092
 
-
 default.kkafka.broker[:log][:retention][:hours]                        = 240
 default.kkafka.broker[:log][:retention][:size]                         = "-1"
 default.kkafka.broker[:num][:network][:threads]                        = 3
@@ -248,6 +252,7 @@ default.kkafka.broker[:log][:index][:interval][:bytes]                   = "4096
 default.kkafka.broker[:log][:flush][:interval][:messages]                = "9223372036854775807"
 default.kkafka.broker[:log][:flush][:scheduler][:interval][:ms]            = 3000
 default.kkafka.broker[:log][:flush][:interval][:ms]                      = 3000
+default.kkafka.broker[:log][:message][:format][:version]                 = "#{node.kkafka.version}"
 default.kkafka.broker[:leader][:imbalance][:check][:interval][:seconds]    = 300
 default.kkafka.broker[:leader][:imbalance][:per][:broker][:percentage]     = 10
 default.kkafka.broker[:log][:dir]                                    = "/tmp/kafka-logs"
@@ -268,13 +273,14 @@ default.kkafka.broker[:default][:replication][:factor]                 = 1
 default.kkafka.broker[:log][:cleaner][:enable]                         = "true"
 default.kkafka.broker[:log][:cleaner][:io][:buffer][:load][:factor]    = "0.9"
 # values are: PLAINTEXT, SSL, SASL_PLAINTEXT, SASL_SSL
-default.kkafka.broker[:security][:inter][:broker][:protocol]           = "PLAINTEXT"
+default.kkafka.broker[:security][:inter][:broker][:protocol]           = "SSL"
 default.kkafka.broker[:inter][:broker][:protocol][:version]            = "#{node.kkafka.version}"
-default.kkafka.broker[:broker][:rack]                                  = "hdp1"
+default.kkafka.broker[:broker][:rack]                                  = "#{node.kkafka.broker.rack.id}"
 # required, requested, none
-default.kkafka.broker[:ssl][:client][:auth]                            = "requested"
+default.kkafka.broker[:ssl][:client][:auth]                            = "required"
 default.kkafka.broker[:ssl][:keystore][:location]                      = "#{node.kagent.certs_dir}/keystores/node_server_keystore.jks"
 default.kkafka.broker[:ssl][:keystore][:password]                      = "adminpw"
+default.kkafka.broker[:ssl][:key][:password]			       = "adminpw"
 #= "#{node.hopsworks.admin.password}"
 default.kkafka.broker[:ssl][:truststore][:location]                    = "#{node.kagent.certs_dir}/keystores/node_server_truststore.jks"
 default.kkafka.broker[:ssl][:truststore][:password]                    = "adminpw"
