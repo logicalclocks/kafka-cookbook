@@ -62,7 +62,7 @@ if node.services.enabled != "true"
 
   if node.kkafka.systemd == "true"
 
-    service service_name do
+    service "kafka" do
       provider Chef::Provider::Service::Systemd
       supports :restart => true, :stop => true, :start => true, :status => true
       action :disable
@@ -70,7 +70,7 @@ if node.services.enabled != "true"
 
   else #sysv
 
-    service service_name do
+    service "kafka" do
       provider Chef::Provider::Service::Init::Debian
       supports :restart => true, :stop => true, :start => true, :status => true
       action :disable
