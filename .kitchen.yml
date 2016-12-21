@@ -37,14 +37,23 @@ suites:
 #      - recipe[apache_hadoop::jhs]
 #      - recipe[kkafka::monitor]
     attributes:
+         kagent:
+            user: 'glassfish'
+            group: 'glassfish'
+            dir: '/srv/hops'
+            enabled: 'false'
          kzookeeper:
-            dir: "/srv/hops"
+            user: 'glassfish'
+            group: 'glassfish'
             default:
                private_ips: ["10.0.2.15"]
+            dir: "/srv/hops"
          private_ips: ["10.0.2.15"]
          public_ips: ["10.0.2.15"]
          vagrant: "enabled"
          kkafka:
+            user: 'glassfish'
+            group: 'glassfish'
             dir: "/srv/hops"
             ulimit_file: 128000
             broker:
@@ -52,12 +61,6 @@ suites:
             default:
                 private_ips: ["10.0.2.15"]
          apache_hadoop:
-            version: 2.7.1
-            group: hadoop
-            hdfs:
-               user: hdfs
-            yarn:
-               user: yarn
             nn:
                private_ips: ["10.0.2.15"]
             dn:

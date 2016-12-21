@@ -3,16 +3,16 @@
 # Recipe:: _setup
 #
 
-group node.kkafka.group do
-  only_if { node.kkafka.manage_user }
-end
+# group node.kkafka.group do
+#   only_if { node.kkafka.manage_user }
+# end
 
-user node.kkafka.user do
-  gid node.kkafka.group
-  home '/var/empty/kafka'
-  shell '/sbin/nologin'
-  only_if { node.kkafka.manage_user }
-end
+# user node.kkafka.user do
+#   gid node.kkafka.group
+#   home '/var/empty/kafka'
+#   shell '/sbin/nologin'
+#   only_if { node.kkafka.manage_user }
+# end
 
 [
   node.kkafka.version_install_dir,
