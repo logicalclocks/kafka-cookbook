@@ -46,3 +46,35 @@ if node.kagent.enabled == "true"
     log_file "/var/logs/kafka/kafka.log"
   end
 end
+
+
+#
+# Disable kafka service, if node.services.enabled is not set to true
+#
+if node.services.enabled != "true"
+
+  case node.platform
+  when "ubuntu"
+    if node.platform_version.to_f <= 14.04
+      node.override.kkafka.systemd = "false"
+    end
+  end
+
+  if node.kkafka.systemd == "true"
+
+    service service_name do
+      provider Chef::Provider::Service::Systemd
+      supports :restart => true, :stop => true, :start => true, :status => true
+      action :disable
+    end
+
+  else #sysv
+
+    service service_name do
+      provider Chef::Provider::Service::Init::Debian
+      supports :restart => true, :stop => true, :start => true, :status => true
+      action :disable
+    end
+  end
+
+end

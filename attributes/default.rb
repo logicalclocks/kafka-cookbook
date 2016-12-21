@@ -306,3 +306,6 @@ default.kkafka.broker[:super][:users]                                  = "User:#
 default[:kkafka][:offset_monitor][:version]                            = "0.2.1"
 default[:kkafka][:offset_monitor][:url]                                = "http://snurran.sics.se/hops/KafkaOffsetMonitor-assembly-" + node[:kkafka][:offset_monitor][:version] + ".jar"
 default[:kkafka][:offset_monitor][:port]                               = "11111"
+
+
+default.kkafka.systemd                                                 = "true"
