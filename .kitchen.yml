@@ -18,8 +18,8 @@ provisioner:
 
 platforms:
   - name: ubuntu-14.04
-  - name: ubuntu-15.04
-  - name: centos-7.0
+#  - name: ubuntu-16.04
+#  - name: centos-7.2
 
 suites: 
   - name: default
@@ -38,15 +38,17 @@ suites:
 #      - recipe[kkafka::monitor]
     attributes:
          kzookeeper:
+            dir: "/srv/hops"
             default:
                private_ips: ["10.0.2.15"]
          private_ips: ["10.0.2.15"]
          public_ips: ["10.0.2.15"]
          vagrant: "enabled"
          kkafka:
+            dir: "/srv/hops"
             ulimit_file: 128000
             broker:
-              log_dirs: ['/mnt/kafka-logs-1', '/mnt/kafka-logs-2']
+              log_dirs: ['/tmp/kafka-logs-1', '/tmp/kafka-logs-2']
             default:
                 private_ips: ["10.0.2.15"]
          apache_hadoop:

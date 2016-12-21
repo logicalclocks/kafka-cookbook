@@ -292,3 +292,7 @@ attribute "kkafka/broker/zookeeper/synctime/ms",
 attribute "kkafka/default/private_ips",
           :description => "Set ip addresses",
           :type => "array"
+
+attribute "kagent/enabled",
+          :description => "'false' to disable. 'true' is default.",
+          :type => 'string'
