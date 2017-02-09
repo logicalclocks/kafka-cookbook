@@ -289,6 +289,10 @@ attribute "kkafka/broker/zookeeper/synctime/ms",
           :description => "",
           :type => 'string'
 
+attribute "kkafka/broker/super/users",
+          :description => "For example: User:dn0;User:glassfish",
+          :type => 'string'
+
 attribute "kkafka/default/private_ips",
           :description => "Set ip addresses",
           :type => "array"

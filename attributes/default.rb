@@ -301,7 +301,12 @@ default.kkafka.broker[:zookeeper][:synctime][:ms]                      = 2000
 default.kkafka.broker[:zookeeper][:session][:timeout][:ms]             = 6000
 default.kkafka.broker[:zookeeper][:set][:acl]                          = "false"
 
-default.kkafka.broker[:super][:users]                                  = "User:#{node['hostname']};User:glassfish"
+if node.vagrant == "false"
+  default.kkafka.broker[:super][:users]                                = "User:#{node['hostname']};User:glassfish"
+else
+  default.kkafka.broker[:super][:users]                                = "User:dn0;User:glassfish"  
+end
+
 
 default[:kkafka][:offset_monitor][:version]                            = "0.2.1"
 default[:kkafka][:offset_monitor][:url]                                = "http://snurran.sics.se/hops/KafkaOffsetMonitor-assembly-" + node[:kkafka][:offset_monitor][:version] + ".jar"
