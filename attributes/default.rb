@@ -229,7 +229,7 @@ default.kkafka.log4j.loggers = {
   },
 }
 
-default.kkafka.broker.port                                             = 9092
+default.kkafka.broker.port                                             = 9091
 
 default.kkafka.broker[:log][:retention][:hours]                        = 240
 default.kkafka.broker[:log][:retention][:size]                         = "-1"
