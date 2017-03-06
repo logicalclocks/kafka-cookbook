@@ -33,6 +33,14 @@ attribute "kkafka/dir",
           :description => "Base directory to install kafka (default: /opt)",
           :type => 'string'
 
+attribute "kkafka/user",
+          :description => "user to run kafka as",
+          :type => 'string'
+
+attribute "kkafka/group",
+          :description => "group to run kafka as",
+          :type => 'string'
+
 attribute "kafka/ulimit",
           :description => "ULimit for the max number of open files allowed",
           :type => 'string'
