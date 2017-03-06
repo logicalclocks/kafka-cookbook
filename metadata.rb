@@ -308,3 +308,8 @@ attribute "kkafka/default/private_ips",
 attribute "kagent/enabled",
           :description => "'false' to disable. 'true' is default.",
           :type => 'string'
+
+attribute "install/dir",
+          :description => "Set to a base directory under which we will install.",
+          :type => "string"
+
