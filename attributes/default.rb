@@ -1,4 +1,5 @@
 include_attribute "ndb"
+include_attribute "kagent"
 
 #
 # Cookbook Name:: kkafka
@@ -38,7 +39,7 @@ default.kkafka.scala_version = '2.11'
 
 #
 # Directory where to install Kafka.
-default.kkafka.dir         = '/opt'
+default.kkafka.dir         = node.install.dir.empty? ? node.install.dir : "/opt"
 
 default.kkafka.install_dir = "#{node.kkafka.dir}/kafka"
 
