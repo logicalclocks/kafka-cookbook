@@ -75,15 +75,15 @@ default.kkafka.jmx_opts = %w[
 
 #
 # User for directories, configuration files and running Kafka.
-default.kkafka.user = 'kafka'
+default.kkafka.user = node.install.user.empty? ? 'kafka' : node.install.user
+
+#
+# Group for directories, configuration files and running Kafka.
+default.kkafka.group = node.install.user.empty? ? 'kafka' : node.install.user
 
 #
 # Should node.kkafka.user and node.kkafka.group be created?
 default.kkafka.manage_user = true
-
-#
-# Group for directories, configuration files and running Kafka.
-default.kkafka.group = 'kafka'
 
 #
 # JVM heap options for Kafka.
