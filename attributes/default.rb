@@ -303,7 +303,7 @@ default.kkafka.broker[:zookeeper][:session][:timeout][:ms]             = 6000
 default.kkafka.broker[:zookeeper][:set][:acl]                          = "false"
 
 if node.vagrant == "false"
-  default.kkafka.broker[:super][:users]                                = "User:#{node['hostname']};User:glassfish"
+  default.kkafka.broker[:super][:users]                                = "User:#{node['hostname']};User:#{node.kkafka.user}"
 else
   default.kkafka.broker[:super][:users]                                = "User:dn0;User:glassfish"  
 end
