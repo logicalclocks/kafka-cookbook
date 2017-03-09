@@ -302,6 +302,12 @@ default.kkafka.broker[:zookeeper][:synctime][:ms]                      = 2000
 default.kkafka.broker[:zookeeper][:session][:timeout][:ms]             = 6000
 default.kkafka.broker[:zookeeper][:set][:acl]                          = "false"
 
+#HopsAclAuthorizer database pool properties
+default.kkafka.broker[:database][:pool][:prepstmt][:cache][:enabled]   = "true"
+default.kkafka.broker[:database][:pool][:prepstmt][:cache][:size]      = "150"
+default.kkafka.broker[:database][:pool][:prepstmt][:cache][:sql][:limit] = "2048"
+default.kkafka.broker[:database][:pool][:size]                         = "10"
+
 if node.vagrant == "false"
   default.kkafka.broker[:super][:users]                                = "User:#{node['hostname']};User:#{node.kkafka.user}"
 else

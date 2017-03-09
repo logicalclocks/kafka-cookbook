@@ -301,6 +301,22 @@ attribute "kkafka/broker/super/users",
           :description => "For example: User:dn0;User:glassfish",
           :type => 'string'
 
+attribute "kkafka/broker/database/pool/prepstmt/cache/enabled",
+          :description => "PreparedStatement of database pool of HopsAclAuthorizer enabled or not",
+          :type => 'string'
+
+attribute "kkafka/broker/database/pool/prepstmt/cache/size",
+          :description => "PreparedStatement cache size of database pool",
+          :type => 'string'
+
+attribute "kkafka/broker/database/pool/prepstmt/cache/sql/limit",
+          :description => "PreparedStatement sql cache limit of database pool",
+          :type => 'string'
+
+attribute "kkafka/broker/database/pool/size",
+          :description => "Size of database pool for HopsAclAuthorizer",
+          :type => 'string'
+
 attribute "kkafka/default/private_ips",
           :description => "Set ip addresses",
           :type => "array"
