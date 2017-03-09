@@ -14,7 +14,7 @@ user node.kkafka.user do
   not_if "getent passwd #{node.kkafka.user}"
 end
 
-group node.kkafka.group do
+group node.kagent.certs_group do
   action :modify
   members ["#{node.kkafka.user}"]
   append true
