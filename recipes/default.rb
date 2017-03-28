@@ -11,7 +11,7 @@ include_recipe 'kkafka::_id'
 
 include_recipe "java"
 
-node.default.kkafka.broker[:log_dirs] = %w[/tmp/kafka-logs]
+#node.default.kkafka.broker[:log_dirs] = %w[/tmp/kafka-logs]
 
 include_recipe 'kkafka::_defaults'
 include_recipe 'kkafka::_setup'
