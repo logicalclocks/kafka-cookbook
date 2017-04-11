@@ -71,6 +71,7 @@ default.kkafka.jmx_opts = %w[
   -Dcom.sun.management.jmxremote
   -Dcom.sun.management.jmxremote.authenticate=false
   -Dcom.sun.management.jmxremote.ssl=false
+  -Djava.net.preferIPv4Stack=true
 ].join(' ')
 
 #
