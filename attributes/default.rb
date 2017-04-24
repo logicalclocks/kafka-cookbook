@@ -47,7 +47,7 @@ default.kkafka.build_dir = ::File.join(Dir.tmpdir, 'kafka-build')
 
 #
 # Directory where to store logs from Kafka.
-default.kkafka.log_dir = "#{node.kkafka.dir}/kafka/logs"
+default.kkafka.log_dir = '/var/log/kafka'
 
 #
 # Directory where to keep Kafka configuration files. For the
@@ -250,7 +250,8 @@ default.kkafka.broker[:log][:flush][:interval][:ms]                          = 3
 default.kkafka.broker[:log][:message][:format][:version]                     = "#{node.kkafka.version}"
 default.kkafka.broker[:leader][:imbalance][:check][:interval][:seconds]      = 300
 default.kkafka.broker[:leader][:imbalance][:per][:broker][:percentage]       = 10
-default.kkafka.broker[:log][:dirs]                                           = node.kkafka.log_dir
+default.kkafka.broker[:log][:dir]                                            = node.kkafka.install_dir + "/kafka-log"
+default.kkafka.broker[:log][:dirs]                                           = %w["#{node.kkafka.install_dir}/kafka-logs"]
 default.kkafka.broker[:log][:flush][:offset][:checkpoint][:interval][:ms]    = 60000
 default.kkafka.broker[:queued][:max][:requests]                              = 500
 default.kkafka.broker[:quota][:consumer][:default]                           = 9223372036854775807
