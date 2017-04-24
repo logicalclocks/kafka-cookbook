@@ -154,7 +154,7 @@ attribute "kkafka/broker/leader/imbalance/per/broker/percentageattribute ",
           :description => "",
           :type => 'string'
 
-attribute "kkafka/broker/log/dirs",
+attribute "kkafka/broker/log/dir",
           :description => "",
           :type => 'string'
 
