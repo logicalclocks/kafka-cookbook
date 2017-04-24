@@ -8,8 +8,7 @@ include_attribute "kagent"
 
 #
 # Version of Kafka to install.
-#default.kkafka.version = '0.9.0.1'
-default.kkafka.version = '0.10.1.0'
+default.kkafka.version = '0.10.2.0'
 #
 # Base URL for Kafka releases. The recipes will a download URL using the
 # `base_url`, `version` and `scala_version` attributes.
@@ -18,14 +17,8 @@ default.kkafka.base_url = 'https://archive.apache.org/dist/kafka'
 #
 # SHA-256 checksum of the archive to download, used by Chef's `remote_file`
 # resource.
-#default.kkafka.checksum = '7f3900586c5e78d4f5f6cbf52b7cd6c02c18816ce3128c323fd53858abcf0fa1'
-
-# 0.10.0.0
-#default.kkafka.checksum = '4a9b1949d7b5dbe18efe1486d706f45dfaf0decd88075bb7dd04c8294100e95f'
-# 0.10.0.1
-#default.kkafka.checksum = '2d73625aeddd827c9e92eefb3c727a78455725fbca4361c221eaa05ae1fab02d'
-# 0.10.1.0
-default.kkafka.checksum = '6d9532ae65c9c8126241e7b928b118aaa3a694dab08069471f0e61f4f0329390'
+# 0.10.2.0
+default.kkafka.checksum = '4c9e73059dea2dcb5022135f8e7eff5f187ffcc27a27b365b326ee61040214cd'
 
 
 #
@@ -257,7 +250,7 @@ default.kkafka.broker[:log][:flush][:interval][:ms]                          = 3
 default.kkafka.broker[:log][:message][:format][:version]                     = "#{node.kkafka.version}"
 default.kkafka.broker[:leader][:imbalance][:check][:interval][:seconds]      = 300
 default.kkafka.broker[:leader][:imbalance][:per][:broker][:percentage]       = 10
-default.kkafka.broker[:log][:dir]                                            =  node.kkafka.install_dir + "/kafka-log"
+default.kkafka.broker[:log][:dir]                                            = node.kkafka.install_dir + "/kafka-log"
 default.kkafka.broker[:log][:dirs]                                           = %w["#{node.kkafka.install_dir}/kafka-logs"]
 default.kkafka.broker[:log][:flush][:offset][:checkpoint][:interval][:ms]    = 60000
 default.kkafka.broker[:queued][:max][:requests]                              = 500

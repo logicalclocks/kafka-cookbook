@@ -7,7 +7,7 @@ cookbook 'scala', '~> 2.1.0'
 
 cookbook 'kagent', github: "karamelchef/kagent-chef", branch: "master"
 cookbook 'ndb', github: "hopshadoop/ndb-chef", branch: "master"
-
+cookbook 'conda', github: "hopshadoop/conda-chef", branch: "master"
 cookbook 'kzookeeper', github: "hopshadoop/kzookeeper", branch: "master"
 
 

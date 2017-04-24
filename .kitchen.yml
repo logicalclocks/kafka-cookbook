@@ -27,14 +27,8 @@ suites:
       - recipe[kagent::install]
       - recipe[kzookeeper::install]
       - recipe[kkafka::install]
-#      - recipe[apache_hadoop::install]
       - recipe[kzookeeper::default]
       - recipe[kkafka::default]
-#      - recipe[apache_hadoop::nn]
-#      - recipe[apache_hadoop::dn]
-#      - recipe[apache_hadoop::rm]
-#      - recipe[apache_hadoop::nm]
-#      - recipe[apache_hadoop::jhs]
 #      - recipe[kkafka::monitor]
     attributes:
          kagent:
@@ -60,7 +54,7 @@ suites:
               log_dirs: ['/tmp/kafka-logs-1', '/tmp/kafka-logs-2']
             default:
                 private_ips: ["10.0.2.15"]
-         apache_hadoop:
+         hops:
             nn:
                private_ips: ["10.0.2.15"]
             dn:
