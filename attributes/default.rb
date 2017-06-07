@@ -306,7 +306,7 @@ default.kkafka.broker[:database][:pool][:prepstmt][:cache][:sql][:limit] = "2048
 default.kkafka.broker[:database][:pool][:size]                         = "10"
 
 if node.vagrant == "false"
-  default.kkafka.broker[:super][:users]                                = "User:#{node['hostname']};User:#{node.kkafka.user}"
+  default.kkafka.broker[:super][:users]                                = "User:#{node['fqdn']};User:#{node.kkafka.user}"
 else
   default.kkafka.broker[:super][:users]                                = "User:dn0;User:glassfish"  
 end
