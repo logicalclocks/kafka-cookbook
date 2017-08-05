@@ -24,6 +24,11 @@
     action :delete
     ignore_failure true
   end
+  directory "/etc/systemd/system/kafka.service.d" do
+    recursive true
+    action :delete
+    ignore_failure true
+  end
 
   directory node[:kkafka][:install_dir] do
     recursive true
