@@ -82,10 +82,7 @@ def kafka_init_opts
       opts[:source] = value_for_platform_family({
         'default' => 'systemd/default.erb'
       })
-      opts[:script_path] = value_for_platform_family({
-        'debian' => '/usr/lib/systemd/system/kafka.service',
-        'default' => '/lib/systemd/system/kafka.service',
-      }) 
+      opts[:script_path] = '/lib/systemd/system/kafka.service'
       opts[:provider] = ::Chef::Provider::Service::Systemd
       opts[:permissions] = '644'
     end
