@@ -63,7 +63,7 @@ include_recipe 'kkafka::_start'
 if node.kagent.enabled == "true" 
   kagent_config "kafka" do
     service "kafka"
-    log_file "/var/logs/kafka/kafka.log"
+    log_file "/var/log/kafka/kafka.log"
   end
 end
 
