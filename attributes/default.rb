@@ -280,10 +280,8 @@ default["kkafka"]["broker"][:ssl][:client][:auth]                            = "
 default["kkafka"]["broker"][:ssl][:keystore][:location]                      = "#{node['kagent']['keystore_dir']}/#{node['hostname']}__kstore.jks"
 default["kkafka"]["broker"][:ssl][:keystore][:password]                      = "adminpw"
 default["kkafka"]["broker"][:ssl][:key][:password]			     = "adminpw"
-#= "#{node.hopsworks.admin.password}"
 default["kkafka"]["broker"][:ssl][:truststore][:location]                    = "#{node['kagent']['keystore_dir']}/#{node['hostname']}__tstore.jks"
 default["kkafka"]["broker"][:ssl][:truststore][:password]                    = "adminpw"
-  # "#{node.hopsworks.admin.password}"
 
 # TODO - HopsWorks implementations needed
 default["kkafka"]["broker"][:authorizer][:class][:name]                      = "io.hops.kafka.HopsAclAuthorizer"
