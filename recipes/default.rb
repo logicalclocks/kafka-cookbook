@@ -2,9 +2,18 @@
 case node['platform']
 when "ubuntu"
  if node['platform_version'].to_f <= 14.04
-    node.override['kkafka']['init_style'] = :sysv
+   node.override['kkafka']['init_style'] = :sysv
+ else
+   node.override['kkafka']['systemd'] = "false"   
  end
 end
+
+case node['platform']
+  when "ubuntu"
+    if node['platform_version'].to_f <= 14.04
+
+    end
+  end
 
 
 group node['kkafka']['group'] do
@@ -31,8 +40,6 @@ include_recipe 'kkafka::_id'
 
 include_recipe "java"
 
-#node.default.kkafka.broker[:log_dirs] = %w[/tmp/kafka-logs]
-
 include_recipe 'kkafka::_defaults'
 include_recipe 'kkafka::_setup'
 include_recipe 'kkafka::_install'
@@ -55,6 +62,13 @@ node.override['kkafka']['broker']['host']['name'] = my_ip
 #node.override.kkafka.broker.advertised.host.name = my_ip
 node.override['kkafka']['broker']['listeners'] = "SSL://#{my_ip}:9091"
 
+
+if node['kkafka']['systemd'] == "true"
+  kagent_config "kafka" do
+    action :systemd_reload
+  end
+end
+
 include_recipe 'kkafka::_configure'
 
 include_recipe 'kkafka::_start'
@@ -72,13 +86,6 @@ end
 # Disable kafka service, if node.services.enabled is not set to true
 #
 if node['services']['enabled'] != "true"
-
-  case node['platform']
-  when "ubuntu"
-    if node['platform_version'].to_f <= 14.04
-      node.override['kkafka']['systemd'] = "false"
-    end
-  end
 
   if node['kkafka']['systemd'] == "true"
 
