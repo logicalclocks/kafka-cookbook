@@ -273,8 +273,8 @@ default["kkafka"]["broker"][:log][:cleaner][:io][:buffer][:load][:factor]       
  
 # values are: PLAINTEXT, SSL, SASL_PLAINTEXT, SASL_SSL
 default["kkafka"]["broker"][:security][:inter][:broker][:protocol]           = "SSL"
-default["kkafka"]["broker"][:inter][:broker][:protocol][:version]            = "#{node["kkafka"]["version}"
-default["kkafka"]["broker"][:broker][:rack]                                  = "#{node["kkafka"]["broker.rack.id}"
+default["kkafka"]["broker"][:inter][:broker][:protocol][:version]            = node["kkafka"]["version"]
+default["kkafka"]["broker"][:broker][:rack]                                  = node["kkafka"]["broker"]["rack"]["id"]
 # required, requested, none
 default["kkafka"]["broker"][:ssl][:client][:auth]                            = "required"
 default["kkafka"]["broker"][:ssl][:keystore][:location]                      = "#{node['kagent']['keystore_dir']}/#{node['hostname']}__kstore.jks"
