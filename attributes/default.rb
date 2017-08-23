@@ -12,8 +12,9 @@ default["kkafka"]["version"] = '0.10.2.0'
 #
 # Base URL for Kafka releases. The recipes will a download URL using the
 # `base_url`, `version` and `scala_version` attributes.
-default["kkafka"]["base_url"] = 'https://archive.apache.org/dist/kafka'
-#default["kkafka"]["base_url"] = 'http://snurran.sics.se/hops'
+#default["kkafka"]["base_url"] = 'https://archive.apache.org/dist/kafka'
+#'http://snurran.sics.se/hops'
+default["kkafka"]["base_url"] = node['download_url']
 #
 # SHA-256 checksum of the archive to download, used by Chef's `remote_file`
 # resource.
