@@ -94,6 +94,9 @@ if node['services']['enabled'] != "true"
       supports :restart => true, :stop => true, :start => true, :status => true
       action :disable
     end
+    kagent_config "kafka" do
+     action :systemd_reload
+    end
 
   else #sysv
 
