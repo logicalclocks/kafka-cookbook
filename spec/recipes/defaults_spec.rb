@@ -6,7 +6,7 @@ require 'spec_helper'
 describe 'kkafka::_defaults' do
   let :chef_run do
     r = ChefSpec::Runner.new do |node|
-      node.set.kkafka.broker = broker_attributes
+      node.set['kkafka']['broker'] = broker_attributes
     end
     r.converge(described_recipe)
   end
@@ -22,12 +22,12 @@ describe 'kkafka::_defaults' do
       end
 
       it 'does not override it' do
-        expect(node.kkafka.broker['broker.id']).to eq('set')
+        expect(node['kkafka']['broker']['broker.id']).to eq('set')
       end
 
       it 'does not set it using other notations' do
-        expect { node.kkafka.broker.broker_id }.to raise_error(NoMethodError)
-        expect { node.kkafka.broker.id }.to raise_error(NoMethodError)
+        expect { node['kkafka']['broker']['broker_id'] }.to raise_error(NoMethodError)
+        expect { node['kkafka']['broker']['id'] }.to raise_error(NoMethodError)
       end
     end
 
@@ -37,12 +37,12 @@ describe 'kkafka::_defaults' do
       end
 
       it 'does not override it' do
-        expect(node.kkafka.broker.broker.id).to eq('set')
+        expect(node['kkafka']['broker']['broker']['id']).to eq('set')
       end
 
       it 'does not set it using other notations' do
-        expect(node.kkafka.broker['broker.id']).to be_nil
-        expect { node.kkafka.broker.broker_id }.to raise_error(NoMethodError)
+        expect(node['kkafka']['broker']['broker.id']).to be_nil
+        expect { node['kkafka']['broker']['broker_id'] }.to raise_error(NoMethodError)
       end
     end
 
@@ -52,12 +52,12 @@ describe 'kkafka::_defaults' do
       end
 
       it 'does not override it' do
-        expect(node.kkafka.broker.broker_id).to eq('set')
+        expect(node['kkafka']['broker']['broker_id']).to eq('set')
       end
 
       it 'does not set it using other notations' do
-        expect(node.kkafka.broker['broker.id']).to be_nil
-        expect { node.kkafka.broker.broker.id }.to raise_error(NoMethodError)
+        expect(node['kkafka']['broker']['broker.id']).to be_nil
+        expect { node['kkafka']['broker']['broker']['id'] }.to raise_error(NoMethodError)
       end
     end
 
@@ -67,7 +67,7 @@ describe 'kkafka::_defaults' do
       end
 
       it 'does not override it' do
-        expect(node.kkafka.broker.broker_id).to be_nil
+        expect(node['kkafka']['broker']['broker_id']).to be_nil
       end
     end
 
@@ -77,7 +77,7 @@ describe 'kkafka::_defaults' do
       end
 
       it 'does override it' do
-        expect(node.kkafka.broker.broker_id).to_not be_nil
+        expect(node['kkafka']['broker']['broker_id']).to_not be_nil
       end
     end
   end
@@ -89,7 +89,7 @@ describe 'kkafka::_defaults' do
       end
 
       it 'does not override it' do
-        expect(node.kkafka.broker.port).to eq(9093)
+        expect(node['kkafka']['broker']['port']).to eq(9093)
       end
     end
 
@@ -99,7 +99,7 @@ describe 'kkafka::_defaults' do
       end
 
       it 'does not override it' do
-        expect(node.kkafka.broker.port).to be_nil
+        expect(node['kkafka']['broker']['port']).to be_nil
       end
     end
 
@@ -109,7 +109,7 @@ describe 'kkafka::_defaults' do
       end
 
       it 'does override it' do
-        expect(node.kkafka.broker.port).to eq(6667)
+        expect(node['kkafka']['broker']['port']).to eq(6667)
       end
     end
   end

@@ -4,10 +4,10 @@ jars = "#{new_resource.jar_file}"
 zk_ips = "#{new_resource.zk_ips}"
 graphite_ip = "#{new_resource.graphite_ip}"
 # zk-server1,zk-server2 \
-port=node[:kkafka][:offset_monitor][:port]
+port=node['kkafka']['offset_monitor']['port']
 
   bash "start-#{new_resource.name}" do
-    user node[:kzookeeper][:user]
+    user node['kzookeeper']['user']
     code <<-EOF
     cd /srv/kafka-monitor
     nohup java -cp #{jars} \

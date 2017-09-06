@@ -4,7 +4,7 @@ when "ubuntu"
  if node['platform_version'].to_f <= 14.04
    node.override['kkafka']['init_style'] = :sysv
  else
-   node.override['kkafka']['systemd'] = "false"   
+   node.override['kkafka']['systemd'] = "false"
  end
 end
 
@@ -52,7 +52,7 @@ group node['kagent']['certs_group'] do
 end
 
 
-#zk_ips = node.kzookeeper.default[:private_ips].join(:":2181/kafka,") 
+#zk_ips = node['kzookeeper']['default']['private_ips'].join(:":2181/kafka,")
 #zk_ips = "#{zk_ips}:2181/kafka"
 #node.override.kkafka.broker.zookeeper.connect = ["#{zk_ips}"]
 zk_ip = private_recipe_ip('kzookeeper', 'default')
@@ -74,7 +74,7 @@ include_recipe 'kkafka::_configure'
 include_recipe 'kkafka::_start'
 
 
-if node['kagent']['enabled'] == "true" 
+if node['kagent']['enabled'] == "true"
   kagent_config "kafka" do
     service "kafka"
     log_file "/var/log/kafka/kafka.log"
@@ -83,7 +83,7 @@ end
 
 
 #
-# Disable kafka service, if node.services.enabled is not set to true
+# Disable kafka service, if node['services']['enabled'] is not set to true
 #
 if node['services']['enabled'] != "true"
 

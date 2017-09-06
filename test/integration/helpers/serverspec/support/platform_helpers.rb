@@ -28,10 +28,10 @@ module PlatformHelpers
   private
 
   def family
-    os[:family]
+    os['family']
   end
 
   def release
-    os[:release]
+    os['release']
   end
 end

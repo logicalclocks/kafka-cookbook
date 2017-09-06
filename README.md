@@ -47,10 +47,10 @@ Attributes concerning configuration of a Kafka broker are to be set under the
 the following are all valid ways to define broker configuration:
 
 ```ruby
-node.default.kafka.broker[:log_dirs] = %w[/tmp/kafka-logs]
-node.default.kafka.broker['log.dirs'] = %w[/tmp/kafka-logs]
-node.default.kafka.broker.log.dirs = %w[/tmp/kafka-logs]
-node.default[:kafka][:broker][:log][:dirs] = %w[/tmp/kafka-logs]
+node.default['kafka']['broker']['log_dirs'] = %w[/tmp/kafka-logs]
+node.default['kafka']['broker']['log.dirs'] = %w[/tmp/kafka-logs]
+node.default['kafka']['broker']['log']['dirs'] = %w[/tmp/kafka-logs]
+node.default['kafka']['broker']['log']['dirs'] = %w[/tmp/kafka-logs]
 ```
 
 The attribute names match the configuration names that Kafka uses to make it
@@ -123,7 +123,7 @@ ruby_block 'restart-coordination' do
 end
 
 service 'kafka' do
-  provider kafka_init_opts[:provider]
+  provider kafka_init_opts['provider']
   supports start: true, stop: true, restart: true, status: true
   action kafka_service_actions
 end
@@ -163,19 +163,19 @@ that needs to be set (assumes that you have ZooKeeper running on port 2181
 locally):
 
 ```ruby
-node.default.kafka.broker.zookeeper.connect = 'localhost:2181'
+node.default['kafka']['broker']['zookeeper']['connect'] = 'localhost:2181'
 # This shouldn't normally be necessary, but might need to be set explicitly
 # if you're having trouble connecting to the brokers.
-node.default.kafka.broker.hostname = '127.0.0.1' # or perhaps 'localhost'
+node.default['kafka']['broker']['hostname'] = '127.0.0.1' # or perhaps 'localhost'
 ```
 
 If you plan on running a cluster locally you will want to set separate
 values for the following configuration options:
 
 ```ruby
-node.default.kafka.broker.broker.id = <id>
-node.default.kafka.broker.port = <port>
-node.default.kafka.broker.log.dirs = <dir path>
+node.default['kafka']['broker']['broker']['id'] = <id>
+node.default['kafka']['broker']['port'] = <port>
+node.default['kafka']['broker']['log']['dirs'] = <dir path>
 ```
 
 Other than that things should work as expected, though depending on what

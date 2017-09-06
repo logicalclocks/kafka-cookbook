@@ -14,10 +14,10 @@ action :run do
     command %(rm -rf #{new_resource.from})
   end
 
-  link node.kkafka.install_dir do
-    owner node.kkafka.user
-    group node.kkafka.group
-    to node.kkafka.version_install_dir
+  link node['kkafka']['install_dir'] do
+    owner node['kkafka']['user']
+    group node['kkafka']['group']
+    to node['kkafka']['version_install_dir']
   end
 
   new_resource.updated_by_last_action(true)
