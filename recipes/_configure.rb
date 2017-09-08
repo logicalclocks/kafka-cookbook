@@ -76,10 +76,10 @@ template kafka_init_opts[:script_path] do
 end
 
 
-remote_file "#{node.kkafka.install_dir}/libs/hops-kafka-authorizer-0.1.jar" do
+remote_file "#{node.kkafka.install_dir}/libs/hops-kafka-authorizer-#{node.kkafka.authorizer_version}.jar" do
   user 'root'
   group 'root'
-  source "http://snurran.sics.se/hops/hops-kafka-authorizer-0.1.jar"
+  source "http://snurran.sics.se/hops/hops-kafka-authorizer-#{node.kkafka.authorizer_version}.jar"
   mode 0755
   action :create_if_missing
 end
