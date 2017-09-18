@@ -10,60 +10,62 @@ include_attribute "kagent"
 # Version of Kafka to install.
 default.kkafka.version = '0.10.2.0'
 # HopsKafkaAuthorizer version
-default.kkafka.authorizer_version = '0.0.1'
+default.kkafka.authorizer_version = '0.1.0'
+default["kkafka"]["version"] = '0.10.2.0'
 
 #
 # Base URL for Kafka releases. The recipes will a download URL using the
 # `base_url`, `version` and `scala_version` attributes.
-default.kkafka.base_url = 'https://archive.apache.org/dist/kafka'
-#default.kkafka.base_url = 'http://snurran.sics.se/hops'
+#default["kkafka"]["base_url"] = 'https://archive.apache.org/dist/kafka'
+#'http://snurran.sics.se/hops'
+default["kkafka"]["base_url"] = node['download_url']
 #
 # SHA-256 checksum of the archive to download, used by Chef's `remote_file`
 # resource.
 # 0.10.2.0
-default.kkafka.checksum = '4c9e73059dea2dcb5022135f8e7eff5f187ffcc27a27b365b326ee61040214cd'
+default["kkafka"]["checksum"] = '4c9e73059dea2dcb5022135f8e7eff5f187ffcc27a27b365b326ee61040214cd'
 
 
 #
 # MD5 checksum of the archive to download, which will be used to validate that
 # the "correct" archive has been downloaded.
-default.kkafka.md5_checksum = ''
+default["kkafka"]["md5_checksum"] = ''
 
 #
 # Scala version of Kafka.
-default.kkafka.scala_version = '2.11'
+default["kkafka"]["scala_version"] = '2.11'
 
 #
 # Directory where to install Kafka.
-default.kkafka.dir         = node.install.dir.empty? ? "/opt" : node.install.dir
+default["kkafka"]["dir"] = node["install"]["dir"].empty? ? "/opt" : node["install"]["dir"]
 
-default.kkafka.install_dir = "#{node.kkafka.dir}/kafka"
+default["kkafka"]["install_dir"] = "#{node["kkafka"]["dir"]}/kafka"
 
 #
 # Directory where to install *this* version of Kafka.
 # For actual default value see `_defaults` recipe.
-default.kkafka.version_install_dir = nil
+default["kkafka"]["version_install_dir"] = nil
 
 #
 # Directory where the downloaded archive will be extracted to.
-default.kkafka.build_dir = ::File.join(Dir.tmpdir, 'kafka-build')
+default["kkafka"]["build_dir"] = ::File.join(Dir.tmpdir, 'kafka-build')
 
 #
 # Directory where to store logs from Kafka.
-default.kkafka.log_dir = '/var/log/kafka'
+default["kkafka"]["log_dir"] = '/var/log/kafka'
 
 #
 # Directory where to keep Kafka configuration files. For the
 # actual default value see `_defaults` recipe.
-default.kkafka.config_dir = nil
+default["kkafka"]["config_dir"] = nil
 
 #
 # JMX port for Kafka.
-default.kkafka.jmx_port = 19999
+default["kkafka"]["jmx_port"] = 19999
 
 #
 # JMX configuration options for Kafka.
-default.kkafka.jmx_opts = %w[
+default["kkafka"]["jmx_opts"] = %w[
   -Dcom.sun.management.jmxremote
   -Dcom.sun.management.jmxremote.authenticate=false
   -Dcom.sun.management.jmxremote.ssl=false
@@ -72,32 +74,32 @@ default.kkafka.jmx_opts = %w[
 
 #
 # User for directories, configuration files and running Kafka.
-default.kkafka.user = node.install.user.empty? ? 'kafka' : node.install.user
+default["kkafka"]["user"] = node["install"]["user"].empty? ? 'kafka' : node["install"]["user"]
 
 #
 # Group for directories, configuration files and running Kafka.
-default.kkafka.group = node.install.user.empty? ? 'kafka' : node.install.user
+default["kkafka"]["group"] = node["install"]["user"].empty? ? 'kafka' : node["install"]["user"]
 
 #
 # Should node.kkafka.user and node.kkafka.group be created?
-default.kkafka.manage_user = true
+default["kkafka"]["manage_user"] = true
 
 #
 # JVM heap options for Kafka.
-default.kkafka.heap_opts = '-Xmx4G -Xms1G'
+default["kkafka"]["heap_opts"] = '-Xmx4G -Xms1G'
 
 #
 # Generic JVM options for Kafka.
-default.kkafka.generic_opts = nil
+default["kkafka"]["generic_opts"] = nil
 
 #
 # GC log options for Kafka. For the actual default value
 # see `_defaults` recipe.
-default.kkafka.gc_log_opts = nil
+default["kkafka"]["gc_log_opts"] = nil
 
 #
 # JVM Performance options for Kafka.
-default.kkafka.jvm_performance_opts = %w[
+default["kkafka"]["jvm_performance_opts"] = %w[
   -server
   -XX:+UseCompressedOops
   -XX:+UseParNewGC
@@ -111,7 +113,7 @@ default.kkafka.jvm_performance_opts = %w[
 #
 # The type of "init" system to install scripts for. Valid values are currently
 # :sysv, :systemd and :upstart.
-default.kkafka.init_style = :systemd
+default["kkafka"]["init_style"] = :systemd
 
 #
 # The ulimit file limit.
@@ -120,11 +122,11 @@ default.kkafka.init_style = :systemd
 # value, or you will most likely run into issues with Kafka simply dying for no
 # particular reason as it needs to keep a lot of file handles for socket
 # connections and log files for all partitions.
-default.kkafka.ulimit_file = 65535
+default["kkafka"]["ulimit_file"] = 65535
 
 #
 # Automatically start kkafka service.
-default.kkafka.automatic_start = true
+default["kkafka"]["automatic_start"] = true
 
 #
 # Automatically restart kkafka on configuration change.
@@ -132,39 +134,39 @@ default.kkafka.automatic_start = true
 # The reason for this is that I can see the need for automatically starting
 # Kafka if it's not running, but not necessarily restart on configuration
 # changes.
-default.kkafka.automatic_restart = true
+default["kkafka"]["automatic_restart"] = true
 
 #
 # Attribute to set the recipe to used to coordinate Kafka service start
 # if nothing is set the default recipe "_coordiante" will be used
 # Refer to issue #58 for details.
-default.kkafka.start_coordination.recipe = 'kkafka::_coordinate'
+default["kkafka"]["start_coordination"]["recipe"] = 'kkafka::_coordinate'
 
 #
 # Attribute to set the timeout in seconds when stopping the broker
 # before sending SIGKILL (or equivalent).
-default.kkafka.kill_timeout = 10
+default["kkafka"]["kill_timeout"] = 10
 
 #
 # `broker` namespace for configuration of a broker.
 # Initially set to an empty Hash to avoid having `fetch(:broker, {})`
 # statements in helper methods and the alike.
-default.kkafka.broker = {}
+default["kkafka"]["broker"] = {}
 
 #Kafka rack id
-default.kkafka.broker.rack.id = 'hdp1'
+default["kkafka"]["broker"]["rack"]["id"] = 'hdp1'
 
 #
 # Root logger level and appender.
-default.kkafka.log4j.root_logger = 'INFO, kafkaAppender'
+default["kkafka"]["log4j"]["root_logger"] = 'INFO, kafkaAppender'
 
 #
 # Appender definitions for various Kafka classes.
-default.kkafka.log4j.appenders = {
+default["kkafka"]["log4j"]["appenders"] = {
   'kafkaAppender' => {
     type: 'org.apache.log4j.DailyRollingFileAppender',
     date_pattern: '.yyyy-MM-dd',
-    file: lazy { %(#{node.kkafka.log_dir}/kafka.log) },
+    file: lazy { %(#{node["kkafka"]["log_dir"]}/kafka.log) },
     layout: {
       type: 'org.apache.log4j.PatternLayout',
       conversion_pattern: '[%d] %p %m (%c)%n',
@@ -173,7 +175,7 @@ default.kkafka.log4j.appenders = {
   'stateChangeAppender' => {
     type: 'org.apache.log4j.DailyRollingFileAppender',
     date_pattern: '.yyyy-MM-dd',
-    file: lazy { %(#{node.kkafka.log_dir}/kafka-state-change.log) },
+    file: lazy { %(#{node["kkafka"]["log_dir"]}/kafka-state-change.log) },
     layout: {
       type: 'org.apache.log4j.PatternLayout',
       conversion_pattern: '[%d] %p %m (%c)%n',
@@ -182,7 +184,7 @@ default.kkafka.log4j.appenders = {
   'requestAppender' => {
     type: 'org.apache.log4j.DailyRollingFileAppender',
     date_pattern: '.yyyy-MM-dd',
-    file: lazy { %(#{node.kkafka.log_dir}/kafka-request.log) },
+    file: lazy { %(#{node["kkafka"]["log_dir"]}/kafka-request.log) },
     layout: {
       type: 'org.apache.log4j.PatternLayout',
       conversion_pattern: '[%d] %p %m (%c)%n',
@@ -191,7 +193,7 @@ default.kkafka.log4j.appenders = {
   'controllerAppender' => {
     type: 'org.apache.log4j.DailyRollingFileAppender',
     date_pattern: '.yyyy-MM-dd',
-    file: lazy { %(#{node.kkafka.log_dir}/kafka-controller.log) },
+    file: lazy { %(#{node["kkafka"]["log_dir"]}/kafka-controller.log) },
     layout: {
       type: 'org.apache.log4j.PatternLayout',
       conversion_pattern: '[%d] %p %m (%c)%n',
@@ -201,7 +203,7 @@ default.kkafka.log4j.appenders = {
 
 #
 # Logger definitions.
-default.kkafka.log4j.loggers = {
+default["kkafka"]["log4j"]["loggers"] = {
   'org.IOItec.zkclient.ZkClient' => {
     level: 'INFO',
   },
@@ -227,91 +229,89 @@ default.kkafka.log4j.loggers = {
   },
 }
 
-default.kkafka.broker.port                                                   = 9091
+default["kkafka"]["broker"]["port"]                                                   = 9091
 
-default.kkafka.broker[:log][:retention][:hours]                              = 240
-default.kkafka.broker[:log][:retention][:size]                               = "-1"
-default.kkafka.broker[:num][:network][:threads]                              = 3
-default.kkafka.broker[:num][:io][:threads]                                   = 8
-default.kkafka.broker[:num][:recovery][:threads][:per][:data][:dir]          = 1
-default.kkafka.broker[:num][:replica][:fetchers]                             = 1
-default.kkafka.broker[:queued][:max][:requests]                              = 500
-default.kkafka.broker[:socket][:send][:buffer][:bytes]                       = 100 * 1024
-default.kkafka.broker[:socket][:receive][:buffer][:bytes]                    = 100 * 1024
-default.kkafka.broker[:socket][:request][:max][:bytes]                       = 100 * 100 * 1024
-default.kkafka.broker[:num][:partitions]                                     = 1
-default.kkafka.broker[:log][:segment][:bytes]                                = 1024 * 1024 * 1024
-default.kkafka.broker[:log][:roll][:hours]                                   = 24 * 7
-default.kkafka.broker[:log][:retention][:hours]                              = 24 * 7
-default.kkafka.broker[:log][:retention][:bytes]                              = "-1"
-default.kkafka.broker[:log][:retention][:check][:interval][:ms]              = 300000
-default.kkafka.broker[:log][:index][:size][:max][:bytes]                     = "10000000"
-default.kkafka.broker[:log][:index][:interval][:bytes]                       = "4096"
-default.kkafka.broker[:log][:flush][:interval][:messages]                    = "9223372036854775807"
-default.kkafka.broker[:log][:flush][:scheduler][:interval][:ms]              = 3000
-default.kkafka.broker[:log][:flush][:interval][:ms]                          = 3000
-default.kkafka.broker[:log][:message][:format][:version]                     = "#{node.kkafka.version}"
-default.kkafka.broker[:leader][:imbalance][:check][:interval][:seconds]      = 300
-default.kkafka.broker[:leader][:imbalance][:per][:broker][:percentage]       = 10
-default.kkafka.broker[:log][:dir]                                            = node.kkafka.install_dir + "/kafka-log"
-default.kkafka.broker[:log][:dirs]                                           = %w["#{node.kkafka.install_dir}/kafka-logs"]
-default.kkafka.broker[:log][:flush][:offset][:checkpoint][:interval][:ms]    = 60000
-default.kkafka.broker[:queued][:max][:requests]                              = 500
-default.kkafka.broker[:quota][:consumer][:default]                           = 9223372036854775807
-default.kkafka.broker[:quota][:producer][:default]                           = 9223372036854775807
-default.kkafka.broker[:replica][:fetch][:max][:bytes]                        = 1048576
-default.kkafka.broker[:replica][:fetch][:min][:bytes]                        = 1
-default.kkafka.broker[:replica][:fetch][:wait][:max][:ms]                    = 500
-default.kkafka.broker[:replica][:high][:watermark][:checkpoint][:interval][:ms]    = 5000
-default.kkafka.broker[:replica][:lag][:time][:max][:ms]                      = 10000
-default.kkafka.broker[:replica][:socket][:receive][:buffer][:bytes]          = 65536
-default.kkafka.broker[:replica][:socket][:timeout][:ms]                      = 30000
-default.kkafka.broker[:request][:timeout][:ms]                               = 30000
-default.kkafka.broker[:message][:max][:bytes]                                = "1000012"
-default.kkafka.broker[:default][:replication][:factor]                       = 1
-default.kkafka.broker[:log][:cleaner][:enable]                               = "true"
-default.kkafka.broker[:log][:cleaner][:io][:buffer][:load][:factor]          = "0.9"
+default["kkafka"]["broker"][:log][:retention][:hours]                              = 240
+default["kkafka"]["broker"][:log][:retention][:size]                               = "-1"
+default["kkafka"]["broker"][:num][:network][:threads]                              = 3
+default["kkafka"]["broker"][:num][:io][:threads]                                   = 8
+default["kkafka"]["broker"][:num][:recovery][:threads][:per][:data][:dir]          = 1
+default["kkafka"]["broker"][:num][:replica][:fetchers]                             = 1
+default["kkafka"]["broker"][:queued][:max][:requests]                              = 500
+default["kkafka"]["broker"][:socket][:send][:buffer][:bytes]                       = 100 * 1024
+default["kkafka"]["broker"][:socket][:receive][:buffer][:bytes]                    = 100 * 1024
+default["kkafka"]["broker"][:socket][:request][:max][:bytes]                       = 100 * 100 * 1024
+default["kkafka"]["broker"][:num][:partitions]                                     = 1
+default["kkafka"]["broker"][:log][:segment][:bytes]                                = 1024 * 1024 * 1024
+default["kkafka"]["broker"][:log][:roll][:hours]                                   = 24 * 7
+default["kkafka"]["broker"][:log][:retention][:hours]                              = 24 * 7
+default["kkafka"]["broker"][:log][:retention][:bytes]                              = "-1"
+default["kkafka"]["broker"][:log][:retention][:check][:interval][:ms]              = 300000
+default["kkafka"]["broker"][:log][:index][:size][:max][:bytes]                     = "10000000"
+default["kkafka"]["broker"][:log][:index][:interval][:bytes]                       = "4096"
+default["kkafka"]["broker"][:log][:flush][:interval][:messages]                    = "9223372036854775807"
+default["kkafka"]["broker"][:log][:flush][:scheduler][:interval][:ms]              = 3000
+default["kkafka"]["broker"][:log][:flush][:interval][:ms]                          = 3000
+default["kkafka"]["broker"][:log][:message][:format][:version]                     = "#{node['kkafka']['version']}"
+default["kkafka"]["broker"][:leader][:imbalance][:check][:interval][:seconds]      = 300
+default["kkafka"]["broker"][:leader][:imbalance][:per][:broker][:percentage]       = 10
+default["kkafka"]["broker"][:log][:dir]                                            = node["kkafka"]["install_dir"] + "/kafka-log"
+default["kkafka"]["broker"][:log][:dirs]                                           = %w[ "#{node["kkafka"]["install_dir"]}/kafka-logs" ]
+default["kkafka"]["broker"][:log][:flush][:offset][:checkpoint][:interval][:ms]    = 60000
+default["kkafka"]["broker"][:queued][:max][:requests]                              = 500
+default["kkafka"]["broker"][:quota][:consumer][:default]                           = 9223372036854775807
+default["kkafka"]["broker"][:quota][:producer][:default]                           = 9223372036854775807
+default["kkafka"]["broker"][:replica][:fetch][:max][:bytes]                        = 1048576
+default["kkafka"]["broker"][:replica][:fetch][:min][:bytes]                        = 1
+default["kkafka"]["broker"][:replica][:fetch][:wait][:max][:ms]                    = 500
+default["kkafka"]["broker"][:replica][:high][:watermark][:checkpoint][:interval][:ms]    = 5000
+default["kkafka"]["broker"][:replica][:lag][:time][:max][:ms]                      = 10000
+default["kkafka"]["broker"][:replica][:socket][:receive][:buffer][:bytes]          = 65536
+default["kkafka"]["broker"][:replica][:socket][:timeout][:ms]                      = 30000
+default["kkafka"]["broker"][:request][:timeout][:ms]                               = 30000
+default["kkafka"]["broker"][:message][:max][:bytes]                                = "1000012"
+default["kkafka"]["broker"][:default][:replication][:factor]                       = 1
+default["kkafka"]["broker"][:log][:cleaner][:enable]                               = "true"
+default["kkafka"]["broker"][:log][:cleaner][:io][:buffer][:load][:factor]          = "0.9"
 
  
 # values are: PLAINTEXT, SSL, SASL_PLAINTEXT, SASL_SSL
-default.kkafka.broker[:security][:inter][:broker][:protocol]           = "SSL"
-default.kkafka.broker[:inter][:broker][:protocol][:version]            = "#{node.kkafka.version}"
-default.kkafka.broker[:broker][:rack]                                  = "#{node.kkafka.broker.rack.id}"
+default["kkafka"]["broker"][:security][:inter][:broker][:protocol]           = "SSL"
+default["kkafka"]["broker"][:inter][:broker][:protocol][:version]            = node["kkafka"]["version"]
+default["kkafka"]["broker"][:broker][:rack]                                  = node["kkafka"]["broker"]["rack"]["id"]
 # required, requested, none
-default.kkafka.broker[:ssl][:client][:auth]                            = "required"
-default.kkafka.broker[:ssl][:keystore][:location]                      = "#{node.kagent.keystore_dir}/#{node['hostname']}__kstore.jks"
-default.kkafka.broker[:ssl][:keystore][:password]                      = "adminpw"
-default.kkafka.broker[:ssl][:key][:password]			       = "adminpw"
-#= "#{node.hopsworks.admin.password}"
-default.kkafka.broker[:ssl][:truststore][:location]                    = "#{node.kagent.keystore_dir}/#{node['hostname']}__tstore.jks"
-default.kkafka.broker[:ssl][:truststore][:password]                    = "adminpw"
-  # "#{node.hopsworks.admin.password}"
+default["kkafka"]["broker"][:ssl][:client][:auth]                            = "required"
+default["kkafka"]["broker"][:ssl][:keystore][:location]                      = "#{node['kagent']['keystore_dir']}/#{node['hostname']}__kstore.jks"
+default["kkafka"]["broker"][:ssl][:keystore][:password]                      = "adminpw"
+default["kkafka"]["broker"][:ssl][:key][:password]			     = "adminpw"
+default["kkafka"]["broker"][:ssl][:truststore][:location]                    = "#{node['kagent']['keystore_dir']}/#{node['hostname']}__tstore.jks"
+default["kkafka"]["broker"][:ssl][:truststore][:password]                    = "adminpw"
 
 # TODO - HopsWorks implementations needed
-default.kkafka.broker[:authorizer][:class][:name]                      = "io.hops.kafka.HopsAclAuthorizer"
-default.kkafka.broker[:authorizer][:download_url]                      = ""
-default.kkafka.broker[:ssl][:endpoint][:identification][:algorithm]    = ""
-default.kkafka.broker[:principal][:builder][:class]                    = "io.hops.kafka.HopsPrincipalBuilder"
-default.kkafka.broker[:allow][:everyone][:if][:no][:acl][:found]       = "false"
-default.kkafka.broker[:delete][:topic][:enable]                        = "true"
+default["kkafka"]["broker"][:authorizer][:class][:name]                      = "io.hops.kafka.HopsAclAuthorizer"
+default["kkafka"]["broker"][:authorizer][:download_url]                      = ""
+default["kkafka"]["broker"][:ssl][:endpoint][:identification][:algorithm]    = ""
+default["kkafka"]["broker"][:principal][:builder][:class]                    = "io.hops.kafka.HopsPrincipalBuilder"
+default["kkafka"]["broker"][:allow][:everyone][:if][:no][:acl][:found]       = "false"
+default["kkafka"]["broker"][:delete][:topic][:enable]                        = "true"
 
-default.kkafka.broker[:zookeeper][:synctime][:ms]                      = 6000
-default.kkafka.broker[:zookeeper][:connectiontimeout][:ms]             = 60000
-default.kkafka.broker[:zookeeper][:sessiontimeout][:ms]                = 6000
-default.kkafka.broker[:zookeeper][:synctime][:ms]                      = 2000
-default.kkafka.broker[:zookeeper][:session][:timeout][:ms]             = 6000
-default.kkafka.broker[:zookeeper][:set][:acl]                          = "false"
+default["kkafka"]["broker"][:zookeeper][:synctime][:ms]                      = 6000
+default["kkafka"]["broker"][:zookeeper][:connectiontimeout][:ms]             = 60000
+default["kkafka"]["broker"][:zookeeper][:sessiontimeout][:ms]                = 6000
+default["kkafka"]["broker"][:zookeeper][:synctime][:ms]                      = 2000
+default["kkafka"]["broker"][:zookeeper][:session][:timeout][:ms]             = 6000
+default["kkafka"]["broker"][:zookeeper][:set][:acl]                          = "false"
 
 #HopsAclAuthorizer database pool properties
-default.kkafka.broker[:database][:pool][:prepstmt][:cache][:enabled]   = "true"
-default.kkafka.broker[:database][:pool][:prepstmt][:cache][:size]      = "150"
-default.kkafka.broker[:database][:pool][:prepstmt][:cache][:sql][:limit] = "2048"
-default.kkafka.broker[:database][:pool][:size]                         = "10"
+default["kkafka"]["broker"][:database][:pool][:prepstmt][:cache][:enabled]   = "true"
+default["kkafka"]["broker"][:database][:pool][:prepstmt][:cache][:size]      = "150"
+default["kkafka"]["broker"][:database][:pool][:prepstmt][:cache][:sql][:limit] = "2048"
+default["kkafka"]["broker"][:database][:pool][:size]                         = "10"
 
-if node.vagrant == "false"
-  default.kkafka.broker[:super][:users]                                = "User:#{node['hostname']};User:#{node.kkafka.user}"
+if node['vagrant'] == "false"
+  default["kkafka"]["broker"][:super][:users]                                = "User:#{node['fqdn']};User:#{node[:kkafka][:user]}"
 else
-  default.kkafka.broker[:super][:users]                                = "User:dn0;User:glassfish"  
+  default["kkafka"]["broker"][:super][:users]                                = "User:hopsworks0;User:#{node[:kkafka][:user]}"
 end
 
 
@@ -320,4 +320,4 @@ default[:kkafka][:offset_monitor][:url]                                = "http:/
 default[:kkafka][:offset_monitor][:port]                               = "11111"
 
 
-default.kkafka.systemd                                                 = "true"
+default["kkafka"]["systemd"]                                           = "true"

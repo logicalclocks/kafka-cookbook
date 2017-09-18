@@ -12,11 +12,20 @@
     ignore_failure true
   end
   
-  file "/usr/lib/systemd/system/kafka.service" do
+  file "/lib/systemd/system/kafka.service" do
+    action :delete
+    ignore_failure true
+  end
+  file "/etc/systemd/system/kafka.service" do
     action :delete
     ignore_failure true
   end
   file "/lib/systemd/system/kafka.service" do
+    action :delete
+    ignore_failure true
+  end
+  directory "/etc/systemd/system/kafka.service.d" do
+    recursive true
     action :delete
     ignore_failure true
   end
