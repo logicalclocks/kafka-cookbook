@@ -30,7 +30,7 @@
     ignore_failure true
   end
 
-  directory node[:kkafka][:install_dir] do
+  directory node['kkafka']['install_dir'] do
     recursive true
     action :delete
     ignore_failure true

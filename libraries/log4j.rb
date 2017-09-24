@@ -29,7 +29,7 @@ module Kafka
       level_appender = options.values_at(:level, :appender).compact.join(', ')
       definition = 'log4j.logger.%s=%s' % [name, level_appender]
       content = [definition]
-      unless (additivity = options[:additivity]).nil?
+      unless (additivity = options['additivity']).nil?
         content << %(log4j.additivity.#{name}=#{additivity})
       end
       content.join($/) << newline

@@ -41,8 +41,8 @@ describe 'kkafka::_install' do
   context 'archive extension for different versions' do
     let :chef_run do
       ChefSpec::Runner.new do |node|
-        node.set[:kkafka][:version] = kkafka_version
-        node.set[:kkafka][:install_method] = :binary
+        node.set['kkafka']['version'] = kkafka_version
+        node.set['kkafka']['install_method'] = :binary
       end.converge(*described_recipes)
     end
 

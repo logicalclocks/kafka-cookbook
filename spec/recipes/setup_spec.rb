@@ -5,7 +5,7 @@ require 'spec_helper'
 describe 'kkafka::_setup' do
   let :chef_run do
     ChefSpec::Runner.new do |node|
-      node.set[:kkafka] = kkafka_attrs
+      node.set['kkafka'] = kkafka_attrs
     end.converge('kkafka::_defaults', described_recipe)
   end
 

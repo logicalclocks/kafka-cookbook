@@ -71,7 +71,7 @@ shared_examples_for 'a kafka directory' do |opts={}|
     expect(kafka_directory).to be_grouped_into 'kafka'
   end
 
-  unless opts[:skip_files]
+  unless opts['skip_files']
     it 'is not empty' do
       expect(files_in_directory).not_to be_empty
     end
