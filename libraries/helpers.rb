@@ -32,7 +32,7 @@ def kafka_installed?
 end
 
 def kafka_download_uri(filename)
-  [node['kkafka']['base_url'], node['kkafka']['version'], filename].join('/')
+  [node['kkafka']['base_url'], filename].join('/')
 end
 
 def kafka_archive_ext
