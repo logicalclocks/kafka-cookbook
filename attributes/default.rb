@@ -8,10 +8,9 @@ include_attribute "kagent"
 
 #
 # Version of Kafka to install.
-default['kkafka']['version'] = '0.10.2.0'
+default['kkafka']['version'] = '0.11.0.1'
 # HopsKafkaAuthorizer version
 default['kkafka']['authorizer_version'] = '0.1.0'
-default['kkafka']['version'] = '0.10.2.0'
 
 #
 # Base URL for Kafka releases. The recipes will a download URL using the
@@ -22,8 +21,7 @@ default['kkafka']['base_url'] = node['download_url']
 #
 # SHA-256 checksum of the archive to download, used by Chef's `remote_file`
 # resource.
-# 0.10.2.0
-default['kkafka']['checksum'] = '4c9e73059dea2dcb5022135f8e7eff5f187ffcc27a27b365b326ee61040214cd'
+default['kkafka']['checksum'] = '0da77e1e542cf097d6025309bc996c10ceda394839c041934b86d8729ab574f1'
 
 
 #
@@ -258,6 +256,7 @@ default['kkafka']['broker']['leader']['imbalance']['per']['broker']['percentage'
 default['kkafka']['broker']['log']['dir']                                            = node['kkafka']['install_dir'] + "/kafka-log"
 default['kkafka']['broker']['log']['dirs']                                           = %w[ "#{node['kkafka']['install_dir']}/kafka-logs" ]
 default['kkafka']['broker']['log']['flush']['offset']['checkpoint']['interval']['ms']    = 60000
+default['kkafka']['broker']['offsets']['topic']['replication']['factor']              = 1
 default['kkafka']['broker']['queued']['max']['requests']                              = 500
 default['kkafka']['broker']['quota']['consumer']['default']                           = 9223372036854775807
 default['kkafka']['broker']['quota']['producer']['default']                           = 9223372036854775807

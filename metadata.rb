@@ -170,6 +170,10 @@ attribute "kkafka/broker/log/message/format/version",
           :description => "",
           :type => 'string'
 
+attribute "kkafka/broker/offsets/topic/replication/factor",
+          :description => "",
+          :type => 'string'
+
 attribute "kkafka/broker/port",
           :description => "",
           :type => 'string'
