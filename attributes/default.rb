@@ -253,8 +253,8 @@ default['kkafka']['broker']['log']['flush']['interval']['ms']                   
 default['kkafka']['broker']['log']['message']['format']['version']                    = "#{node['kkafka']['version']}"
 default['kkafka']['broker']['leader']['imbalance']['check']['interval']['seconds']    = 300
 default['kkafka']['broker']['leader']['imbalance']['per']['broker']['percentage']     = 10
-default['kkafka']['broker']['log']['dir']                                             = node['kkafka']['install_dir'] + "/kafka-log"
-default['kkafka']['broker']['log']['dirs']                                            = %w[ "#{node['kkafka']['install_dir']}/kafka-logs" ]
+default['kkafka']['broker']['log']['dir']                                             = "#{node['kkafka']['install_dir']}/kafka-log"
+default['kkafka']['broker']['log']['dirs']                                            = "#{node['kkafka']['install_dir']}/kafka-logs"
 default['kkafka']['broker']['log']['flush']['offset']['checkpoint']['interval']['ms'] = 60000
 default['kkafka']['broker']['offsets']['topic']['replication']['factor']              = 1
 default['kkafka']['broker']['queued']['max']['requests']                              = 500
