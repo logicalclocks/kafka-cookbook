@@ -106,8 +106,9 @@ end
 def kafka_log_dirs
   dirs = []
   dirs += Array(node['kkafka']['broker']['log.dirs'])
-  dirs += Array(node['kkafka']['broker'].fetch(:log_dirs, []))
-  dirs += Array(node['kkafka']['broker'].fetch(:log, {}).fetch(:dirs, []))
+  dirs += Array(node['kkafka']['broker']['log.dir'])
+  #dirs += Array(node['kkafka']['broker'].fetch(:log_dirs, []))
+  #dirs += Array(node['kkafka']['broker'].fetch(:log, {}).fetch(:dirs, []))
   dirs.uniq!
   dirs
 end
