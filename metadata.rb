@@ -58,6 +58,10 @@ attribute "kkafka/memory_mb",
           :description => "Kafka server memory in mbs",
           :type => 'string'
 
+attribute "kkafka/broker/advertised/listeners",
+          :description => "Listeners to publish to ZooKeeper for clients to use, if different than the `listeners` config property. For example, INTERNAL://hops1:9091,EXTERNAL://hops1:9092",
+          :type => 'string'
+
 attribute "kkafka/broker/zookeeper_connection_timeout_ms",
           :description => "",
           :type => 'string'

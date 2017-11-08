@@ -227,8 +227,9 @@ default['kkafka']['log4j']['loggers'] = {
   },
 }
 
+default['kkafka']['broker']['advertised']['listeners']                                = ""
 default['kkafka']['broker']['port']                                                   = 9091
-
+default['kkafka']['broker']['inter']['broker']['listener']['name']                    = "INTERNAL"
 default['kkafka']['broker']['log']['retention']['hours']                              = 240
 default['kkafka']['broker']['log']['retention']['size']                               = "-1"
 default['kkafka']['broker']['num']['network']['threads']                              = 3
@@ -275,9 +276,11 @@ default['kkafka']['broker']['log']['cleaner']['io']['buffer']['load']['factor'] 
 
 
 # values are: PLAINTEXT, SSL, SASL_PLAINTEXT, SASL_SSL
-default['kkafka']['broker']['security']['inter']['broker']['protocol']           = "SSL"
+#default['kkafka']['broker']['security']['inter']['broker']['protocol']           = "SSL"
 default['kkafka']['broker']['inter']['broker']['protocol']['version']            = node['kkafka']['version']
 default['kkafka']['broker']['broker']['rack']                                    = node['kkafka']['broker']['rack']['id']
+default['kkafka']['broker']['listener']['security']['protocol']['map']           = "INTERNAL:SSL"
+
 # required, requested, none
 default['kkafka']['broker']['ssl']['client']['auth']                            = "required"
 default['kkafka']['broker']['ssl']['keystore']['location']                      = "#{node['kagent']['keystore_dir']}/#{node['hostname']}__kstore.jks"

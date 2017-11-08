@@ -60,8 +60,8 @@ node.override['kkafka']['broker']['zookeeper']['connect'] = ["#{zk_ip}:2181"]
 my_ip = my_private_ip()
 node.override['kkafka']['broker']['host']['name'] = my_ip
 #node.override.kkafka.broker.advertised.host.name = my_ip
-node.override['kkafka']['broker']['listeners'] = "SSL://#{my_ip}:9091"
-
+node.override['kkafka']['broker']['listeners'] = "INTERNAL://#{my_ip}:9091"
+node.override['kkafka']['broker']['advertised']['listeners'] = "INTERNAL://#{my_ip}:9091"
 
 if node['kkafka']['systemd'] == "true"
   kagent_config "kafka" do
