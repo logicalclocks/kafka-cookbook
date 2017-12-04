@@ -62,7 +62,7 @@ my_gateway_ip = my_gateway_ip()
 
 node.override['kkafka']['broker']['host']['name'] = my_ip
 #node.override.kkafka.broker.advertised.host.name = my_ip
-node.override['kkafka']['broker']['listeners'] = "INTERNAL://#{my_ip}:9091,EXTERNAL://#{my_gateway_ip}:9092"
+node.override['kkafka']['broker']['listeners'] = "INTERNAL://#{my_ip}:9091,EXTERNAL://#{my_ip}:9092"
 node.override['kkafka']['broker']['advertised']['listeners'] = "INTERNAL://#{my_ip}:9091,EXTERNAL://#{my_gateway_ip}:9092"
 
 if node['kkafka']['systemd'] == "true"
