@@ -279,7 +279,7 @@ default['kkafka']['broker']['log']['cleaner']['io']['buffer']['load']['factor'] 
 #default['kkafka']['broker']['security']['inter']['broker']['protocol']           = "SSL"
 default['kkafka']['broker']['inter']['broker']['protocol']['version']            = node['kkafka']['version']
 default['kkafka']['broker']['broker']['rack']                                    = node['kkafka']['broker']['rack']['id']
-default['kkafka']['broker']['listener']['security']['protocol']['map']           = "INTERNAL:SSL"
+default['kkafka']['broker']['listener']['security']['protocol']['map']           = "INTERNAL:SSL,EXTERNAL:SSL"
 
 # required, requested, none
 default['kkafka']['broker']['ssl']['client']['auth']                            = "required"
