@@ -9,6 +9,8 @@ include_attribute "kagent"
 #
 # Version of Kafka to install.
 default['kkafka']['version'] = '1.0.0'
+# Version used for properties file
+default['kkafka']['version_properties'] = '1.0'
 # HopsKafkaAuthorizer version
 default['kkafka']['authorizer_version'] = '0.1.0'
 
@@ -251,7 +253,7 @@ default['kkafka']['broker']['log']['index']['interval']['bytes']                
 default['kkafka']['broker']['log']['flush']['interval']['messages']                   = "9223372036854775807"
 default['kkafka']['broker']['log']['flush']['scheduler']['interval']['ms']            = 3000
 default['kkafka']['broker']['log']['flush']['interval']['ms']                         = 3000
-default['kkafka']['broker']['log']['message']['format']['version']                    = "#{node['kkafka']['version']}"
+default['kkafka']['broker']['log']['message']['format']['version']                    = "#{node['kkafka']['version_properties']}"
 default['kkafka']['broker']['leader']['imbalance']['check']['interval']['seconds']    = 300
 default['kkafka']['broker']['leader']['imbalance']['per']['broker']['percentage']     = 10
 default['kkafka']['broker']['log']['dir']                                             = "#{node['kkafka']['install_dir']}/kafka-log"
@@ -277,7 +279,7 @@ default['kkafka']['broker']['log']['cleaner']['io']['buffer']['load']['factor'] 
 
 # values are: PLAINTEXT, SSL, SASL_PLAINTEXT, SASL_SSL
 #default['kkafka']['broker']['security']['inter']['broker']['protocol']           = "SSL"
-default['kkafka']['broker']['inter']['broker']['protocol']['version']            = node['kkafka']['version']
+default['kkafka']['broker']['inter']['broker']['protocol']['version']            = node['kkafka']['version_properties']
 default['kkafka']['broker']['broker']['rack']                                    = node['kkafka']['broker']['rack']['id']
 default['kkafka']['broker']['listener']['security']['protocol']['map']           = "INTERNAL:SSL,EXTERNAL:SSL"
 
