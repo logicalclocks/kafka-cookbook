@@ -8,7 +8,9 @@ include_attribute "kagent"
 
 #
 # Version of Kafka to install.
-default['kkafka']['version'] = '0.11.0.1'
+default['kkafka']['version'] = '1.0.0'
+# Version used for properties file
+default['kkafka']['version_properties'] = '1.0'
 # HopsKafkaAuthorizer version
 default['kkafka']['authorizer_version'] = '0.1.0'
 
@@ -21,7 +23,7 @@ default['kkafka']['base_url'] = node['download_url']
 #
 # SHA-256 checksum of the archive to download, used by Chef's `remote_file`
 # resource.
-default['kkafka']['checksum'] = '0da77e1e542cf097d6025309bc996c10ceda394839c041934b86d8729ab574f1'
+default['kkafka']['checksum'] = 'b5b535f8db770cda8513e391917d0f5a35ef24c537ef3d29dcd9aa287da529f5'
 
 
 #
@@ -251,7 +253,7 @@ default['kkafka']['broker']['log']['index']['interval']['bytes']                
 default['kkafka']['broker']['log']['flush']['interval']['messages']                   = "9223372036854775807"
 default['kkafka']['broker']['log']['flush']['scheduler']['interval']['ms']            = 3000
 default['kkafka']['broker']['log']['flush']['interval']['ms']                         = 3000
-default['kkafka']['broker']['log']['message']['format']['version']                    = "#{node['kkafka']['version']}"
+default['kkafka']['broker']['log']['message']['format']['version']                    = "#{node['kkafka']['version_properties']}"
 default['kkafka']['broker']['leader']['imbalance']['check']['interval']['seconds']    = 300
 default['kkafka']['broker']['leader']['imbalance']['per']['broker']['percentage']     = 10
 default['kkafka']['broker']['log']['dir']                                             = "#{node['kkafka']['install_dir']}/kafka-log"
@@ -277,9 +279,9 @@ default['kkafka']['broker']['log']['cleaner']['io']['buffer']['load']['factor'] 
 
 # values are: PLAINTEXT, SSL, SASL_PLAINTEXT, SASL_SSL
 #default['kkafka']['broker']['security']['inter']['broker']['protocol']           = "SSL"
-default['kkafka']['broker']['inter']['broker']['protocol']['version']            = node['kkafka']['version']
+default['kkafka']['broker']['inter']['broker']['protocol']['version']            = node['kkafka']['version_properties']
 default['kkafka']['broker']['broker']['rack']                                    = node['kkafka']['broker']['rack']['id']
-default['kkafka']['broker']['listener']['security']['protocol']['map']           = "INTERNAL:SSL"
+default['kkafka']['broker']['listener']['security']['protocol']['map']           = "INTERNAL:SSL,EXTERNAL:SSL"
 
 # required, requested, none
 default['kkafka']['broker']['ssl']['client']['auth']                            = "required"
