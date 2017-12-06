@@ -11,7 +11,7 @@ for h in node['kagent']['default']['private_ips']
   hostname = hostf.getname(h)
   all_hosts = all_hosts + "User:" + hostname + ";"  
 end  
-all_hosts = all_hosts + ";User:#{node['kkafka']['user']}"
+all_hosts = all_hosts + "User:#{node['kkafka']['user']}"
 node.override['kkafka']['broker']['super']['users'] = all_hosts
 
 
