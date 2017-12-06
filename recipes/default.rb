@@ -1,3 +1,19 @@
+require 'resolv'
+
+#
+#
+#
+all_hosts = ""
+hostf = Resolv::Hosts.new
+for h in node['kagent']['default']['private_ips']
+  # Convert all private_ips to their hostnames
+  # Kafa requires fqdns to work - won't work with IPs
+  hostname = hostf.getname(h)
+  all_hosts = all_hosts + "User:" + hostname + ";"  
+end  
+all_hosts = all_hosts + ";User:#{node['kkafka']['user']}"
+node.override['kkafka']['broker']['super']['users'] = all_hosts
+
 
 case node['platform']
 when "ubuntu"
@@ -7,14 +23,6 @@ when "ubuntu"
    node.override['kkafka']['systemd'] = "false"
  end
 end
-
-case node['platform']
-  when "ubuntu"
-    if node['platform_version'].to_f <= 14.04
-
-    end
-  end
-
 
 group node['kkafka']['group'] do
   action :create
