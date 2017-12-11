@@ -311,6 +311,7 @@ default['kkafka']['broker']['database']['pool']['prepstmt']['cache']['enabled'] 
 default['kkafka']['broker']['database']['pool']['prepstmt']['cache']['size']      = "150"
 default['kkafka']['broker']['database']['pool']['prepstmt']['cache']['sql']['limit'] = "2048"
 default['kkafka']['broker']['database']['pool']['size']                         = "10"
+default['kkafka']['broker']['acl']['polling']['frequency']['ms']                = "1000"
 
 if node['vagrant'] == "false"
   default['kkafka']['broker']['super']['users']                                = "User:#{node['fqdn']};User:#{node['kkafka']['user']}"

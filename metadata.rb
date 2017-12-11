@@ -330,6 +330,10 @@ attribute "kkafka/broker/database/pool/size",
           :description => "Size of database pool for HopsAclAuthorizer",
           :type => 'string'
 
+attribute "kkafka/broker/acl/polling/frequency/ms",
+          :description => "Polling frequency of HopsKafkaAuthorizer to retrieve ACLs",
+          :type => 'string'
+
 attribute "kkafka/default/private_ips",
           :description => "Set ip addresses",
           :type => "array"
