@@ -52,7 +52,7 @@ default['kkafka']['build_dir'] = ::File.join(Dir.tmpdir, 'kafka-build')
 
 #
 # Directory where to store logs from Kafka.
-default['kkafka']['log_dir'] = '/var/log/kafka'
+default['kkafka']['log_dir'] = "#{node['kkafka']['install_dir']}/" + "logs"
 
 #
 # Directory where to keep Kafka configuration files. For the
