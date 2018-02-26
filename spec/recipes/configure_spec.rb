@@ -36,7 +36,7 @@ describe 'kkafka::_configure' do
 
   describe 'broker configuration file' do
     let :path do
-      #{node['kkafka']['install_dir']}
+      #{node['kkafka']['config_dir']} + "/server.properties"
     end
 
     it 'creates the configuration file' do
