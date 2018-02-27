@@ -196,7 +196,7 @@ default['kkafka']['log4j']['appenders'] = {
   'controllerAppender' => {
     type: 'org.apache.log4j.RollingFileAppender',
     file: lazy { %(#{node['kkafka']['log_dir']}/kafka-controller.log) },
-    'MaxFileSize: '128MB',
+    'MaxFileSize': '128MB',
     'MaxBackupIndex': '2',
     layout: {
       type: 'org.apache.log4j.PatternLayout',
