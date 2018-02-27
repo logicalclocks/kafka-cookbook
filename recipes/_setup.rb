@@ -16,7 +16,9 @@
 
 [
   node['kkafka']['version_install_dir'],
-  node['kkafka']['log_dir'],
+  #Let the log dir be created automatically when Kafka starts up
+  #otherwise it is created before the symlink
+  #node['kkafka']['log_dir'],
   node['kkafka']['build_dir'],
 ].each do |dir|
   directory dir do
