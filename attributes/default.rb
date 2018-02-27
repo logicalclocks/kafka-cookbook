@@ -177,7 +177,7 @@ default['kkafka']['log4j']['appenders'] = {
     type: 'org.apache.log4j.RollingFileAppender',
     file: lazy { %(#{node['kkafka']['log_dir']}/kafka-state-change.log) },
     MaxFileSize: '512MB',
-    MaxBackupIndex: '10',
+    MaxBackupIndex: '2',
     layout: {
       type: 'org.apache.log4j.PatternLayout',
       conversion_pattern: '[%d] %p %m (%c)%n',
@@ -187,7 +187,7 @@ default['kkafka']['log4j']['appenders'] = {
     type: 'org.apache.log4j.RollingFileAppender',
     file: lazy { %(#{node['kkafka']['log_dir']}/kafka-request.log) },
     MaxFileSize: '512MB',
-    MaxBackupIndex: '10',
+    MaxBackupIndex: '2',
     layout: {
       type: 'org.apache.log4j.PatternLayout',
       conversion_pattern: '[%d] %p %m (%c)%n',
@@ -197,7 +197,7 @@ default['kkafka']['log4j']['appenders'] = {
     type: 'org.apache.log4j.RollingFileAppender',
     file: lazy { %(#{node['kkafka']['log_dir']}/kafka-controller.log) },
     MaxFileSize: '512MB',
-    MaxBackupIndex: '10',
+    MaxBackupIndex: '2',
     layout: {
       type: 'org.apache.log4j.PatternLayout',
       conversion_pattern: '[%d] %p %m (%c)%n',
