@@ -151,10 +151,10 @@ describe 'kkafka::_configure' do
 
     it 'configures appenders' do
       expect(chef_run).to have_configured(path).with('log4j.appender.kafkaAppender=org.apache.log4j.RollingFileAppender')
-      expect(chef_run).to have_configured(path).with('log4j.appender.kafkaAppender.MaxFileSize=512MB')
-      expect(chef_run).to have_configured(path).with('log4j.appender.kafkaAppender.MaxBackupIndex=10')
+      expect(chef_run).to have_configured(path).with('log4j.appender.kafkaAppender.MaxFileSize=256MB')
+      expect(chef_run).to have_configured(path).with('log4j.appender.kafkaAppender.MaxBackupIndex=20')
       expect(chef_run).to have_configured(path).with('log4j.appender.stateChangeAppender=org.apache.log4j.RollingFileAppender')
-      expect(chef_run).to have_configured(path).with('log4j.appender.stateChangeAppender.MaxFileSize=128B')
+      expect(chef_run).to have_configured(path).with('log4j.appender.stateChangeAppender.MaxFileSize=128MB')
       expect(chef_run).to have_configured(path).with('log4j.appender.stateChangeAppender.MaxBackupIndex=10')
       expect(chef_run).to have_configured(path).with('log4j.appender.requestAppender=org.apache.log4j.RollingFileAppender')
       expect(chef_run).to have_configured(path).with('log4j.appender.requestAppender.MaxFileSize=128MB')
