@@ -52,7 +52,7 @@ default['kkafka']['build_dir'] = ::File.join(Dir.tmpdir, 'kafka-build')
 
 #
 # Directory where to store logs from Kafka.
-default['kkafka']['log_dir'] = '/var/log/kafka'
+default['kkafka']['log_dir'] = "#{node['kkafka']['install_dir']}/" + "logs"
 
 #
 # Directory where to keep Kafka configuration files. For the
@@ -164,36 +164,40 @@ default['kkafka']['log4j']['root_logger'] = 'INFO, kafkaAppender'
 # Appender definitions for various Kafka classes.
 default['kkafka']['log4j']['appenders'] = {
   'kafkaAppender' => {
-    type: 'org.apache.log4j.DailyRollingFileAppender',
-    date_pattern: '.yyyy-MM-dd',
+    type: 'org.apache.log4j.RollingFileAppender',
     file: lazy { %(#{node['kkafka']['log_dir']}/kafka.log) },
+    Max_File_Size: '256MB',
+    Max_Backup_Index: '20',
     layout: {
       type: 'org.apache.log4j.PatternLayout',
       conversion_pattern: '[%d] %p %m (%c)%n',
     },
   },
   'stateChangeAppender' => {
-    type: 'org.apache.log4j.DailyRollingFileAppender',
-    date_pattern: '.yyyy-MM-dd',
+    type: 'org.apache.log4j.RollingFileAppender',
     file: lazy { %(#{node['kkafka']['log_dir']}/kafka-state-change.log) },
+    Max_File_Size: '128MB',
+     Max_Backup_Index: '2',
     layout: {
       type: 'org.apache.log4j.PatternLayout',
       conversion_pattern: '[%d] %p %m (%c)%n',
     },
   },
   'requestAppender' => {
-    type: 'org.apache.log4j.DailyRollingFileAppender',
-    date_pattern: '.yyyy-MM-dd',
+    type: 'org.apache.log4j.RollingFileAppender',
     file: lazy { %(#{node['kkafka']['log_dir']}/kafka-request.log) },
+    Max_File_Size: '128MB',
+     Max_Backup_Index: '2',
     layout: {
       type: 'org.apache.log4j.PatternLayout',
       conversion_pattern: '[%d] %p %m (%c)%n',
     },
   },
   'controllerAppender' => {
-    type: 'org.apache.log4j.DailyRollingFileAppender',
-    date_pattern: '.yyyy-MM-dd',
+    type: 'org.apache.log4j.RollingFileAppender',
     file: lazy { %(#{node['kkafka']['log_dir']}/kafka-controller.log) },
+    Max_File_Size: '128MB',
+     Max_Backup_Index: '2',
     layout: {
       type: 'org.apache.log4j.PatternLayout',
       conversion_pattern: '[%d] %p %m (%c)%n',

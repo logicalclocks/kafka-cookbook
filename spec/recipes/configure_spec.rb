@@ -27,7 +27,7 @@ describe 'kkafka::_configure' do
   end
 
   it 'creates config directory' do
-    expect(chef_run).to create_directory('/opt/kafka/config').with({
+    expect(chef_run).to create_directory(#{node['kkafka']['config_dir']}).with({
       owner: 'kafka',
       group: 'kafka',
       mode: '755'
@@ -36,7 +36,7 @@ describe 'kkafka::_configure' do
 
   describe 'broker configuration file' do
     let :path do
-      '/opt/kafka/config/server.properties'
+      #{node['kkafka']['config_dir']} + "/server.properties"
     end
 
     it 'creates the configuration file' do
@@ -150,11 +150,18 @@ describe 'kkafka::_configure' do
     end
 
     it 'configures appenders' do
-      expect(chef_run).to have_configured(path).with('log4j.appender.kafkaAppender=org.apache.log4j.DailyRollingFileAppender')
-      expect(chef_run).to have_configured(path).with('log4j.appender.kafkaAppender.DatePattern').as('.yyyy-MM-dd')
-      expect(chef_run).to have_configured(path).with('log4j.appender.stateChangeAppender=org.apache.log4j.DailyRollingFileAppender')
-      expect(chef_run).to have_configured(path).with('log4j.appender.requestAppender=org.apache.log4j.DailyRollingFileAppender')
-      expect(chef_run).to have_configured(path).with('log4j.appender.controllerAppender=org.apache.log4j.DailyRollingFileAppender')
+      expect(chef_run).to have_configured(path).with('log4j.appender.kafkaAppender=org.apache.log4j.RollingFileAppender')
+      expect(chef_run).to have_configured(path).with('log4j.appender.kafkaAppender.MaxFileSize=256MB')
+      expect(chef_run).to have_configured(path).with('log4j.appender.kafkaAppender.MaxBackupIndex=20')
+      expect(chef_run).to have_configured(path).with('log4j.appender.stateChangeAppender=org.apache.log4j.RollingFileAppender')
+      expect(chef_run).to have_configured(path).with('log4j.appender.stateChangeAppender.MaxFileSize=128MB')
+      expect(chef_run).to have_configured(path).with('log4j.appender.stateChangeAppender.MaxBackupIndex=10')
+      expect(chef_run).to have_configured(path).with('log4j.appender.requestAppender=org.apache.log4j.RollingFileAppender')
+      expect(chef_run).to have_configured(path).with('log4j.appender.requestAppender.MaxFileSize=128MB')
+      expect(chef_run).to have_configured(path).with('log4j.appender.requestAppender.MaxBackupIndex=5')
+      expect(chef_run).to have_configured(path).with('log4j.appender.controllerAppender=org.apache.log4j.RollingFileAppender')
+      expect(chef_run).to have_configured(path).with('log4j.appender.controllerAppender.MaxFileSize=128MB')
+      expect(chef_run).to have_configured(path).with('log4j.appender.controllerAAppender.MaxBackupIndex=5')
     end
 
     it 'configures layouts' do
@@ -171,17 +178,17 @@ describe 'kkafka::_configure' do
     end
 
     it 'configures log path for FileAppenders' do
-      expect(chef_run).to have_configured(path).with('log4j.appender.kafkaAppender.File').as('/var/log/kafka/kafka.log')
-      expect(chef_run).to have_configured(path).with('log4j.appender.stateChangeAppender.File').as('/var/log/kafka/kafka-state-change.log')
-      expect(chef_run).to have_configured(path).with('log4j.appender.requestAppender.File').as('/var/log/kafka/kafka-request.log')
-      expect(chef_run).to have_configured(path).with('log4j.appender.controllerAppender.File').as('/var/log/kafka/kafka-controller.log')
+      expect(chef_run).to have_configured(path).with('log4j.appender.kafkaAppender.File').as(node['kkafka']['install_dir'] + '/kafka.log')
+      expect(chef_run).to have_configured(path).with('log4j.appender.stateChangeAppender.File').as(node['kkafka']['install_dir'] +'/kafka-state-change.log')
+      expect(chef_run).to have_configured(path).with('log4j.appender.requestAppender.File').as(node['kkafka']['install_dir'] +'/kafka-request.log')
+      expect(chef_run).to have_configured(path).with('log4j.appender.controllerAppender.File').as(node['kkafka']['install_dir'] +'/kafka-controller.log')
     end
 
-    it 'configures sane date patterns for appenders' do
-      expect(node['kkafka']['log4j']['appenders']).to_not be_empty
-      node['kkafka']['log4j']['appenders'].each do |_, opts|
-        expect(opts.date_pattern).to eq('.yyyy-MM-dd')
-      end
+    #it 'configures sane date patterns for appenders' do
+    #  expect(node['kkafka']['log4j']['appenders']).to_not be_empty
+    #  node['kkafka']['log4j']['appenders'].each do |_, opts|
+    #    expect(opts.date_pattern).to eq('.yyyy-MM-dd')
+    #  end
     end
   end
 
@@ -233,7 +240,7 @@ describe 'kkafka::_configure' do
       end
 
       it 'sets KAFKA_LOG4J_OPTS' do
-        expect(chef_run).to have_configured(env_path).with('(export |)KAFKA_LOG4J_OPTS').as('"-Dlog4j.configuration=file:/opt/kafka/config/log4j.properties"')
+        expect(chef_run).to have_configured(env_path).with('(export |)KAFKA_LOG4J_OPTS').as('"-Dlog4j.configuration=file:' + + #{node['kkafka']['config_dir']} +'/log4j.properties"')
       end
 
       it 'sets KAFKA_HEAP_OPTS' do
@@ -241,7 +248,7 @@ describe 'kkafka::_configure' do
       end
 
       it 'sets KAFKA_GC_LOG_OPTS' do
-        expect(chef_run).to have_configured(env_path).with('(export |)KAFKA_GC_LOG_OPTS').as('"-Xloggc:/var/log/kafka/kafka-gc.log -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps"')
+        expect(chef_run).to have_configured(env_path).with('(export |)KAFKA_GC_LOG_OPTS').as('"-Xloggc:' + #{node['kkafka']['install_dir']} + '/kafka-gc.log -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps"')
       end
 
       it 'sets KAFKA_OPTS' do
@@ -253,7 +260,7 @@ describe 'kkafka::_configure' do
       end
 
       it 'sets KAFKA_RUN' do
-        expect(chef_run).to have_configured(env_path).with('KAFKA_RUN').as('"/opt/kafka/bin/kafka-run-class.sh"')
+        expect(chef_run).to have_configured(env_path).with('KAFKA_RUN').as('"' + #{node['kkafka']['install_dir']}+ '/bin/kafka-run-class.sh"')
       end
 
       it 'sets KAFKA_ARGS' do
@@ -261,7 +268,7 @@ describe 'kkafka::_configure' do
       end
 
       it 'sets KAFKA_CONFIG' do
-        expect(chef_run).to have_configured(env_path).with('KAFKA_CONFIG').as('"/opt/kafka/config/server.properties"')
+        expect(chef_run).to have_configured(env_path).with('KAFKA_CONFIG').as('" ' + #{node['kkafka']['config_dir']} + '/server.properties"')
       end
     end
   end
