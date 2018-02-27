@@ -164,36 +164,40 @@ default['kkafka']['log4j']['root_logger'] = 'INFO, kafkaAppender'
 # Appender definitions for various Kafka classes.
 default['kkafka']['log4j']['appenders'] = {
   'kafkaAppender' => {
-    type: 'org.apache.log4j.DailyRollingFileAppender',
-    date_pattern: '.yyyy-MM-dd',
+    type: 'org.apache.log4j.RollingFileAppender',
     file: lazy { %(#{node['kkafka']['log_dir']}/kafka.log) },
+    MaxFileSize: '512MB',
+    MaxBackupIndex: '10',
     layout: {
       type: 'org.apache.log4j.PatternLayout',
       conversion_pattern: '[%d] %p %m (%c)%n',
     },
   },
   'stateChangeAppender' => {
-    type: 'org.apache.log4j.DailyRollingFileAppender',
-    date_pattern: '.yyyy-MM-dd',
+    type: 'org.apache.log4j.RollingFileAppender',
     file: lazy { %(#{node['kkafka']['log_dir']}/kafka-state-change.log) },
+    MaxFileSize: '512MB',
+    MaxBackupIndex: '10',
     layout: {
       type: 'org.apache.log4j.PatternLayout',
       conversion_pattern: '[%d] %p %m (%c)%n',
     },
   },
   'requestAppender' => {
-    type: 'org.apache.log4j.DailyRollingFileAppender',
-    date_pattern: '.yyyy-MM-dd',
+    type: 'org.apache.log4j.RollingFileAppender',
     file: lazy { %(#{node['kkafka']['log_dir']}/kafka-request.log) },
+    MaxFileSize: '512MB',
+    MaxBackupIndex: '10',
     layout: {
       type: 'org.apache.log4j.PatternLayout',
       conversion_pattern: '[%d] %p %m (%c)%n',
     },
   },
   'controllerAppender' => {
-    type: 'org.apache.log4j.DailyRollingFileAppender',
-    date_pattern: '.yyyy-MM-dd',
+    type: 'org.apache.log4j.RollingFileAppender',
     file: lazy { %(#{node['kkafka']['log_dir']}/kafka-controller.log) },
+    MaxFileSize: '512MB',
+    MaxBackupIndex: '10',
     layout: {
       type: 'org.apache.log4j.PatternLayout',
       conversion_pattern: '[%d] %p %m (%c)%n',
