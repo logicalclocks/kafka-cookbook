@@ -8,11 +8,11 @@ include_attribute "kagent"
 
 #
 # Version of Kafka to install.
-default['kkafka']['version'] = '1.0.0'
+default['kkafka']['version'] = '1.1.0'
 # Version used for properties file
 default['kkafka']['version_properties'] = '1.0'
 # HopsKafkaAuthorizer version
-default['kkafka']['authorizer_version'] = '0.1.0'
+default['kkafka']['authorizer_version'] = '0.2.0'
 
 #
 # Base URL for Kafka releases. The recipes will a download URL using the
@@ -23,7 +23,7 @@ default['kkafka']['base_url'] = node['download_url']
 #
 # SHA-256 checksum of the archive to download, used by Chef's `remote_file`
 # resource.
-default['kkafka']['checksum'] = 'b5b535f8db770cda8513e391917d0f5a35ef24c537ef3d29dcd9aa287da529f5'
+default['kkafka']['checksum'] = '124861011a849b1cf63d2fccee5e79303cea32987f37890d1848948edfcc18ca'
 
 
 #
