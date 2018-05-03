@@ -12,7 +12,7 @@ default['kkafka']['version'] = '1.1.0'
 # Version used for properties file
 default['kkafka']['version_properties'] = '1.0'
 # HopsKafkaAuthorizer version
-default['kkafka']['authorizer_version'] = '0.1.0'
+default['kkafka']['authorizer_version'] = '0.2.0'
 
 #
 # Base URL for Kafka releases. The recipes will a download URL using the
