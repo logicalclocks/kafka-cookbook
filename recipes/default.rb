@@ -1,14 +1,19 @@
 require 'resolv'
 
 #
-#
+# Get all the hostsnames for all hosts in the cluster
 #
 all_hosts = ""
 hostf = Resolv::Hosts.new
+dnsr = Resolv::DNS.new
 for h in node['kagent']['default']['private_ips']
   # Convert all private_ips to their hostnames
   # Kafa requires fqdns to work - won't work with IPs
-  hostname = hostf.getname(h)
+  begin
+    hostname = hostf.getname(h)
+  rescue
+    hostname = dnsr.getname(h).to_s()
+  end
   all_hosts = all_hosts + "User:" + hostname + ";"  
 end  
 all_hosts = all_hosts + "User:#{node['kkafka']['user']}"
