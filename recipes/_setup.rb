@@ -16,9 +16,6 @@
 
 [
   node['kkafka']['version_install_dir'],
-  #Let the log dir be created automatically when Kafka starts up
-  #otherwise it is created before the symlink
-  #node['kkafka']['log_dir'],
   node['kkafka']['build_dir'],
 ].each do |dir|
   directory dir do
@@ -33,7 +30,9 @@ kafka_log_dirs.each do |dir|
   directory dir do
     owner node['kkafka']['user']
     group node['kkafka']['group']
-    mode '755'
+    mode '770'
+    action :create
     recursive true
+    not_if { File.directory?(dir) }
   end
 end
