@@ -51,7 +51,7 @@ suites:
             dir: "/srv/hops"
             ulimit_file: 128000
             broker:
-              log_dirs: ['/tmp/kafka-logs-1', '/tmp/kafka-logs-2']
+              log_dirs: ['/srv/hops/kafka-logs']
             default:
                 private_ips: ["10.0.2.15"]
          hops:
