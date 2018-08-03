@@ -40,6 +40,7 @@ user node['kkafka']['user'] do
   home "/home/#{node['kkafka']['user']}"
   shell "/bin/bash"
   manage_home true
+  system true
   not_if "getent passwd #{node['kkafka']['user']}"
 end
 
