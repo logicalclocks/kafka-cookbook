@@ -15,11 +15,18 @@ default['kkafka']['version_properties'] = '1.0'
 default['kkafka']['authorizer_version'] = '0.2.0'
 
 #
+# Scala version of Kafka.
+default['kkafka']['scala_version'] = '2.11'
+
+#
 # Base URL for Kafka releases. The recipes will a download URL using the
 # `base_url`, `version` and `scala_version` attributes.
 #default['kkafka']['base_url'] = 'https://archive.apache.org/dist/kafka'
 #'http://snurran.sics.se/hops'
 default['kkafka']['base_url'] = node['download_url']
+default['kkafka']['download_url'] = kafka_download_uri(kafka_tar_gz)
+default['kkafka']['authorizer_download_url'] = kafka_download_uri("hops-kafka-authorizer-#{node['kkafka']['authorizer_version']}.jar")
+
 #
 # SHA-256 checksum of the archive to download, used by Chef's `remote_file`
 # resource.
@@ -31,9 +38,6 @@ default['kkafka']['checksum'] = '124861011a849b1cf63d2fccee5e79303cea32987f37890
 # the "correct" archive has been downloaded.
 default['kkafka']['md5_checksum'] = ''
 
-#
-# Scala version of Kafka.
-default['kkafka']['scala_version'] = '2.11'
 
 #
 # Directory where to install Kafka.
@@ -297,7 +301,6 @@ default['kkafka']['broker']['ssl']['truststore']['password']                    
 
 # TODO - HopsWorks implementations needed
 default['kkafka']['broker']['authorizer']['class']['name']                      = "io.hops.kafka.HopsAclAuthorizer"
-default['kkafka']['broker']['authorizer']['download_url']                      = ""
 default['kkafka']['broker']['ssl']['endpoint']['identification']['algorithm']    = ""
 default['kkafka']['broker']['principal']['builder']['class']                    = "io.hops.kafka.HopsPrincipalBuilder"
 default['kkafka']['broker']['allow']['everyone']['if']['no']['acl']['found']       = "false"

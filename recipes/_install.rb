@@ -4,7 +4,7 @@
 #
 
 kkafka_download kafka_local_download_path do
-  source kafka_download_uri(kafka_tar_gz)
+  source node['kkafka']['download_url']
   checksum node['kkafka']['checksum']
   md5_checksum node['kkafka']['md5_checksum']
   not_if { kafka_installed? }
