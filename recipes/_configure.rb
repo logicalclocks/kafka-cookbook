@@ -77,9 +77,9 @@ end
 
 
 remote_file "#{node['kkafka']['install_dir']}/libs/hops-kafka-authorizer-#{node['kkafka']['authorizer_version']}.jar" do
+  source node['kkafka']['authorizer_download_url']
   user 'root'
   group 'root'
-  source "http://snurran.sics.se/hops/hops-kafka-authorizer-#{node['kkafka']['authorizer_version']}.jar"
   mode 0755
   action :create_if_missing
 end
