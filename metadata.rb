@@ -22,16 +22,8 @@ depends "conda"
   supports os
 end
 
-attribute "java/jdk_version",
-          :description =>  "Jdk version",
-          :type => 'string'
-
 attribute "kkafka/authorizer_version",
           :description => "Hops Kafka Authorizer version",
-          :type => 'string'
-
-attribute "java/install_flavor",
-          :description =>  "Oracle (default) or openjdk",
           :type => 'string'
 
 attribute "kkafka/dir",
