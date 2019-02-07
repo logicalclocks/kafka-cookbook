@@ -50,6 +50,14 @@ attribute "kkafka/memory_mb",
           :description => "Kafka server memory in mbs",
           :type => 'string'
 
+attribute "kkafka/broker/broker/id",
+          :description => "broker id",
+          :type => 'string'
+
+attribute "kkafka/broker/host/name",
+          :description => "hostname to be used in server.properties",
+          :type => 'string'
+
 attribute "kkafka/broker/advertised/listeners",
           :description => "Listeners to publish to ZooKeeper for clients to use, if different than the `listeners` config property. For example, INTERNAL://hops1:9091,EXTERNAL://hops1:9092",
           :type => 'string'
@@ -110,23 +118,27 @@ attribute "kkafka/broker/log/segment/bytesattribute ",
           :description => "",
           :type => 'string'
 
+attribute "kkafka/broker/log/message/timestamp/difference/max/ms",
+          :description => "",
+          :type => 'string'
+
 attribute "kkafka/broker/log/roll/hoursattribute ",
           :description => "",
           :type => 'string'
 
-attribute "kkafka/broker/log/retention/hoursattribute ",
+attribute "kkafka/broker/log/retention/hours",
           :description => "",
           :type => 'string'
 
-attribute "kkafka/broker/log/retention/bytesattribute ",
+attribute "kkafka/broker/log/retention/bytes",
           :description => "",
           :type => 'string'
 
-attribute "kkafka/broker/log/retention/check/interval/attribute ms",
+attribute "kkafka/broker/log/retention/check/interval/ms",
           :description => "",
           :type => 'string'
 
-attribute "kkafka/broker/log/index/size/max/bytesattribute ",
+attribute "kkafka/broker/log/index/size/max/bytes",
           :description => "",
           :type => 'string'
 
@@ -155,6 +167,10 @@ attribute "kkafka/broker/leader/imbalance/per/broker/percentageattribute ",
           :type => 'string'
 
 attribute "kkafka/broker/log/dir",
+          :description => "",
+          :type => 'string'
+
+attribute "kkafka/broker/log/dirs",
           :description => "",
           :type => 'string'
 
@@ -215,6 +231,10 @@ attribute "kkafka/broker/replica/socket/timeout/ms",
           :type => 'string'
 
 attribute "kkafka/broker/request/timeout/ms",
+          :description => "",
+          :type => 'string'
+
+attribute "kkafka/broker/zookeeper/connection/timeout/ms",
           :description => "",
           :type => 'string'
 
