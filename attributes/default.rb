@@ -237,14 +237,15 @@ default['kkafka']['log4j']['loggers'] = {
   },
 }
 
+default['kkafka']['broker']['host']['name']                                           = ""
+default['kkafka']['broker']['broker']['id']                                           = 1
 default['kkafka']['broker']['advertised']['listeners']                                = ""
 default['kkafka']['broker']['port']                                                   = 9091
 default['kkafka']['broker']['inter']['broker']['listener']['name']                    = "INTERNAL"
 default['kkafka']['broker']['log']['retention']['hours']                              = 240
-default['kkafka']['broker']['log']['retention']['size']                               = "-1"
 default['kkafka']['broker']['num']['network']['threads']                              = 3
 default['kkafka']['broker']['num']['io']['threads']                                   = 8
-default['kkafka']['broker']['num']['recovery']['threads']['per']['data']['dir']          = 1
+default['kkafka']['broker']['num']['recovery']['threads']['per']['data']['dir']       = 1
 default['kkafka']['broker']['num']['replica']['fetchers']                             = 1
 default['kkafka']['broker']['queued']['max']['requests']                              = 500
 default['kkafka']['broker']['socket']['send']['buffer']['bytes']                      = 100 * 1024
@@ -260,7 +261,8 @@ default['kkafka']['broker']['log']['index']['size']['max']['bytes']             
 default['kkafka']['broker']['log']['index']['interval']['bytes']                      = "4096"
 default['kkafka']['broker']['log']['flush']['interval']['messages']                   = "9223372036854775807"
 default['kkafka']['broker']['log']['flush']['scheduler']['interval']['ms']            = 3000
-default['kkafka']['broker']['log']['flush']['interval']['ms']                         = 3000
+default['kkafka']['broker']['log']['flush']['interval']['ms']
+default['kkafka']['broker']['log']['message']['timestamp']['difference']['max']['ms'] = 604800000
 default['kkafka']['broker']['log']['message']['format']['version']                    = "#{node['kkafka']['version_properties']}"
 default['kkafka']['broker']['leader']['imbalance']['check']['interval']['seconds']    = 300
 default['kkafka']['broker']['leader']['imbalance']['per']['broker']['percentage']     = 10
@@ -306,11 +308,9 @@ default['kkafka']['broker']['principal']['builder']['class']                    
 default['kkafka']['broker']['allow']['everyone']['if']['no']['acl']['found']       = "false"
 default['kkafka']['broker']['delete']['topic']['enable']                        = "true"
 
-default['kkafka']['broker']['zookeeper']['synctime']['ms']                      = 6000
-default['kkafka']['broker']['zookeeper']['connectiontimeout']['ms']             = 60000
-default['kkafka']['broker']['zookeeper']['sessiontimeout']['ms']                = 6000
-default['kkafka']['broker']['zookeeper']['synctime']['ms']                      = 2000
-default['kkafka']['broker']['zookeeper']['session']['timeout']['ms']             = 6000
+default['kkafka']['broker']['zookeeper']['connection']['timeout']['ms']         = 30000
+default['kkafka']['broker']['zookeeper']['sync']['time']['ms']                  = 2000
+default['kkafka']['broker']['zookeeper']['session']['timeout']['ms']            = 30000
 default['kkafka']['broker']['zookeeper']['set']['acl']                          = "false"
 
 #HopsAclAuthorizer database pool properties
