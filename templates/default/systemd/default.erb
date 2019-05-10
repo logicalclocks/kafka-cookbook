@@ -1,5 +1,6 @@
 [Unit]
-Description=<%= @daemon_name %> daemon
+Description=<%= @daemon_name %> daemon 
+After = syslog.target network.target remote-fs.target <%= @deps %>
 
 [Service]
 User=<%= node['kkafka']['user'] %>
