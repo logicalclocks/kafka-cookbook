@@ -41,10 +41,6 @@ template ::File.join(node['kkafka']['config_dir'], 'server.properties') do
   end
 end
 
-deps = ""
-if exists_local("kzookeeper", "default")
-  deps = "zookeeper.service"
-end
 
 template kafka_init_opts['env_path'] do
   source kafka_init_opts.fetch(:env_template, 'env.erb')
@@ -57,6 +53,14 @@ template kafka_init_opts['env_path'] do
   if restart_on_configuration_change?
     notifies :create, 'ruby_block[coordinate-kafka-start]', :immediately
   end
+end
+
+deps = ""
+if exists_local("kzookeeper", "default")
+  deps = "zookeeper.service"
+end
+if exists_local("ndb", "mysqld")
+  deps += " mysqld.service"
 end
 
 template kafka_init_opts['script_path'] do
