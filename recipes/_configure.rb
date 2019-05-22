@@ -41,6 +41,11 @@ template ::File.join(node['kkafka']['config_dir'], 'server.properties') do
   end
 end
 
+deps = ""
+if exists_local("kzookeeper", "default")
+  deps = "zookeeper.service"
+end
+
 template kafka_init_opts['env_path'] do
   source kafka_init_opts.fetch(:env_template, 'env.erb')
   owner 'root'
@@ -60,6 +65,7 @@ template kafka_init_opts['script_path'] do
   group 'root'
   mode kafka_init_opts['permissions']
   variables({
+    deps: deps,              
     daemon_name: 'kafka',
     port: node['kkafka']['broker']['port'],
     user: node['kkafka']['user'],
