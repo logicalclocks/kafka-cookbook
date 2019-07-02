@@ -19,10 +19,6 @@ unless node['kkafka']['config_dir']
   node.default['kkafka']['config_dir'] = ::File.join(node['kkafka']['install_dir'], 'config')
 end
 
-unless node['kkafka']['version_install_dir']
-  node.default['kkafka']['version_install_dir'] = %(#{node['kkafka']['install_dir']}-#{node['kkafka']['version']})
-end
-
 unless broker_attribute?(:database, :type)
   node.default['kkafka']['broker']['database']['type'] = "mysql"
 end

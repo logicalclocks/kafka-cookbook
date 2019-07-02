@@ -48,7 +48,7 @@ default['kkafka']['install_dir'] = "#{node['kkafka']['dir']}/kafka"
 #
 # Directory where to install *this* version of Kafka.
 # For actual default value see `_defaults` recipe.
-default['kkafka']['version_install_dir'] = nil
+default['kkafka']['version_install_dir'] = %(#{node['kkafka']['install_dir']}-#{node['kkafka']['version']})
 
 #
 # Directory where the downloaded archive will be extracted to.
