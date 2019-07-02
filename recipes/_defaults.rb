@@ -3,10 +3,6 @@
 # Recipe:: _defaults
 #
 
-unless broker_attribute?(:broker, :id)
-  node.default['kkafka']['broker']['broker_id'] = node['ipaddress'].gsub('.', '').to_i % 2**31
-end
-
 unless broker_attribute?(:port)
   node.default['kkafka']['broker']['port'] = 6667
 end
@@ -35,6 +31,7 @@ unless broker_attribute?(:database, :url)
   mysql_host = private_recipe_ip("ndb","mysqld")
   node.default['kkafka']['broker']['database']['url'] = "#{mysql_host}:#{node['ndb']['mysql_port']}/hopsworks"
 end
+
 unless broker_attribute?(:database, :username)
   node.default['kkafka']['broker']['database']['username'] = node['mysql']['user']
 end

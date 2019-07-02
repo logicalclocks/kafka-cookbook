@@ -238,7 +238,7 @@ default['kkafka']['log4j']['loggers'] = {
 }
 
 default['kkafka']['broker']['host']['name']                                           = ""
-default['kkafka']['broker']['broker']['id']                                           = 1
+default['kkafka']['broker']['broker']['id']                                           = -1
 default['kkafka']['broker']['advertised']['listeners']                                = ""
 default['kkafka']['broker']['port']                                                   = 9091
 default['kkafka']['broker']['inter']['broker']['listener']['name']                    = "INTERNAL"
