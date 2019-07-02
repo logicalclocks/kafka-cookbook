@@ -36,7 +36,6 @@ if node['kkafka']['broker']['broker']['id'] == -1
 end
 
 include_recipe 'kkafka::_defaults'
-include_recipe 'kkafka::_setup'
 
 zk_ip = private_recipe_ip('kzookeeper', 'default')
 node.override['kkafka']['broker']['zookeeper']['connect'] = ["#{zk_ip}:#{node['kzookeeper']['config']['clientPort']}"]
