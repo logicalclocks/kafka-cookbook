@@ -39,7 +39,10 @@ include_recipe 'kkafka::_defaults'
 
 zk_ip = private_recipe_ip('kzookeeper', 'default')
 node.override['kkafka']['broker']['zookeeper']['connect'] = ["#{zk_ip}:#{node['kzookeeper']['config']['clientPort']}"]
-node.override['kkafka']['broker']['host']['name'] = my_ip
+
+if node['kkafka']['broker']['host']['name'].eql?("")
+  node.override['kkafka']['broker']['host']['name'] = my_ip
+end
 node.override['kkafka']['broker']['listeners'] = "INTERNAL://#{my_ip}:9091,EXTERNAL://#{my_ip}:9092"
 node.override['kkafka']['broker']['advertised']['listeners'] = "INTERNAL://#{my_ip}:9091,EXTERNAL://#{my_gateway_ip}:9092"
 
