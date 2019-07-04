@@ -46,8 +46,11 @@ if node['kkafka']['broker']['host']['name'].eql?("")
   node.override['kkafka']['broker']['host']['name'] = my_ip
 end
 
-node.override['kkafka']['broker']['listeners'] = "INTERNAL://#{hostname}:9091,EXTERNAL://#{hostname}:9092"
-node.override['kkafka']['broker']['advertised']['listeners'] = "INTERNAL://#{hostname}:9091,EXTERNAL://#{my_gateway_ip}:9092"
+broker_port_internal = node['kkafka']['broker']['port'].to_i
+broker_port_external = broker_port_internal + 1
+
+node.override['kkafka']['broker']['listeners'] = "INTERNAL://#{hostname}:#{broker_port_internal},EXTERNAL://#{hostname}:#{broker_port_external}"
+node.override['kkafka']['broker']['advertised']['listeners'] = "INTERNAL://#{hostname}:#{broker_port_internal},EXTERNAL://#{my_gateway_ip}:#{broker_port_external}"
 
 if node['kkafka']['systemd'] == "true"
   kagent_config "kafka" do
