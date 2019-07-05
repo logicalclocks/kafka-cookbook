@@ -48,7 +48,7 @@ default['kkafka']['install_dir'] = "#{node['kkafka']['dir']}/kafka"
 #
 # Directory where to install *this* version of Kafka.
 # For actual default value see `_defaults` recipe.
-default['kkafka']['version_install_dir'] = nil
+default['kkafka']['version_install_dir'] = %(#{node['kkafka']['install_dir']}-#{node['kkafka']['version']})
 
 #
 # Directory where the downloaded archive will be extracted to.
@@ -238,7 +238,7 @@ default['kkafka']['log4j']['loggers'] = {
 }
 
 default['kkafka']['broker']['host']['name']                                           = ""
-default['kkafka']['broker']['broker']['id']                                           = 1
+default['kkafka']['broker']['broker']['id']                                           = -1
 default['kkafka']['broker']['advertised']['listeners']                                = ""
 default['kkafka']['broker']['port']                                                   = 9091
 default['kkafka']['broker']['inter']['broker']['listener']['name']                    = "INTERNAL"
