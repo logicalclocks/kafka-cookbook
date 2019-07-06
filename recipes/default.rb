@@ -1,5 +1,8 @@
 require 'resolv'
 
+my_ip = my_private_ip()
+my_gateway_ip = my_gateway_ip()
+
 #
 # Get all the hostsnames for all hosts in the cluster
 #
@@ -19,65 +22,35 @@ end
 all_hosts = all_hosts + "User:#{node['kkafka']['user']}"
 node.override['kkafka']['broker']['super']['users'] = all_hosts
 
-
-case node['platform']
-when "ubuntu"
- if node['platform_version'].to_f <= 14.04
-   node.override['kkafka']['init_style'] = :sysv
- else
-   node.override['kkafka']['systemd'] = "false"
- end
-end
-
-group node['kkafka']['group'] do
-  action :create
-  not_if "getent group #{node['kkafka']['group']}"
-end
-
-user node['kkafka']['user'] do
-  action :create
-  gid node['kkafka']['group']
-  home "/home/#{node['kkafka']['user']}"
-  shell "/bin/bash"
-  manage_home true
-  system true
-  not_if "getent passwd #{node['kkafka']['user']}"
-end
-
-group node['kagent']['certs_group'] do
-  action :modify
-  members ["#{node['kkafka']['user']}"]
-  append true
-end
-
-include_recipe 'kkafka::_id'
-
 include_recipe "java"
 
-include_recipe 'kkafka::_defaults'
-include_recipe 'kkafka::_setup'
-include_recipe 'kkafka::_install'
-
-
-group node['kagent']['certs_group'] do
-  action :modify
-  members ["#{node['kkafka']['user']}"]
-  append true
+if node['kkafka']['broker']['broker']['id'] == -1 
+  id=1
+  for broker in node['kkafka']['default']['private_ips'].sort()
+    if my_ip.eql? broker 
+      Chef::Log.info "Found matching IP address in the list of kafka nodes: #{broker}. ID= #{id}"
+      node.override['kkafka']['broker']['broker']['id'] = id 
+    end
+    id += 1
+  end 
 end
 
+include_recipe 'kkafka::_defaults'
 
-#zk_ips = node['kzookeeper']['default']['private_ips'].join(:":2181/kafka,")
-#zk_ips = "#{zk_ips}:2181/kafka"
-#node.override.kkafka.broker.zookeeper.connect = ["#{zk_ips}"]
 zk_ip = private_recipe_ip('kzookeeper', 'default')
-node.override['kkafka']['broker']['zookeeper']['connect'] = ["#{zk_ip}:2181"]
-my_ip = my_private_ip()
-my_gateway_ip = my_gateway_ip()
+node.override['kkafka']['broker']['zookeeper']['connect'] = ["#{zk_ip}:#{node['kzookeeper']['config']['clientPort']}"]
 
-node.override['kkafka']['broker']['host']['name'] = my_ip
-#node.override.kkafka.broker.advertised.host.name = my_ip
-node.override['kkafka']['broker']['listeners'] = "INTERNAL://#{my_ip}:9091,EXTERNAL://#{my_ip}:9092"
-node.override['kkafka']['broker']['advertised']['listeners'] = "INTERNAL://#{my_ip}:9091,EXTERNAL://#{my_gateway_ip}:9092"
+hostname=node['kkafka']['broker']['host']['name']
+if node['kkafka']['broker']['host']['name'].eql?("") 
+  hostname = my_ip
+  node.override['kkafka']['broker']['host']['name'] = my_ip
+end
+
+broker_port_internal = node['kkafka']['broker']['port'].to_i
+broker_port_external = broker_port_internal + 1
+
+node.override['kkafka']['broker']['listeners'] = "INTERNAL://#{hostname}:#{broker_port_internal},EXTERNAL://#{hostname}:#{broker_port_external}"
+node.override['kkafka']['broker']['advertised']['listeners'] = "INTERNAL://#{hostname}:#{broker_port_internal},EXTERNAL://#{my_gateway_ip}:#{broker_port_external}"
 
 if node['kkafka']['systemd'] == "true"
   kagent_config "kafka" do
@@ -87,9 +60,6 @@ end
 
 include_recipe 'kkafka::_configure'
 
-include_recipe 'kkafka::_start'
-
-
 if node['kagent']['enabled'] == "true"
   kagent_config "kafka" do
     service "kafka"
@@ -97,32 +67,19 @@ if node['kagent']['enabled'] == "true"
   end
 end
 
-
 #
 # Disable kafka service, if node['services']['enabled'] is not set to true
 #
-if node['services']['enabled'] != "true"
-
-  if node['kkafka']['systemd'] == "true"
-
+if node['services']['enabled'] != "true" && node['kkafka']['systemd'] == "true"
     service "kafka" do
       provider Chef::Provider::Service::Systemd
       supports :restart => true, :stop => true, :start => true, :status => true
       action :disable
     end
+
     kagent_config "kafka" do
      action :systemd_reload
     end
-
-  else #sysv
-
-    service "kafka" do
-      provider Chef::Provider::Service::Init::Debian
-      supports :restart => true, :stop => true, :start => true, :status => true
-      action :disable
-    end
-  end
-
 end
 
 
