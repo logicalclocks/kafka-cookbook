@@ -288,48 +288,48 @@ default['kkafka']['broker']['log']['cleaner']['io']['buffer']['load']['factor'] 
 
 
 # values are: PLAINTEXT, SSL, SASL_PLAINTEXT, SASL_SSL
-#default['kkafka']['broker']['security']['inter']['broker']['protocol']           = "SSL"
-default['kkafka']['broker']['inter']['broker']['protocol']['version']            = node['kkafka']['version_properties']
-default['kkafka']['broker']['broker']['rack']                                    = node['kkafka']['broker']['rack']['id']
-default['kkafka']['broker']['listener']['security']['protocol']['map']           = "INTERNAL:SSL,EXTERNAL:SSL"
+#default['kkafka']['broker']['security']['inter']['broker']['protocol']               = "SSL"
+default['kkafka']['broker']['inter']['broker']['protocol']['version']                 = node['kkafka']['version_properties']
+default['kkafka']['broker']['broker']['rack']                                         = node['kkafka']['broker']['rack']['id']
+default['kkafka']['broker']['listener']['security']['protocol']['map']                = "INTERNAL:SSL,EXTERNAL:SSL"
 
 # required, requested, none
-default['kkafka']['broker']['ssl']['client']['auth']                            = "required"
-default['kkafka']['broker']['ssl']['keystore']['location']                      = "#{node['kagent']['keystore_dir']}/#{node['fqdn']}__kstore.jks"
-default['kkafka']['broker']['ssl']['keystore']['password']                      = node['hopsworks']['master']['password']
-default['kkafka']['broker']['ssl']['key']['password']			        = node['hopsworks']['master']['password']
-default['kkafka']['broker']['ssl']['truststore']['location']                    = "#{node['kagent']['keystore_dir']}/#{node['fqdn']}__tstore.jks"
-default['kkafka']['broker']['ssl']['truststore']['password']                    = node['hopsworks']['master']['password']
+default['kkafka']['broker']['ssl']['client']['auth']                                  = "required"
+default['kkafka']['broker']['ssl']['keystore']['location']                            = node['install']['localhost'].casecmp?("true") ? "#{node['kagent']['keystore_dir']}/localhost__kstore.jks" : "#{node['kagent']['keystore_dir']}/#{node['fqdn']}__kstore.jks"
+default['kkafka']['broker']['ssl']['keystore']['password']                            = node['hopsworks']['master']['password']
+default['kkafka']['broker']['ssl']['key']['password']                                 = node['hopsworks']['master']['password']
+default['kkafka']['broker']['ssl']['truststore']['location']                          = node['install']['localhost'].casecmp?("true") ?  "#{node['kagent']['keystore_dir']}/localhost__tstore.jks" : "#{node['kagent']['keystore_dir']}/#{node['fqdn']}__tstore.jks"
+default['kkafka']['broker']['ssl']['truststore']['password']                          = node['hopsworks']['master']['password']
 
 # TODO - HopsWorks implementations needed
-default['kkafka']['broker']['authorizer']['class']['name']                      = "io.hops.kafka.HopsAclAuthorizer"
-default['kkafka']['broker']['ssl']['endpoint']['identification']['algorithm']    = ""
-default['kkafka']['broker']['principal']['builder']['class']                    = "io.hops.kafka.HopsPrincipalBuilder"
-default['kkafka']['broker']['allow']['everyone']['if']['no']['acl']['found']       = "false"
-default['kkafka']['broker']['delete']['topic']['enable']                        = "true"
+default['kkafka']['broker']['authorizer']['class']['name']                            = "io.hops.kafka.HopsAclAuthorizer"
+default['kkafka']['broker']['ssl']['endpoint']['identification']['algorithm']         = ""
+default['kkafka']['broker']['principal']['builder']['class']                          = "io.hops.kafka.HopsPrincipalBuilder"
+default['kkafka']['broker']['allow']['everyone']['if']['no']['acl']['found']          = "false"
+default['kkafka']['broker']['delete']['topic']['enable']                              = "true"
 
-default['kkafka']['broker']['zookeeper']['connection']['timeout']['ms']         = 30000
-default['kkafka']['broker']['zookeeper']['sync']['time']['ms']                  = 2000
-default['kkafka']['broker']['zookeeper']['session']['timeout']['ms']            = 30000
-default['kkafka']['broker']['zookeeper']['set']['acl']                          = "false"
+default['kkafka']['broker']['zookeeper']['connection']['timeout']['ms']               = 30000
+default['kkafka']['broker']['zookeeper']['sync']['time']['ms']                        = 2000
+default['kkafka']['broker']['zookeeper']['session']['timeout']['ms']                  = 30000
+default['kkafka']['broker']['zookeeper']['set']['acl']                                = "false"
 
 #HopsAclAuthorizer database pool properties
-default['kkafka']['broker']['database']['pool']['prepstmt']['cache']['enabled']   = "true"
-default['kkafka']['broker']['database']['pool']['prepstmt']['cache']['size']      = "150"
-default['kkafka']['broker']['database']['pool']['prepstmt']['cache']['sql']['limit'] = "2048"
-default['kkafka']['broker']['database']['pool']['size']                         = "10"
-default['kkafka']['broker']['acl']['polling']['frequency']['ms']                = "1000"
+default['kkafka']['broker']['database']['pool']['prepstmt']['cache']['enabled']       = "true"
+default['kkafka']['broker']['database']['pool']['prepstmt']['cache']['size']          = "150"
+default['kkafka']['broker']['database']['pool']['prepstmt']['cache']['sql']['limit']  = "2048"
+default['kkafka']['broker']['database']['pool']['size']                               = "10"
+default['kkafka']['broker']['acl']['polling']['frequency']['ms']                      = "1000"
 
 if node['vagrant'] == "false"
-  default['kkafka']['broker']['super']['users']                                = "User:#{node['fqdn']};User:#{node['kkafka']['user']}"
+  default['kkafka']['broker']['super']['users']                                       = "User:#{node['fqdn']};User:#{node['kkafka']['user']}"
 else
-  default['kkafka']['broker']['super']['users']                                = "User:hopsworks0;User:#{node['kkafka']['user']}"
+  default['kkafka']['broker']['super']['users']                                       = "User:hopsworks0;User:#{node['kkafka']['user']}"
 end
 
 
-default['kkafka']['offset_monitor']['version']                            = "0.2.1"
-default['kkafka']['offset_monitor']['url']                                = "http://snurran.sics.se/hops/KafkaOffsetMonitor-assembly-" + node['kkafka']['offset_monitor']['version'] + ".jar"
-default['kkafka']['offset_monitor']['port']                               = "11111"
+default['kkafka']['offset_monitor']['version']                                        = "0.2.1"
+default['kkafka']['offset_monitor']['url']                                            = "http://snurran.sics.se/hops/KafkaOffsetMonitor-assembly-" + node['kkafka']['offset_monitor']['version'] + ".jar"
+default['kkafka']['offset_monitor']['port']                                           = "11111"
 
 
-default['kkafka']['systemd']                                           = "true"
+default['kkafka']['systemd']                                                          = "true"
