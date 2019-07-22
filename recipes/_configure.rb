@@ -6,7 +6,7 @@
 directory node['kkafka']['config_dir'] do
   owner node['kkafka']['user']
   group node['kkafka']['group']
-  mode '755'
+  mode '750'
   recursive true
 end
 
@@ -14,7 +14,7 @@ template ::File.join(node['kkafka']['config_dir'], 'log4j.properties') do
   source 'log4j.properties.erb'
   owner node['kkafka']['user']
   group node['kkafka']['group']
-  mode '644'
+  mode '640'
   helpers(Kafka::Log4J)
   variables({
     config: node['kkafka']['log4j'],
@@ -28,7 +28,7 @@ template ::File.join(node['kkafka']['config_dir'], 'server.properties') do
   source 'server.properties.erb'
   owner node['kkafka']['user']
   group node['kkafka']['group']
-  mode '644'
+  mode '640'
   helper :config do
     node['kkafka']['broker'].sort_by(&:first)
   end
@@ -46,13 +46,35 @@ template kafka_init_opts['env_path'] do
   source kafka_init_opts.fetch(:env_template, 'env.erb')
   owner 'root'
   group 'root'
-  mode '644'
+  mode '640'
   variables({
     main_class: 'kafka.Kafka',
   })
   if restart_on_configuration_change?
     notifies :create, 'ruby_block[coordinate-kafka-start]', :immediately
   end
+end
+
+file "#{node['kkafka']['config_dir']}/jmxremote.password" do 
+  owner node['kkafka']['user']
+  group node['kkafka']['group']
+  mode '640'
+  content "#{node['kkafka']['jmx_user']} #{node['kkafka']['jmx_password']}"  
+end
+
+file "#{node['kkafka']['config_dir']}/jmxremote.access" do 
+  owner node['kkafka']['user']
+  group node['kkafka']['group']
+  mode '640'
+  content "#{node['kkafka']['jmx_user']} readWrite" 
+end
+
+cookbook_file "#{node['kkafka']['config_dir']}/kafka.yaml" do
+  owner node['kkafka']['user']
+  group node['kkafka']['group']
+  source 'kafka.yaml'
+  mode '0750'
+  action :create
 end
 
 deps = ""
