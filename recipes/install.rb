@@ -68,3 +68,15 @@ kkafka_install node['kkafka']['version_install_dir'] do
   from kafka_target_path
   not_if { kafka_installed? }
 end
+
+# Download JMX exporter
+jmx_prometheus_filename = File.basename(node['kkafka']['jmx']['prometheus_exporter']['url'])
+remote_file "#{node['kkafka']['libs_dir']}/#{jmx_prometheus_filename}" do
+  source node['kkafka']['jmx']['prometheus_exporter']['url']
+  owner node['kkafka']['user']
+  group node['kkafka']['group']
+  mode '0755'
+  action :create
+end
+
+

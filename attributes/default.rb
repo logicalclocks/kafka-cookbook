@@ -80,14 +80,14 @@ default['kkafka']['jmx_password']             = "kafkaAdmin"
 
 #
 # JMX configuration options for Kafka.
-default['kkafka']['jmx_opts'] = %w[
-  -javaagent:#{node['kkafka']['libs_dir']}/jmx_prometheus_javaagent-#{node['kkafka']['jmx']['prometheus_exporter']['version']}.jar=#{node['kkafka']['metrics_port']}:#{node['kkafka']['config_dir']}/kafka.yaml 
-  -Dcom.sun.management.jmxremote
-  -Dcom.sun.management.jmxremote.authenticate=true
-  -Dcom.sun.management.jmxremote.password.file=#{node['kkafka']['config_dir']}/jmxremote.password
-  -Dcom.sun.management.jmxremote.access.file=#{node['kkafka']['config_dir']}/jmxremote.access
-  -Dcom.sun.management.jmxremote.ssl=false
-  -Djava.net.preferIPv4Stack=true
+default['kkafka']['jmx_opts'] = [
+  "-javaagent:#{node['kkafka']['libs_dir']}/jmx_prometheus_javaagent-#{node['kkafka']['jmx']['prometheus_exporter']['version']}.jar=#{node['kkafka']['metrics_port']}:#{node['kkafka']['config_dir']}/kafka.yaml",
+  "-Dcom.sun.management.jmxremote",
+  "-Dcom.sun.management.jmxremote.authenticate=true",
+  "-Dcom.sun.management.jmxremote.password.file=#{node['kkafka']['config_dir']}/jmxremote.password",
+  "-Dcom.sun.management.jmxremote.access.file=#{node['kkafka']['config_dir']}/jmxremote.access",
+  "-Dcom.sun.management.jmxremote.ssl=false",
+  "-Djava.net.preferIPv4Stack=true"
 ].join(' ')
 
 #
