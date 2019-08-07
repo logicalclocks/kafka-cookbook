@@ -207,6 +207,16 @@ default['kkafka']['log4j']['appenders'] = {
       conversion_pattern: '[%d] %p %m (%c)%n',
     },
   },
+  'authorizerAppender' => {
+    type: 'org.apache.log4j.RollingFileAppender',
+    file: lazy { %(#{node['kkafka']['log_dir']}/kafka-authorizer.log) },
+    Max_File_Size: '128MB',
+     Max_Backup_Index: '2',
+    layout: {
+      type: 'org.apache.log4j.PatternLayout',
+      conversion_pattern: '[%d] %p %m (%c)%n',
+    },
+  },
 }
 
 #
@@ -233,6 +243,11 @@ default['kkafka']['log4j']['loggers'] = {
   'state.change.logger' => {
     level: 'INFO',
     appender: 'stateChangeAppender',
+    additivity: false,
+  },
+  'kafka.authorizer.logger' => {
+    level: 'WARN',
+    appender: 'authorizerAppender',
     additivity: false,
   },
 }
