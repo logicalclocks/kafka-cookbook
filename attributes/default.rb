@@ -25,7 +25,7 @@ default['kkafka']['scala_version'] = '2.11'
 #'http://snurran.sics.se/hops'
 default['kkafka']['base_url'] = node['download_url']
 default['kkafka']['download_url'] = kafka_download_uri(kafka_tar_gz)
-default['kkafka']['authorizer_download_url'] = kafka_download_uri("hops-kafka-authorizer-#{node['kkafka']['authorizer_version']}.jar")
+default['kkafka']['authorizer_download_url'] =  "#{node['download_url']}/hops-kafka-authorizer/#{node['kkafka']['authorizer_version']}/hops-kafka-authorizer-#{node['kkafka']['authorizer_version']}.jar"
 
 #
 # SHA-256 checksum of the archive to download, used by Chef's `remote_file`
