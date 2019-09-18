@@ -56,24 +56,38 @@ default['kkafka']['build_dir'] = ::File.join(Dir.tmpdir, 'kafka-build')
 
 #
 # Directory where to store logs from Kafka.
-default['kkafka']['log_dir'] = "#{node['kkafka']['install_dir']}/" + "logs"
+default['kkafka']['log_dir'] = "#{node['kkafka']['install_dir']}/logs"
+
+#
+# Directory where to store kafka libs 
+default['kkafka']['libs_dir'] = "#{node['kkafka']['install_dir']}/libs" 
 
 #
 # Directory where to keep Kafka configuration files. For the
 # actual default value see `_defaults` recipe.
-default['kkafka']['config_dir'] = nil
+default['kkafka']['config_dir'] = "#{node['kkafka']['install_dir']}/config"
+
+# JXM prometheus monitoring 
+default['kkafka']['jmx']['prometheus_exporter']['version']    = "0.12.0"
+default['kkafka']['jmx']['prometheus_exporter']['url']        = "#{node['download_url']}/prometheus/jmx_prometheus_javaagent-#{node['kkafka']['jmx']['prometheus_exporter']['version']}.jar"
+default['kkafka']['metrics_port']                             = "19901"
 
 #
 # JMX port for Kafka.
-default['kkafka']['jmx_port'] = 19999
+default['kkafka']['jmx_port']                 = 19999
+default['kkafka']['jmx_user']                 = "kafkaAdmin"
+default['kkafka']['jmx_password']             = "kafkaAdmin"
 
 #
 # JMX configuration options for Kafka.
-default['kkafka']['jmx_opts'] = %w[
-  -Dcom.sun.management.jmxremote
-  -Dcom.sun.management.jmxremote.authenticate=false
-  -Dcom.sun.management.jmxremote.ssl=false
-  -Djava.net.preferIPv4Stack=true
+default['kkafka']['jmx_opts'] = [
+  "-javaagent:#{node['kkafka']['libs_dir']}/jmx_prometheus_javaagent-#{node['kkafka']['jmx']['prometheus_exporter']['version']}.jar=#{node['kkafka']['metrics_port']}:#{node['kkafka']['config_dir']}/kafka.yaml",
+  "-Dcom.sun.management.jmxremote",
+  "-Dcom.sun.management.jmxremote.authenticate=true",
+  "-Dcom.sun.management.jmxremote.password.file=#{node['kkafka']['config_dir']}/jmxremote.password",
+  "-Dcom.sun.management.jmxremote.access.file=#{node['kkafka']['config_dir']}/jmxremote.access",
+  "-Dcom.sun.management.jmxremote.ssl=false",
+  "-Djava.net.preferIPv4Stack=true"
 ].join(' ')
 
 #
@@ -343,7 +357,7 @@ end
 
 
 default['kkafka']['offset_monitor']['version']                                        = "0.2.1"
-default['kkafka']['offset_monitor']['url']                                            = "http://snurran.sics.se/hops/KafkaOffsetMonitor-assembly-" + node['kkafka']['offset_monitor']['version'] + ".jar"
+default['kkafka']['offset_monitor']['url']                                            = "#{node['download_url']}/KafkaOffsetMonitor-assembly-" + node['kkafka']['offset_monitor']['version'] + ".jar"
 default['kkafka']['offset_monitor']['port']                                           = "11111"
 
 
