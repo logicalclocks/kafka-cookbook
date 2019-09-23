@@ -1,6 +1,7 @@
 group node['kkafka']['group'] do
   action :create
   not_if "getent group #{node['kkafka']['group']}"
+  not_if { node['install']['external_users'].casecmp("true") == 0 }
 end
 
 user node['kkafka']['user'] do
@@ -11,17 +12,20 @@ user node['kkafka']['user'] do
   manage_home true
   system true
   not_if "getent passwd #{node['kkafka']['user']}"
+  not_if { node['install']['external_users'].casecmp("true") == 0 }
 end
 
 group node['kagent']['certs_group'] do
   action :create
   not_if "getent group #{node['kagent']['certs_group']}"
+  not_if { node['install']['external_users'].casecmp("true") == 0 }
 end
 
 group node['kagent']['certs_group'] do
   action :modify
   members ["#{node['kkafka']['user']}"]
   append true
+  ot_if { node['install']['external_users'].casecmp("true") == 0 }
 end
 
 [
