@@ -25,7 +25,7 @@ group node['kagent']['certs_group'] do
   action :modify
   members ["#{node['kkafka']['user']}"]
   append true
-  ot_if { node['install']['external_users'].casecmp("true") == 0 }
+  not_if { node['install']['external_users'].casecmp("true") == 0 }
 end
 
 [
