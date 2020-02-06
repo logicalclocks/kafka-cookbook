@@ -23,18 +23,6 @@ all_hosts = all_hosts + "User:#{node['kkafka']['user']}"
 node.override['kkafka']['broker']['super']['users'] = all_hosts
 
 include_recipe "java"
-
-if node['kkafka']['broker']['broker']['id'] == -1 
-  id=1
-  for broker in node['kkafka']['default']['private_ips'].sort()
-    if my_ip.eql? broker 
-      Chef::Log.info "Found matching IP address in the list of kafka nodes: #{broker}. ID= #{id}"
-      node.override['kkafka']['broker']['broker']['id'] = id 
-    end
-    id += 1
-  end 
-end
-
 include_recipe 'kkafka::_defaults'
 
 zk_ip = private_recipe_ip('kzookeeper', 'default')
@@ -47,10 +35,20 @@ if node['kkafka']['broker']['host']['name'].eql?("")
 end
 
 broker_port_internal = node['kkafka']['broker']['port'].to_i
-broker_port_external = broker_port_internal + 1
 
-node.override['kkafka']['broker']['listeners'] = "INTERNAL://#{hostname}:#{broker_port_internal},EXTERNAL://#{hostname}:#{broker_port_external}"
-node.override['kkafka']['broker']['advertised']['listeners'] = "INTERNAL://#{hostname}:#{broker_port_internal},EXTERNAL://#{my_gateway_ip}:#{broker_port_external}"
+if node['kkafka']['broker']['broker']['id'] == -1
+  id=1
+  for broker in node['kkafka']['default']['private_ips'].sort()
+    if my_ip.eql? broker
+      Chef::Log.info "Found matching IP address in the list of kafka nodes: #{broker}. ID= #{id}"
+      node.override['kkafka']['broker']['broker']['id'] = id
+      broker_port_external = broker_port_internal + id
+      node.override['kkafka']['broker']['listeners'] = "INTERNAL://#{hostname}:#{broker_port_internal},EXTERNAL://#{hostname}:#{broker_port_external}"
+      node.override['kkafka']['broker']['advertised']['listeners'] = "INTERNAL://#{hostname}:#{broker_port_internal},EXTERNAL://#{my_gateway_ip}:#{broker_port_external}"
+    end
+    id += 1
+  end
+end
 
 if node['kkafka']['systemd'] == "true"
   kagent_config "kafka" do
