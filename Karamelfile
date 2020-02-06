@@ -7,3 +7,4 @@ dependencies:
     global:
       - kzookeeper::default
       - kagent::default
+      - hopsworks::default

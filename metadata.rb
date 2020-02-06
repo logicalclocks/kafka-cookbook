@@ -17,6 +17,7 @@ depends "kzookeeper"
 depends "ndb"
 depends "java"
 depends "conda"
+depends "hopsworks"
 
 %w{ ubuntu debian rhel centos }.each do |os|
   supports os
