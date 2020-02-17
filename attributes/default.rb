@@ -330,7 +330,6 @@ default['kkafka']['broker']['ssl']['key']['password']                           
 default['kkafka']['broker']['ssl']['truststore']['location']                          = node['install']['localhost'].casecmp?("true") ?  "#{node['kagent']['keystore_dir']}/localhost__tstore.jks" : "#{node['kagent']['keystore_dir']}/#{node['fqdn']}__tstore.jks"
 default['kkafka']['broker']['ssl']['truststore']['password']                          = node['hopsworks']['master']['password']
 
-# TODO - HopsWorks implementations needed
 default['kkafka']['broker']['authorizer']['class']['name']                            = "io.hops.kafka.HopsAclAuthorizer"
 default['kkafka']['broker']['ssl']['endpoint']['identification']['algorithm']         = ""
 default['kkafka']['broker']['principal']['builder']['class']                          = "io.hops.kafka.HopsPrincipalBuilder"
@@ -348,6 +347,10 @@ default['kkafka']['broker']['database']['pool']['prepstmt']['cache']['size']    
 default['kkafka']['broker']['database']['pool']['prepstmt']['cache']['sql']['limit']  = "2048"
 default['kkafka']['broker']['database']['pool']['size']                               = "10"
 default['kkafka']['broker']['acl']['polling']['frequency']['ms']                      = "1000"
+
+# Usernames and passwords of non-superusers in MySQL
+default['kkafka']['mysql']['user']                                                    = "kafka"
+default['kkafka']['mysql']['password']                                                = "kafka"
 
 if node['vagrant'] == "false"
   default['kkafka']['broker']['super']['users']                                       = "User:#{node['fqdn']};User:#{node['kkafka']['user']}"
