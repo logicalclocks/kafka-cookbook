@@ -29,8 +29,8 @@ unless broker_attribute?(:database, :url)
 end
 
 unless broker_attribute?(:database, :username)
-  node.default['kkafka']['broker']['database']['username'] = node['kafka']['mysql']['user']
+  node.default['kkafka']['broker']['database']['username'] = node['kkafka']['mysql']['user']
 end
 unless broker_attribute?(:database, :password)
-  node.default['kkafka']['broker']['database']['password'] = node['kafka']['mysql']['password']
+  node.default['kkafka']['broker']['database']['password'] = node['kkafka']['mysql']['password']
 end
