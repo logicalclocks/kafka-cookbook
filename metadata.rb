@@ -347,6 +347,14 @@ attribute "kkafka/broker/acl/polling/frequency/ms",
           :description => "Polling frequency of HopsKafkaAuthorizer to retrieve ACLs",
           :type => 'string'
 
+attribute "kkafka/mysql/user",
+          :description => "DB user for the Kafka service",
+          :type => 'string'
+
+attribute "kkafka/mysql/password",
+          :description => "Password of the DB user for the Kafka service",
+          :type => 'string'
+
 attribute "kkafka/default/private_ips",
           :description => "Set ip addresses",
           :type => "array"
