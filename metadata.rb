@@ -12,10 +12,11 @@ recipe            "kkafka::monitor", "Helper webapp to monitor performance of ka
 recipe            "kkafka::client", "Kafka client installation"
 recipe            "kkafka::purge", "Removes and deletes Kafka"
 
+depends "java", '~> 7.0.0'
+depends 'scala', '~> 2.1.0'
 depends "kagent"
 depends "kzookeeper"
 depends "ndb"
-depends "java"
 depends "conda"
 depends "hopsworks"
 
