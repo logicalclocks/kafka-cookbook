@@ -14,11 +14,6 @@ recipe            "kkafka::purge", "Removes and deletes Kafka"
 
 depends "java", '~> 7.0.0'
 depends 'scala', '~> 2.1.0'
-depends "kagent"
-depends "kzookeeper"
-depends "ndb"
-depends "conda"
-depends "hopsworks"
 
 %w{ ubuntu debian rhel centos }.each do |os|
   supports os
