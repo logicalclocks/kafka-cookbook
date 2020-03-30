@@ -12,12 +12,8 @@ recipe            "kkafka::monitor", "Helper webapp to monitor performance of ka
 recipe            "kkafka::client", "Kafka client installation"
 recipe            "kkafka::purge", "Removes and deletes Kafka"
 
-depends "kagent"
-depends "kzookeeper"
-depends "ndb"
-depends "java"
-depends "conda"
-depends "hopsworks"
+depends "java", '~> 7.0.0'
+depends 'scala', '~> 2.1.0'
 
 %w{ ubuntu debian rhel centos }.each do |os|
   supports os
