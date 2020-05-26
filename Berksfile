@@ -6,5 +6,4 @@ cookbook 'kagent', github: "logicalclocks/kagent-chef", branch: "master"
 cookbook 'ndb', github: "logicalclocks/ndb-chef", branch: "master"
 cookbook 'conda', github: "logicalclocks/conda-chef", branch: "master"
 cookbook 'kzookeeper', github: "logicalclocks/kzookeeper", branch: "master"
-
-
+cookbook 'hops', github: "logicalclocks/kzookeeper", branch: "master"
