@@ -80,4 +80,10 @@ if node['services']['enabled'] != "true" && node['kkafka']['systemd'] == "true"
     end
 end
 
-
+if service_discovery_enabled()
+  # Register Kafka with Consul
+  consul_service "Registering Kafka with Consul" do
+    service_definition "kafka-consul.hcl.erb"
+    action :register
+  end
+end 
