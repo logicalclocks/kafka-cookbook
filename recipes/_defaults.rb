@@ -24,8 +24,7 @@ unless broker_attribute?(:database, :type)
 end
 
 unless broker_attribute?(:database, :url)
-  mysql_host = private_recipe_ip("ndb","mysqld")
-  node.default['kkafka']['broker']['database']['url'] = "#{mysql_host}:#{node['ndb']['mysql_port']}/hopsworks"
+  node.default['kkafka']['broker']['database']['url'] = "127.0.0.1:#{node['ndb']['mysql_port']}/hopsworks"
 end
 
 unless broker_attribute?(:database, :username)
