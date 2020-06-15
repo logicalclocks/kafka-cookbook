@@ -1,5 +1,7 @@
 require 'resolv'
 
+Chef::Recipe.send(:include, Hops::Helpers)
+
 my_ip = my_private_ip()
 my_gateway_ip = my_gateway_ip()
 
@@ -17,8 +19,8 @@ for h in node['kagent']['default']['private_ips']
   rescue
     hostname = dnsr.getname(h).to_s()
   end
-  all_hosts = all_hosts + "User:" + hostname + ";"  
-end  
+  all_hosts = all_hosts + "User:" + hostname + ";"
+end
 all_hosts = all_hosts + "User:#{node['kkafka']['user']}"
 node.override['kkafka']['broker']['super']['users'] = all_hosts
 
@@ -29,7 +31,7 @@ zk_ip = private_recipe_ip('kzookeeper', 'default')
 node.override['kkafka']['broker']['zookeeper']['connect'] = ["#{zk_ip}:#{node['kzookeeper']['config']['clientPort']}"]
 
 hostname=node['kkafka']['broker']['host']['name']
-if node['kkafka']['broker']['host']['name'].eql?("") 
+if node['kkafka']['broker']['host']['name'].eql?("")
   hostname = my_ip
   node.override['kkafka']['broker']['host']['name'] = my_ip
 end
@@ -80,4 +82,10 @@ if node['services']['enabled'] != "true" && node['kkafka']['systemd'] == "true"
     end
 end
 
-
+if service_discovery_enabled()
+  # Register Kafka with Consul
+  consul_service "Registering Kafka with Consul" do
+    service_definition "kafka-consul.hcl.erb"
+    action :register
+  end
+end
