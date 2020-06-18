@@ -36,6 +36,10 @@ attribute "kkafka/user",
           :description => "user to run kafka as",
           :type => 'string'
 
+attribute "kkafka/user-home",
+          :description => "Home directory of kafka user",
+          :type => 'string'
+
 attribute "kkafka/group",
           :description => "group to run kafka as",
           :type => 'string'

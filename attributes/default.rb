@@ -93,6 +93,7 @@ default['kkafka']['jmx_opts'] = [
 #
 # User for directories, configuration files and running Kafka.
 default['kkafka']['user'] = node['install']['user'].empty? ? 'kafka' : node['install']['user']
+default['kkafka']['user-home'] = "/home/#{node['kkafka']['user']}"
 
 #
 # Group for directories, configuration files and running Kafka.
@@ -321,14 +322,6 @@ default['kkafka']['broker']['log']['cleaner']['io']['buffer']['load']['factor'] 
 default['kkafka']['broker']['inter']['broker']['protocol']['version']                 = node['kkafka']['version_properties']
 default['kkafka']['broker']['broker']['rack']                                         = node['kkafka']['broker']['rack']['id']
 default['kkafka']['broker']['listener']['security']['protocol']['map']                = "INTERNAL:SSL,EXTERNAL:SSL"
-
-# required, requested, none
-default['kkafka']['broker']['ssl']['client']['auth']                                  = "required"
-default['kkafka']['broker']['ssl']['keystore']['location']                            = node['install']['localhost'].casecmp?("true") ? "#{node['kagent']['keystore_dir']}/localhost__kstore.jks" : "#{node['kagent']['keystore_dir']}/#{node['fqdn']}__kstore.jks"
-default['kkafka']['broker']['ssl']['keystore']['password']                            = node['hopsworks']['master']['password']
-default['kkafka']['broker']['ssl']['key']['password']                                 = node['hopsworks']['master']['password']
-default['kkafka']['broker']['ssl']['truststore']['location']                          = node['install']['localhost'].casecmp?("true") ?  "#{node['kagent']['keystore_dir']}/localhost__tstore.jks" : "#{node['kagent']['keystore_dir']}/#{node['fqdn']}__tstore.jks"
-default['kkafka']['broker']['ssl']['truststore']['password']                          = node['hopsworks']['master']['password']
 
 default['kkafka']['broker']['authorizer']['class']['name']                            = "io.hops.kafka.HopsAclAuthorizer"
 default['kkafka']['broker']['ssl']['endpoint']['identification']['algorithm']         = ""
