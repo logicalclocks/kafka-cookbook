@@ -11,7 +11,7 @@ group node['kkafka']['group'] do
   not_if { node['install']['external_users'].casecmp("true") == 0 }
 end
 
-hopsworks_alt_url = "https://#{private_recipe_ip("hopsworks","default")}:8181" 
+hopsworks_alt_url = "https://#{private_recipe_ip("hopsworks","default")}:8181"
 if node.attribute? "hopsworks"
   if node["hopsworks"].attribute? "https" and node["hopsworks"]['https'].attribute? ('port')
     hopsworks_alt_url = "https://#{private_recipe_ip("hopsworks","default")}:#{node['hopsworks']['https']['port']}"
@@ -24,7 +24,7 @@ kagent_hopsify "Generate x.509" do
   crypto_directory crypto_dir
   hopsworks_alt_url hopsworks_alt_url
   action :generate_x509
-  not_if { conda_helpers.is_upgrade || node["kagent"]["enabled"] == "false" }
+  not_if { node["kagent"]["enabled"] == "false" }
 end
 
 kstore_name, tstore_name = x509_helper.get_user_keystores_name(node['kkafka']['user'])
@@ -88,18 +88,18 @@ template kafka_init_opts['env_path'] do
   end
 end
 
-file "#{node['kkafka']['config_dir']}/jmxremote.password" do 
+file "#{node['kkafka']['config_dir']}/jmxremote.password" do
   owner node['kkafka']['user']
   group node['kkafka']['group']
   mode '600'
-  content "#{node['kkafka']['jmx_user']} #{node['kkafka']['jmx_password']}"  
+  content "#{node['kkafka']['jmx_user']} #{node['kkafka']['jmx_password']}"
 end
 
-file "#{node['kkafka']['config_dir']}/jmxremote.access" do 
+file "#{node['kkafka']['config_dir']}/jmxremote.access" do
   owner node['kkafka']['user']
   group node['kkafka']['group']
   mode '600'
-  content "#{node['kkafka']['jmx_user']} readwrite" 
+  content "#{node['kkafka']['jmx_user']} readwrite"
 end
 
 cookbook_file "#{node['kkafka']['config_dir']}/kafka.yaml" do
@@ -124,7 +124,7 @@ template kafka_init_opts['script_path'] do
   group 'root'
   mode kafka_init_opts['permissions']
   variables({
-    deps: deps,              
+    deps: deps,
     daemon_name: 'kafka',
     port: node['kkafka']['broker']['port'],
     user: node['kkafka']['user'],
