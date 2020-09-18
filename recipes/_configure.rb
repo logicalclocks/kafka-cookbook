@@ -140,6 +140,14 @@ template kafka_init_opts['script_path'] do
   end
 end
 
+bash "remove_old_authorizer" do
+  user "root"
+  cwd "#{node['kkafka']['libs_dir']}"
+  code <<-EOF
+    set -e
+    rm -f hops-kafka-authorizer-*.jar
+  EOF
+end
 
 remote_file "#{node['kkafka']['install_dir']}/libs/hops-kafka-authorizer-#{node['kkafka']['authorizer_version']}.jar" do
   source node['kkafka']['authorizer_download_url']
