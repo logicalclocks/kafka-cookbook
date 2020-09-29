@@ -27,15 +27,8 @@ node.override['kkafka']['broker']['super']['users'] = all_hosts
 include_recipe "java"
 include_recipe 'kkafka::_defaults'
 
-zk_ip = ""
-# Set IP of local zookeeper node if it is installed
-# Otherwise pick first one from private_ips
-if exists_local("kzookeeper", "default")
-  zk_ip = my_ip
-else
-  zk_ip = private_recipe_ip('kzookeeper', 'default')
-end
-node.override['kkafka']['broker']['zookeeper']['connect'] = ["#{zk_ip}:#{node['kzookeeper']['config']['clientPort']}"]
+zookeeper_fqdn = consul_helper.get_service_fqdn("zookeeper")
+node.override['kkafka']['broker']['zookeeper']['connect'] = ["#{zookeeper_fqdn}:#{node['kzookeeper']['config']['clientPort']}"]
 
 hostname=node['kkafka']['broker']['host']['name']
 if node['kkafka']['broker']['host']['name'].eql?("")
