@@ -1,6 +1,8 @@
 [Unit]
 Description=<%= @daemon_name %> daemon 
 After = syslog.target network.target remote-fs.target <%= @deps %>
+StartLimitIntervalSec=120
+StartLimitBurst=15
 
 [Service]
 User=<%= node['kkafka']['user'] %>
@@ -8,6 +10,8 @@ EnvironmentFile=<%= @env_path %>
 ExecStart=/bin/bash $KAFKA_RUN $KAFKA_ARGS $KAFKA_CONFIG
 TimeoutSec=10
 TimeoutStopSec=<%= @kill_timeout %>
+Restart=on-failure
+RestartSec=5
 <% if @ulimit %>
 LimitNOFILE=<%= @ulimit %>
 <% end %>
