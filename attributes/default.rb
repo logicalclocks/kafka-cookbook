@@ -12,7 +12,7 @@ default['kkafka']['version'] = '2.3.0'
 # Version used for properties file
 default['kkafka']['version_properties'] = '1.0'
 # HopsKafkaAuthorizer version
-default['kkafka']['authorizer_version'] = '2.0.0-SNAPSHOT'
+default['kkafka']['authorizer_version'] = ''
 
 #
 # Scala version of Kafka.
