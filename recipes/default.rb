@@ -22,6 +22,8 @@ for h in node['kagent']['default']['private_ips']
   all_hosts = all_hosts + "User:" + hostname + ";"
 end
 all_hosts = all_hosts + "User:#{node['kkafka']['user']}"
+# Append glassfish CN so that Hopsworks can connect to Kafka as admin
+all_hosts = all_hosts + ";User:" + consul_helper.get_service_fqdn("glassfish")
 node.override['kkafka']['broker']['super']['users'] = all_hosts
 
 include_recipe "java"
