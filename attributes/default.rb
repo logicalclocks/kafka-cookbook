@@ -8,7 +8,7 @@ include_attribute "kagent"
 
 #
 # Version of Kafka to install.
-default['kkafka']['version'] = '2.3.0'
+default['kkafka']['version'] = '2.4.0'
 # Version used for properties file
 default['kkafka']['version_properties'] = '1.0'
 # HopsKafkaAuthorizer version
@@ -16,7 +16,7 @@ default['kkafka']['authorizer_version'] = '2.2.0-SNAPSHOT'
 
 #
 # Scala version of Kafka.
-default['kkafka']['scala_version'] = '2.11'
+default['kkafka']['scala_version'] = '2.12'
 
 #
 # Base URL for Kafka releases. The recipes will a download URL using the
