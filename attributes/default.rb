@@ -30,7 +30,7 @@ default['kkafka']['authorizer_download_url'] =  "#{node['download_url']}/hops-ka
 #
 # SHA-256 checksum of the archive to download, used by Chef's `remote_file`
 # resource.
-default['kkafka']['checksum'] = '80bae8179ffa3e1fb32a98d669b552d52d1d69f7d3437c7ffead7c6d6413b74c'
+default['kkafka']['checksum'] = '2177cbd14118999e1d76fec628ca78ace7e6f841219dbc6035027c796bbe1a2a'
 
 
 #
