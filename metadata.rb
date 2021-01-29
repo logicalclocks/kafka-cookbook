@@ -13,7 +13,7 @@ recipe            "kkafka::client", "Kafka client installation"
 recipe            "kkafka::purge", "Removes and deletes Kafka"
 
 depends "java", '~> 7.0.0'
-depends 'scala', '~> 2.2.0'
+depends 'scala', '~> 2.1.0'
 depends 'kagent'
 depends 'ndb'
 depends 'conda'
