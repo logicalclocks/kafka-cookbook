@@ -1,16 +1,34 @@
-service {
-    id = "kafka/monitoring"
-    name = "kafka"
-    tags = [
-        "monitoring"
-    ]
-    port = <%= node['kkafka']['metrics_port'] %> 
-    check = {
-        id = "kafka-check"
-        name = "Health check for Kafka"
-        http = "http://localhost:<%= node['kkafka']['metrics_port'] %>/metrics"
-        interval = "20s"
-        timeout = "20s"
-        status = "passing"
-    }
-} 
+services = [
+    {
+        id = "kafka/monitoring"
+        name = "kafka"
+        tags = [
+            "broker"
+        ]
+        port = <%= node['kkafka']['broker']['port'] %>
+        check = {
+            id = "kafka-check"
+            name = "Health check for Kafka"
+            http = "http://localhost:<%= node['kkafka']['metrics_port'] %>/metrics"
+            interval = "20s"
+            timeout = "20s"
+            status = "passing"
+        }
+    },
+    {
+        id = "kafka/monitoring"
+        name = "kafka"
+        tags = [
+            "monitoring"
+        ]
+        port = <%= node['kkafka']['metrics_port'] %>
+        check = {
+            id = "kafka-check"
+            name = "Health check for Kafka"
+            http = "http://localhost:<%= node['kkafka']['metrics_port'] %>/metrics"
+            interval = "20s"
+            timeout = "20s"
+            status = "passing"
+        }
+    } 
+]
