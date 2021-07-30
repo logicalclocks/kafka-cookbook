@@ -74,12 +74,17 @@ directory node['data']['dir'] do
   not_if { ::File.directory?(node['data']['dir']) }
 end
 
+directory node['kkafka']['data_volume']['root_dir'] do
+  owner node['kkafka']['user']
+  group node['kkafka']['group']
+  mode '0770'
+end
+
 directory node['kkafka']['data_volume']['logs_dir'] do
   owner node['kkafka']['user']
   group node['kkafka']['group']
   mode '770'
   action :create
-  recursive true
   not_if { File.directory?(node['kkafka']['data_volume']['logs_dir']) }
 end
 
