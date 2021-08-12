@@ -1,4 +1,5 @@
 include_attribute "ndb"
+include_attribute "hops"
 include_attribute "kagent"
 
 #
@@ -194,7 +195,7 @@ default['kkafka']['log4j']['appenders'] = {
     Max_Backup_Index: '20',
     layout: {
       type: 'org.apache.log4j.PatternLayout',
-      conversion_pattern: '[%d] %p %m (%c)%n',
+      conversion_pattern: node['hops']['log']['pattern'],
     },
   },
   'stateChangeAppender' => {
@@ -204,7 +205,7 @@ default['kkafka']['log4j']['appenders'] = {
      Max_Backup_Index: '2',
     layout: {
       type: 'org.apache.log4j.PatternLayout',
-      conversion_pattern: '[%d] %p %m (%c)%n',
+      conversion_pattern: node['hops']['log']['pattern'],
     },
   },
   'requestAppender' => {
@@ -214,7 +215,7 @@ default['kkafka']['log4j']['appenders'] = {
      Max_Backup_Index: '2',
     layout: {
       type: 'org.apache.log4j.PatternLayout',
-      conversion_pattern: '[%d] %p %m (%c)%n',
+      conversion_pattern: node['hops']['log']['pattern'],
     },
   },
   'controllerAppender' => {
@@ -224,7 +225,7 @@ default['kkafka']['log4j']['appenders'] = {
      Max_Backup_Index: '2',
     layout: {
       type: 'org.apache.log4j.PatternLayout',
-      conversion_pattern: '[%d] %p %m (%c)%n',
+      conversion_pattern: node['hops']['log']['pattern'],
     },
   },
   'authorizerAppender' => {
@@ -234,7 +235,7 @@ default['kkafka']['log4j']['appenders'] = {
      Max_Backup_Index: '2',
     layout: {
       type: 'org.apache.log4j.PatternLayout',
-      conversion_pattern: '[%d] %p %m (%c)%n',
+      conversion_pattern: node['hops']['log']['pattern'],
     },
   },
 }
