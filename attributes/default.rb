@@ -98,11 +98,13 @@ default['kkafka']['jmx_opts'] = [
 #
 # User for directories, configuration files and running Kafka.
 default['kkafka']['user'] = node['install']['user'].empty? ? 'kafka' : node['install']['user']
+default['kkafka']['user_id'] = '1504'
 default['kkafka']['user-home'] = "/home/#{node['kkafka']['user']}"
 
 #
 # Group for directories, configuration files and running Kafka.
 default['kkafka']['group'] = node['install']['user'].empty? ? 'kafka' : node['install']['user']
+default['kkafka']['group_id'] = '1504'
 
 #
 # Should node['kkafka']['user'] and node['kkafka']['group'] be created?
