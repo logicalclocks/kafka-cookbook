@@ -43,7 +43,7 @@ user node['logger']['user'] do
 end
 
 group node['kkafka']['group'] do
-  action :manage
+  action :modify
   append true
   members [node['logger']['user']]
   not_if { node['install']['external_users'].casecmp("true") == 0 }
