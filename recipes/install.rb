@@ -1,6 +1,24 @@
+group node['logger']['group'] do
+  gid node['logger']['group_id']
+  action :create
+  not_if "getent group #{node['logger']['group']}"
+  not_if { node['install']['external_users'].casecmp("true") == 0 }
+end
+
+user node['logger']['user'] do
+  uid node['logger']['user_id']
+  gid node['logger']['group_id']
+  shell "/bin/nologin"
+  action :create
+  system true
+  not_if "getent passwd #{node['logger']['user']}"
+  not_if { node['install']['external_users'].casecmp("true") == 0 }
+end
+
 group node['kkafka']['group'] do
   gid node['kkafka']['group_id']
   action :create
+  members [node['logger']['user']]
   not_if "getent group #{node['kkafka']['group']}"
   not_if { node['install']['external_users'].casecmp("true") == 0 }
 end
