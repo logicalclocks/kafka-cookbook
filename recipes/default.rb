@@ -41,10 +41,18 @@ zookeeper_fqdn = consul_helper.get_service_fqdn("zookeeper")
 node.override['kkafka']['broker']['zookeeper']['connect'] = ["#{zookeeper_fqdn}:#{node['kzookeeper']['config']['clientPort']}"]
 
 hostname=node['kkafka']['broker']['host']['name']
+
 if node['kkafka']['broker']['host']['name'].eql?("")
   hostname = my_ip
   node.override['kkafka']['broker']['host']['name'] = my_ip
 end
+
+
+if !is_managed_cloud()
+  if !node['kkafka']['public_ips'][0].eql?("")
+    my_gateway_ip =node['kkafka']['public_ips'][0]
+  end
+end  
 
 broker_port_internal = node['kkafka']['broker']['port'].to_i
 

@@ -398,3 +398,13 @@ attribute "kkafka/jmx_user",
 attribute "kkafka/jmx_password",
           :description => "JMX password for Kafka JVM",
           :type => "string"
+
+attribute "kkafka/public_ips",
+          :description =>  "Public Ips for kafka",
+          :type => 'array'
+
+attribute "kkafka/default/public_ips",
+          :description =>  "Public Ips for kafka",
+          :type => 'array'
+
+

@@ -366,3 +366,6 @@ default['kkafka']['offset_monitor']['port']                                     
 
 
 default['kkafka']['systemd']                                                          = "true"
+
+default['kkafka']['default']['public_ips']                                            = ['']
+default['kkafka']['public_ips']                                                       = ['']
