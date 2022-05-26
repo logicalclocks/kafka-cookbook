@@ -49,8 +49,8 @@ end
 
 
 if !is_managed_cloud()
-  if !node['kkafka']['public_ips'][0].eql?("")
-    my_gateway_ip =node['kkafka']['public_ips'][0]
+  if !node['kkafka']['broker']['host']['public_ip'].eql?("")
+    my_gateway_ip = node['kkafka']['broker']['host']['public_ip'] 
   end
 end  
 
