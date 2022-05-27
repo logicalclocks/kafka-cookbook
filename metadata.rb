@@ -71,7 +71,7 @@ attribute "kkafka/broker/host/name",
           :description => "hostname to be used in server.properties",
           :type => 'string'
 
-attribute "kkafka/brokeer/host/public_ip",
+attribute "kkafka/broker/host/public_ip",
           :description => "public_ip for external host to be used in server.properties",
           :type => 'string'
 
