@@ -71,6 +71,10 @@ attribute "kkafka/broker/host/name",
           :description => "hostname to be used in server.properties",
           :type => 'string'
 
+attribute "kkafka/brokeer/host/public_ip",
+          :description => "public_ip for external host to be used in server.properties",
+          :type => 'string'
+
 attribute "kkafka/broker/advertised/listeners",
           :description => "Listeners to publish to ZooKeeper for clients to use, if different than the `listeners` config property. For example, INTERNAL://hops1:9091,EXTERNAL://hops1:9092",
           :type => 'string'
@@ -371,10 +375,6 @@ attribute "kkafka/default/private_ips",
           :description => "Set ip addresses",
           :type => "array"
 
-attribute "kkafka/default/public_ips",
-          :description => "Set ip addresses",
-          :type => "array"
-
 attribute "kagent/enabled",
           :description => "'false' to disable. 'true' is default.",
           :type => 'string'
@@ -398,3 +398,13 @@ attribute "kkafka/jmx_user",
 attribute "kkafka/jmx_password",
           :description => "JMX password for Kafka JVM",
           :type => "string"
+
+attribute "kkafka/public_ips",
+          :description =>  "Public Ips for kafka",
+          :type => 'array'
+
+attribute "kkafka/default/public_ips",
+          :description =>  "Public Ips for kafka",
+          :type => 'array'
+
+

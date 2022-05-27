@@ -276,6 +276,7 @@ default['kkafka']['log4j']['loggers'] = {
 }
 
 default['kkafka']['broker']['host']['name']                                           = ""
+default['kkafka']['broker']['host']['public_ip']                                      = ""
 default['kkafka']['broker']['broker']['id']                                           = -1
 default['kkafka']['broker']['advertised']['listeners']                                = ""
 default['kkafka']['broker']['port']                                                   = 9091
@@ -366,3 +367,6 @@ default['kkafka']['offset_monitor']['port']                                     
 
 
 default['kkafka']['systemd']                                                          = "true"
+
+default['kkafka']['default']['public_ips']                                            = ['']
+default['kkafka']['public_ips']                                                       = ['']
