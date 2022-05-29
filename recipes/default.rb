@@ -6,7 +6,7 @@ my_ip = my_private_ip()
 my_gateway_ip = my_gateway_ip()
 
 #
-# Get all the hostsnames for all hosts in the cluster
+# Get all the for all hosts in the cluster
 #
 all_hosts = ""
 hostf = Resolv::Hosts.new
@@ -106,4 +106,11 @@ if service_discovery_enabled()
     service_definition "kafka-consul.hcl.erb"
     action :register
   end
+end
+
+template "#{node['kkafka']['bin_dir']}/kafka-restore.sh" do
+  source "kafka-restore.sh.erb"
+  owner node['kkafka']['user']
+  group node['kkafka']['group']
+  mode '0750'
 end
