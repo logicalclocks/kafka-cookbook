@@ -61,6 +61,10 @@ default['kkafka']['version_install_dir'] = %(#{node['kkafka']['install_dir']}-#{
 default['kkafka']['build_dir'] = ::File.join(Dir.tmpdir, 'kafka-build')
 
 #
+# Directory where to store the kafka scripts.
+default['kkafka']['bin_dir'] = "#{node['kkafka']['install_dir']}/bin"
+
+#
 # Directory where to store logs from Kafka.
 default['kkafka']['log_dir'] = "#{node['kkafka']['install_dir']}/logs"
 

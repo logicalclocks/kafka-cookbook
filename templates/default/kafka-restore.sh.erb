@@ -1,0 +1,23 @@
+#!/bin/bash 
+  
+<%= node['mysql']['bin_dir'] %>/mysql -u root \
+        --skip-password \
+        -S <%= node['ndb']['mysql_socket'] %> \
+        -B -N -e "select topic_name, num_partitions, num_replicas from hopsworks.project_topics"  | sed 's/\t/,/g' > /tmp/topics.csv
+
+while IFS="," read -r topic_name num_partitions num_replicas 
+do
+  if [ "$num_partitions" == "NULL" ] || [ "$num_replicas" == "NULL" ]
+  then
+    echo "Skipping creating topic: $topic_name as configuration is NULL"
+  else
+    echo "Creating topic: $topic_name"
+    <%= node['kkafka']['bin_dir'] %>/kafka-topics.sh --zookeeper <%= node['kkafka']['broker']['zookeeper']['connect'][0] %>  \
+            --command-config <%= node['kkafka']['config_dir'] %>/consumer.properties \
+            --topic $topic_name \
+            --replication-factor $num_replicas \
+            --partitions $num_partitions \
+            --if-not-exists \
+            --create
+  fi
+done < /tmp/topics.csv

@@ -66,14 +66,33 @@ template ::File.join(node['kkafka']['config_dir'], 'server.properties') do
     node['kkafka']['broker'].sort_by(&:first)
   end
   helpers(Kafka::Configuration)
-  # variables({
-  #   zk_ip: zk_ip
-  # })
   if restart_on_configuration_change?
     notifies :create, 'ruby_block[coordinate-kafka-start]', :immediately
   end
 end
 
+## This is the configuration for a super-user consumer. Used by the backup/restore tools
+kafka_fqdn = consul_helper.get_service_fqdn("kafka")
+node.override['kkafka']['consumer']['ssl']['endpoint']['identification']['algorithm'] = node['kkafka']['broker']['ssl']['endpoint']['identification']['algorithm']
+node.override['kkafka']['consumer']['boostrap']['servers'] = "#{kafka_fqdn}:#{node['kkafka']['broker']['port']}"
+node.override['kkafka']['consumer']['ssl']['client']['auth'] = "required"
+node.override['kkafka']['consumer']['security']['protocol'] = "SSL"
+node.override['kkafka']['consumer']['ssl']['keystore']['location'] = "#{crypto_dir}/#{kstore_name}"
+node.override['kkafka']['consumer']['ssl']['keystore']['password'] = node['hopsworks']['master']['password']
+node.override['kkafka']['consumer']['ssl']['key']['password'] = node['hopsworks']['master']['password']
+node.override['kkafka']['consumer']['ssl']['truststore']['location'] = "#{crypto_dir}/#{tstore_name}"
+node.override['kkafka']['consumer']['ssl']['truststore']['password'] = node['hopsworks']['master']['password']
+
+template ::File.join(node['kkafka']['config_dir'], 'consumer.properties') do
+  source 'consumer.properties.erb'
+  owner node['kkafka']['user']
+  group node['kkafka']['group']
+  mode '640'
+  helper :config do
+    node['kkafka']['consumer'].sort_by(&:first)
+  end
+  helpers(Kafka::Configuration)
+end
 
 template kafka_init_opts['env_path'] do
   source kafka_init_opts.fetch(:env_template, 'env.erb')
