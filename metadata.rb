@@ -75,6 +75,10 @@ attribute "kkafka/broker/host/public_ip",
           :description => "public_ip for external host to be used in server.properties",
           :type => 'string'
 
+attribute "kkafka/broker/listeners",
+          :description => "Listeners Kafka will bind to",
+          :type => 'string'
+
 attribute "kkafka/broker/advertised/listeners",
           :description => "Listeners to publish to ZooKeeper for clients to use, if different than the `listeners` config property. For example, INTERNAL://hops1:9091,EXTERNAL://hops1:9092",
           :type => 'string'
