@@ -107,20 +107,6 @@ template kafka_init_opts['env_path'] do
   end
 end
 
-file "#{node['kkafka']['config_dir']}/jmxremote.password" do
-  owner node['kkafka']['user']
-  group node['kkafka']['group']
-  mode '600'
-  content "#{node['kkafka']['jmx_user']} #{node['kkafka']['jmx_password']}"
-end
-
-file "#{node['kkafka']['config_dir']}/jmxremote.access" do
-  owner node['kkafka']['user']
-  group node['kkafka']['group']
-  mode '600'
-  content "#{node['kkafka']['jmx_user']} readwrite"
-end
-
 cookbook_file "#{node['kkafka']['config_dir']}/kafka.yaml" do
   owner node['kkafka']['user']
   group node['kkafka']['group']
