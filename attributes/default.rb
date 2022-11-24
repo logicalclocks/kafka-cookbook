@@ -83,20 +83,9 @@ default['kkafka']['jmx']['prometheus_exporter']['url']        = "#{node['downloa
 default['kkafka']['metrics_port']                             = "19901"
 
 #
-# JMX port for Kafka.
-default['kkafka']['jmx_port']                 = 19999
-default['kkafka']['jmx_user']                 = "kafkaAdmin"
-default['kkafka']['jmx_password']             = "kafkaAdmin"
-
-#
 # JMX configuration options for Kafka.
 default['kkafka']['jmx_opts'] = [
   "-javaagent:#{node['kkafka']['libs_dir']}/jmx_prometheus_javaagent-#{node['kkafka']['jmx']['prometheus_exporter']['version']}.jar=#{node['kkafka']['metrics_port']}:#{node['kkafka']['config_dir']}/kafka.yaml",
-  "-Dcom.sun.management.jmxremote",
-  "-Dcom.sun.management.jmxremote.authenticate=true",
-  "-Dcom.sun.management.jmxremote.password.file=#{node['kkafka']['config_dir']}/jmxremote.password",
-  "-Dcom.sun.management.jmxremote.access.file=#{node['kkafka']['config_dir']}/jmxremote.access",
-  "-Dcom.sun.management.jmxremote.ssl=false",
   "-Djava.net.preferIPv4Stack=true"
 ].join(' ')
 

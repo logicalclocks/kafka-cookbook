@@ -391,18 +391,6 @@ attribute "install/user",
           :description => "User to install the services as",
           :type => "string"
 
-attribute "kkafka/jmx_port",
-          :description => "JMX port on which Kafka JVM binds to",
-          :type => "string"
-
-attribute "kkafka/jmx_user",
-          :description => "JMX user for Kafka JVM",
-          :type => "string"
-
-attribute "kkafka/jmx_password",
-          :description => "JMX password for Kafka JVM",
-          :type => "string"
-
 attribute "kkafka/public_ips",
           :description =>  "Public Ips for kafka",
           :type => 'array'
