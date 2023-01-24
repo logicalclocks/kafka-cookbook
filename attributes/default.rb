@@ -283,7 +283,7 @@ default['kkafka']['broker']['queued']['max']['requests']                        
 default['kkafka']['broker']['socket']['send']['buffer']['bytes']                      = 100 * 1024
 default['kkafka']['broker']['socket']['receive']['buffer']['bytes']                   = 100 * 1024
 default['kkafka']['broker']['socket']['request']['max']['bytes']                      = 100 * 100 * 1024
-default['kkafka']['broker']['num']['partitions']                                      = 1
+default['kkafka']['broker']['num']['partitions']                                      = 10
 default['kkafka']['broker']['log']['segment']['bytes']                                = 1024 * 1024 * 1024
 default['kkafka']['broker']['log']['roll']['hours']                                   = 24 * 7
 default['kkafka']['broker']['log']['retention']['hours']                              = 24 * 7

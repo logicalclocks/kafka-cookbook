@@ -131,8 +131,8 @@ attribute "kkafka/broker/sockeattribute t/request/max/bytes",
           :description => "",
           :type => 'string'
 
-attribute "kkafka/broker/num/partitionsattribute ",
-          :description => "",
+attribute "kkafka/broker/num/partitions",
+          :description => "The default number of partitions per topic, relevant for topic auto creation.",
           :type => 'string'
 
 attribute "kkafka/broker/log/segment/bytesattribute ",
