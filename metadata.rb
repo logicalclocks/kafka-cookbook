@@ -63,6 +63,10 @@ attribute "kkafka/memory_mb",
           :description => "Kafka server memory in mbs",
           :type => 'string'
 
+attribute "kkafka/create_topics_from_backup",
+          :description => "Flag to re-create Kafka topics stored in database from a backup. Default: true",
+          :type => 'string'
+
 attribute "kkafka/broker/broker/id",
           :description => "broker id",
           :type => 'string'

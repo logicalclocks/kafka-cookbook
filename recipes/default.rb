@@ -116,3 +116,17 @@ template "#{node['kkafka']['bin_dir']}/kafka-restore.sh" do
   group node['kkafka']['group']
   mode '0750'
 end
+
+should_run = my_ip.eql?(node['ndb']['mysqld']['private_ips'].sort[0])
+
+bash 'recreate-kafka-topics' do
+  user 'root'
+  group 'root'
+  code <<-EOH
+    #{node['kkafka']['bin_dir']}/kafka-restore.sh
+  EOH
+  retries 30
+  retry_delay 20
+  only_if { node['kkafka']['create_topics_from_backup'].casecmp?("true") }
+  only_if { should_run }
+end

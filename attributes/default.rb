@@ -82,6 +82,9 @@ default['kkafka']['jmx']['prometheus_exporter']['version']    = "0.12.0"
 default['kkafka']['jmx']['prometheus_exporter']['url']        = "#{node['download_url']}/prometheus/jmx_prometheus_javaagent-#{node['kkafka']['jmx']['prometheus_exporter']['version']}.jar"
 default['kkafka']['metrics_port']                             = "19901"
 
+# Run kafka-restore.sh script
+default['kkafka']['create_topics_from_backup']                = "true"
+
 #
 # JMX configuration options for Kafka.
 default['kkafka']['jmx_opts'] = [
