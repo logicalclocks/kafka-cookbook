@@ -351,6 +351,10 @@ attribute "kkafka/broker/super/users",
           :description => "For example: User:dn0;User:glassfish",
           :type => 'string'
 
+attribute "kkafka/broker/forbidden/topics",
+          :description => "For example: __consumer_offsets;test",
+          :type => 'string'
+
 attribute "kkafka/broker/database/pool/prepstmt/cache/enabled",
           :description => "PreparedStatement of database pool of HopsAclAuthorizer enabled or not",
           :type => 'string'
