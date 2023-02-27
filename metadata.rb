@@ -351,8 +351,8 @@ attribute "kkafka/broker/super/users",
           :description => "For example: User:dn0;User:glassfish",
           :type => 'string'
 
-attribute "kkafka/broker/forbidden/topics",
-          :description => "For example: __consumer_offsets;test",
+attribute "kkafka/broker/consumer_offsets/enabled",
+          :description => "Identifies if working with __consumer_offsets topic is enabled or not",
           :type => 'string'
 
 attribute "kkafka/broker/database/pool/prepstmt/cache/enabled",
