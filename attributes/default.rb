@@ -357,6 +357,7 @@ else
 end
 
 default['kkafka']['broker']['consumer_offsets']['access_allowed']                     = "false"
+default['kkafka']['broker']['cache']['max_size']                                      = "1000"
 
 default['kkafka']['offset_monitor']['version']                                        = "0.2.1"
 default['kkafka']['offset_monitor']['url']                                            = "#{node['download_url']}/KafkaOffsetMonitor-assembly-" + node['kkafka']['offset_monitor']['version'] + ".jar"
