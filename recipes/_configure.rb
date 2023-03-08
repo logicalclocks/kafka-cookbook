@@ -115,6 +115,13 @@ cookbook_file "#{node['kkafka']['config_dir']}/kafka.yaml" do
   action :create
 end
 
+template ::File.join(node['kkafka']['config_dir'], 'jaas.conf') do
+  source 'jaas.conf.erb'
+  owner node['kkafka']['user']
+  group node['kkafka']['group']
+  mode '640'
+end
+
 deps = ""
 if exists_local("kzookeeper", "default")
   deps = "zookeeper.service"
