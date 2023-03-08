@@ -72,10 +72,8 @@ broker_port_external = broker_port_internal + node['kkafka']['broker']['broker']
 node.override['kkafka']['broker']['listeners'] = "INTERNAL://#{hostname}:#{broker_port_internal},EXTERNAL://#{hostname}:#{broker_port_external}"
 node.override['kkafka']['broker']['advertised']['listeners'] = "INTERNAL://#{hostname}:#{broker_port_internal},EXTERNAL://#{my_gateway_ip}:#{broker_port_external}"
 
-if node['kkafka']['systemd'] == "true"
-  kagent_config "kafka" do
-    action :systemd_reload
-  end
+kagent_config "kafka" do
+  action :systemd_reload
 end
 
 include_recipe 'kkafka::_configure'
@@ -128,5 +126,26 @@ bash 'recreate-kafka-topics' do
   retries 30
   retry_delay 20
   only_if { node['kkafka']['create_topics_from_backup'].casecmp?("true") }
+  only_if { should_run }
+end
+
+bash 'kafka-enable-zk-acls-upgrade' do
+  user 'root'
+  group 'root'
+  code <<-EOH
+    #{node['kkafka']['bin_dir']}/zookeeper-security-migration.sh \
+      --zookeeper.connect #{zookeeper_fqdn}:#{node['kzookeeper']['config']['clientPort']} \
+      --zookeeper.acl secure 
+  EOH
+  retries 30
+  retry_delay 20
+  only_if { conda_helpers.is_upgrade }
+  only_if { should_run }
+end
+
+# Restart Kafka after having applied the ACLs
+kagent_config "kafka" do
+  action :systemd_reload
+  only_if { conda_helpers.is_upgrade }
   only_if { should_run }
 end

@@ -1,0 +1,5 @@
+Client {
+       org.apache.zookeeper.server.auth.DigestLoginModule required
+       username="<%= node['kzookeeper']['kafka']['username'] %>"
+       password="<%= node['kzookeeper']['kafka']['password'] %>";
+};
