@@ -1,6 +1,7 @@
 include_attribute "ndb"
 include_attribute "hops"
 include_attribute "kagent"
+include_attribute "kzookeeper"
 
 #
 # Cookbook Name:: kkafka
@@ -113,7 +114,7 @@ default['kkafka']['heap_opts'] = '-Xmx4G -Xms1G'
 
 #
 # Generic JVM options for Kafka.
-default['kkafka']['generic_opts'] = nil
+default['kkafka']['generic_opts'] = "-Djava.security.auth.login.config=#{node['kkafka']['config_dir']}/jaas.conf"
 
 #
 # GC log options for Kafka. For the actual default value
@@ -337,7 +338,7 @@ default['kkafka']['broker']['delete']['topic']['enable']                        
 default['kkafka']['broker']['zookeeper']['connection']['timeout']['ms']               = 30000
 default['kkafka']['broker']['zookeeper']['sync']['time']['ms']                        = 2000
 default['kkafka']['broker']['zookeeper']['session']['timeout']['ms']                  = 30000
-default['kkafka']['broker']['zookeeper']['set']['acl']                                = "false"
+default['kkafka']['broker']['zookeeper']['set']['acl']                                = "true"
 
 #HopsAclAuthorizer database pool properties
 default['kkafka']['broker']['database']['pool']['prepstmt']['cache']['enabled']       = "true"
