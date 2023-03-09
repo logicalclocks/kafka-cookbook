@@ -8,6 +8,8 @@ rm -f /tmp/topics.csv
         -S <%= node['ndb']['mysql_socket'] %> \
         -B -N -e "select topic_name, num_partitions, num_replicas from hopsworks.project_topics"  | sed 's/\t/,/g' > /tmp/topics.csv
 
+export KAFKA_OPTS="<%= node['kkafka']['generic_opts'] %>"
+
 while IFS="," read -r topic_name num_partitions num_replicas 
 do
   if [ "$num_partitions" == "NULL" ] || [ "$num_replicas" == "NULL" ]
