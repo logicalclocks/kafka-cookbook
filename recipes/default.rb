@@ -129,9 +129,16 @@ bash 'recreate-kafka-topics' do
   only_if { should_run }
 end
 
+# Kafka needs to be running for the zookeeper-security-migration to work
+kagent_config "kafka" do
+  action :systemd_reload
+  only_if { conda_helpers.is_upgrade }
+end
+
 bash 'kafka-enable-zk-acls-upgrade' do
   user 'root'
   group 'root'
+  environment ({'KAFKA_OPTS' => "-Djava.security.auth.login.config=#{node['kkafka']['config_dir']}/jaas.conf"})
   code <<-EOH
     #{node['kkafka']['bin_dir']}/zookeeper-security-migration.sh \
       --zookeeper.connect #{zookeeper_fqdn}:#{node['kzookeeper']['config']['clientPort']} \
@@ -140,12 +147,10 @@ bash 'kafka-enable-zk-acls-upgrade' do
   retries 30
   retry_delay 20
   only_if { conda_helpers.is_upgrade }
-  only_if { should_run }
 end
 
 # Restart Kafka after having applied the ACLs
 kagent_config "kafka" do
   action :systemd_reload
   only_if { conda_helpers.is_upgrade }
-  only_if { should_run }
 end
