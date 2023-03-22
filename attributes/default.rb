@@ -90,6 +90,7 @@ default['kkafka']['create_topics_from_backup']                = "true"
 # JMX configuration options for Kafka.
 default['kkafka']['jmx_opts'] = [
   "-javaagent:#{node['kkafka']['libs_dir']}/jmx_prometheus_javaagent-#{node['kkafka']['jmx']['prometheus_exporter']['version']}.jar=#{node['kkafka']['metrics_port']}:#{node['kkafka']['config_dir']}/kafka.yaml",
+  "-Djdk.tls.ephemeralDHKeySize=2048",
   "-Djava.net.preferIPv4Stack=true"
 ].join(' ')
 
