@@ -4,7 +4,7 @@ check_running() {
     if [ -z "$pid" ]; then
       if [ -e "$PIDFILE" ]; then
         pid=$(cat "$PIDFILE")
-        check="netstat --numeric --listen --programs --tcp 2> /dev/null | grep -q '$pid/java'"
+        check="ss -Hlptnu 2> /dev/null | grep -q 'pid=$pid'"
       else
         sleep 1
         continue

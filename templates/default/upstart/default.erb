@@ -23,7 +23,7 @@ post-start script
   pid=${pid##* }
   if [ -n "$pid" ]; then
     while [ $tries -le $max_tries ]; do
-      if netstat --numeric --listen --programs --tcp 2> /dev/null | grep -q "$pid/java"; then
+      if ss -Hlptnu 2> /dev/null | grep -q 'pid=$pid'; then
         exit 0
       fi
       tries=$((tries + 1))
