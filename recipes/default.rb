@@ -3,7 +3,6 @@ require 'resolv'
 Chef::Recipe.send(:include, Hops::Helpers)
 
 my_ip = my_private_ip()
-my_gateway_ip = my_gateway_ip()
 
 #
 # Get all the for all hosts in the cluster
@@ -47,15 +46,6 @@ if node['kkafka']['broker']['host']['name'].eql?("")
   node.override['kkafka']['broker']['host']['name'] = my_ip
 end
 
-
-if !is_managed_cloud()
-  if !node['kkafka']['broker']['host']['public_ip'].eql?("")
-    my_gateway_ip = node['kkafka']['broker']['host']['public_ip'] 
-  end
-end  
-
-broker_port_internal = node['kkafka']['broker']['port'].to_i
-
 id=node['kkafka']['broker']['broker']['id']
 if node['kkafka']['broker']['broker']['id'] == -1
   id=1
@@ -68,9 +58,12 @@ if node['kkafka']['broker']['broker']['id'] == -1
   end
 end
 
-broker_port_external = broker_port_internal + node['kkafka']['broker']['broker']['id'].to_i
-node.override['kkafka']['broker']['listeners'] = "INTERNAL://#{hostname}:#{broker_port_internal},EXTERNAL://#{hostname}:#{broker_port_external}"
-node.override['kkafka']['broker']['advertised']['listeners'] = "INTERNAL://#{hostname}:#{broker_port_internal},EXTERNAL://#{my_gateway_ip}:#{broker_port_external}"
+kafka_fqdn = consul_helper.get_service_fqdn("kafka")
+broker_port_external = node['kkafka']['broker']['port'].to_i + node['kkafka']['broker']['broker']['id'].to_i
+
+node.override['kkafka']['broker']['listeners'] = "INTERNAL://#{hostname}:#{node['kkafka']['broker']['port']},EXTERNAL://#{hostname}:#{broker_port_external}"
+
+node.override['kkafka']['broker']['advertised']['listeners'] = "INTERNAL://#{hostname}:#{node['kkafka']['broker']['port']},EXTERNAL://#{kafka_fqdn}:#{broker_port_external}"
 
 kagent_config "kafka" do
   action :systemd_reload
