@@ -7,8 +7,6 @@ version          "3.3.0"
 
 recipe            "kkafka::install", "Installs kafka binaries"
 recipe            "kkafka::default", "Configures Kafka"
-#link:<a target='_blank' href='http://%host%:11111/'>Launch the WebUI for Kafka Monitor</a>
-recipe            "kkafka::monitor", "Helper webapp to monitor performance of kafka"
 recipe            "kkafka::client", "Kafka client installation"
 recipe            "kkafka::purge", "Removes and deletes Kafka"
 
@@ -53,10 +51,6 @@ attribute "kkafka/group_id",
 
 attribute "kafka/ulimit",
           :description => "ULimit for the max number of open files allowed",
-          :type => 'string'
-
-attribute "kkafka/offset_monitor/port",
-          :description => "Port for Kafka monitor service",
           :type => 'string'
 
 attribute "kkafka/memory_mb",
