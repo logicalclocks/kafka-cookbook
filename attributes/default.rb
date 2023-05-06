@@ -10,7 +10,7 @@ include_attribute "kzookeeper"
 
 #
 # Version of Kafka to install.
-default['kkafka']['version'] = '2.3.0'
+default['kkafka']['version'] = '3.4.0'
 # Version used for properties file
 default['kkafka']['version_properties'] = '1.0'
 # HopsKafkaAuthorizer version
@@ -18,7 +18,7 @@ default['kkafka']['authorizer_version'] = '3.3.0-SNAPSHOT'
 
 #
 # Scala version of Kafka.
-default['kkafka']['scala_version'] = '2.11'
+default['kkafka']['scala_version'] = '2.12'
 
 #
 # Base URL for Kafka releases. The recipes will a download URL using the
@@ -32,7 +32,7 @@ default['kkafka']['authorizer_download_url'] =  "#{node['download_url']}/hops-ka
 #
 # SHA-256 checksum of the archive to download, used by Chef's `remote_file`
 # resource.
-default['kkafka']['checksum'] = '80bae8179ffa3e1fb32a98d669b552d52d1d69f7d3437c7ffead7c6d6413b74c'
+default['kkafka']['checksum'] = '681d85a7b088b9b94bf4d8a5c8f5f339298719afedefd32da7c68a94979ac077'
 
 
 #
