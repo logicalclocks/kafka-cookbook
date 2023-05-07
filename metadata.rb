@@ -27,6 +27,10 @@ attribute "kkafka/authorizer_version",
           :description => "Hops Kafka Authorizer version",
           :type => 'string'
 
+attribute "kkafka/authorizer_download_url",
+          :description => "Hops Kafka Authorizer download url",
+          :type => 'string'
+
 attribute "kkafka/dir",
           :description => "Base directory to install kafka (default: /opt)",
           :type => 'string'
