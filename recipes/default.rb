@@ -65,6 +65,18 @@ node.override['kkafka']['broker']['listeners'] = "INTERNAL://#{hostname}:#{node[
 
 node.override['kkafka']['broker']['advertised']['listeners'] = "INTERNAL://#{hostname}:#{node['kkafka']['broker']['port']},EXTERNAL://#{kafka_fqdn}:#{broker_port_external}"
 
+
+zk_domain = consul_helper.get_service_fqdn("client.zookeeper")
+template "#{node['kkafka']['bin_dir']}/broker-waiter.sh" do
+  source "broker-waiter.sh.erb"
+  owner node['kkafka']['user']
+  group node['kkafka']['group']
+  mode '0750'
+  variables({
+    :zk_endpoint => zk_domain
+  })
+end
+
 kagent_config "kafka" do
   action :systemd_reload
 end
@@ -128,6 +140,15 @@ kagent_config "kafka" do
   only_if { conda_helpers.is_upgrade }
 end
 
+bash 'wait-for-broker' do
+  user node['kkafka']['user']
+  group node['kkafka']['group']
+  timeout 250
+  code <<-EOH
+      #{node['kkafka']['bin_dir']}/broker-waiter.sh
+  EOH
+end
+
 bash 'kafka-enable-zk-acls-upgrade' do
   user 'root'
   group 'root'
@@ -146,4 +167,13 @@ end
 kagent_config "kafka" do
   action :systemd_reload
   only_if { conda_helpers.is_upgrade }
+end
+
+bash 'wait-for-broker' do
+  user node['kkafka']['user']
+  group node['kkafka']['group']
+  timeout 250
+  code <<-EOH
+      #{node['kkafka']['bin_dir']}/broker-waiter.sh
+  EOH
 end

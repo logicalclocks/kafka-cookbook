@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+zk_endpoint=<%= @zk_endpoint %>
+zk_port=<%= node['kzookeeper']['config']['clientPort'] %>
+set -e
+my_id=$(grep "broker.id" /srv/hops/kafka/config/server.properties | awk -F "=" '{print $2}')
+set +e
+
+i=0
+while true
+do
+    /srv/hops/kafka/bin/zookeeper-shell.sh ${zk_endpoint}:${zk_port} get /brokers/ids/${my_id}
+    if [ $? -eq "0" ]
+    then
+        exit 0
+    fi
+    echo "Kafka broker is not running/healthy"
+    let i++
+    if [ $i -gt 100 ]
+    then
+        echo "Exhausted all retries"
+        exit 1
+    fi
+    sleep 2s
+done
