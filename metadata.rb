@@ -409,4 +409,6 @@ attribute "kkafka/default/public_ips",
           :description =>  "Public Ips for kafka",
           :type => 'array'
 
-
+attribute "kkafka/broker/external_port",
+          :description => "Kafka broker external port",
+          :type => 'string'

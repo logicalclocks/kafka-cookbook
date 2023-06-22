@@ -278,6 +278,7 @@ default['kkafka']['broker']['host']['public_ip']                                
 default['kkafka']['broker']['broker']['id']                                           = -1
 default['kkafka']['broker']['advertised']['listeners']                                = ""
 default['kkafka']['broker']['port']                                                   = 9091
+default['kkafka']['broker']['external_port']                                          = 9092
 default['kkafka']['broker']['inter']['broker']['listener']['name']                    = "INTERNAL"
 default['kkafka']['broker']['log']['retention']['hours']                              = 240
 default['kkafka']['broker']['num']['network']['threads']                              = 3

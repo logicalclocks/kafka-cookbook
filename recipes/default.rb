@@ -59,11 +59,10 @@ if node['kkafka']['broker']['broker']['id'] == -1
 end
 
 kafka_fqdn = consul_helper.get_service_fqdn("kafka")
-broker_port_external = node['kkafka']['broker']['port'].to_i + node['kkafka']['broker']['broker']['id'].to_i
 
-node.override['kkafka']['broker']['listeners'] = "INTERNAL://#{hostname}:#{node['kkafka']['broker']['port']},EXTERNAL://#{hostname}:#{broker_port_external}"
+node.override['kkafka']['broker']['listeners'] = "INTERNAL://#{hostname}:#{node['kkafka']['broker']['port']},EXTERNAL://#{hostname}:#{node['kkafka']['broker']['external_port']}"
 
-node.override['kkafka']['broker']['advertised']['listeners'] = "INTERNAL://#{hostname}:#{node['kkafka']['broker']['port']},EXTERNAL://#{kafka_fqdn}:#{broker_port_external}"
+node.override['kkafka']['broker']['advertised']['listeners'] = "INTERNAL://#{hostname}:#{node['kkafka']['broker']['port']},EXTERNAL://#{kafka_fqdn}:#{node['kkafka']['broker']['external_port']}"
 
 
 zk_domain = consul_helper.get_service_fqdn("client.zookeeper")
