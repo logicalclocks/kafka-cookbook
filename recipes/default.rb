@@ -118,6 +118,9 @@ template "#{node['kkafka']['bin_dir']}/kafka-restore.sh" do
   owner node['kkafka']['user']
   group node['kkafka']['group']
   mode '0750'
+  variables({
+    :kafka_fqdn => kafka_fqdn
+  })
 end
 
 should_run = my_ip.eql?(node['ndb']['mysqld']['private_ips'].sort[0])
