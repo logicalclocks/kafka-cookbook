@@ -17,7 +17,7 @@ do
     echo "Skipping creating topic: $topic_name as configuration is NULL"
   else
     echo "Creating topic: $topic_name"
-    <%= node['kkafka']['bin_dir'] %>/kafka-topics.sh --zookeeper <%= node['kkafka']['broker']['zookeeper']['connect'][0] %>  \
+    <%= node['kkafka']['bin_dir'] %>/kafka-topics.sh --bootstrap-server <%= @kafka_fqdn %>:<%= node['kkafka']['broker']['port'] %>  \
             --command-config <%= node['kkafka']['config_dir'] %>/consumer.properties \
             --topic $topic_name \
             --replication-factor $num_replicas \
