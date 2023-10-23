@@ -357,6 +357,18 @@ attribute "kkafka/broker/cache/max_size",
           :description => "Specifies the maximum size of cached entries stored",
           :type => 'string'
 
+attribute "kkafka/broker/database/url",
+          :description => "MySQL database url to connect to for the HopsAclAuthorizer",
+          :type => 'string'
+
+attribute "kkafka/broker/database/username",
+          :description => "MySQL database username to use for the HopsAclAuthorizer",
+          :type => 'string'
+
+attribute "kkafka/broker/database/password",
+          :description => "MySQL database password to use for the HopsAclAuthorizer",
+          :type => 'string'
+
 attribute "kkafka/broker/database/pool/prepstmt/cache/enabled",
           :description => "PreparedStatement of database pool of HopsAclAuthorizer enabled or not",
           :type => 'string'
