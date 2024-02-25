@@ -10,7 +10,7 @@ my_ip = my_private_ip()
 all_hosts = ""
 hostf = Resolv::Hosts.new
 dnsr = Resolv::DNS.new
-for h in node['kagent']['default']['private_ips']
+for h in node['kkafka']['default']['private_ips']
   # Convert all private_ips to their hostnames
   # Kafa requires fqdns to work - won't work with IPs
   begin
